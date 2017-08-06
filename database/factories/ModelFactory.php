@@ -30,3 +30,25 @@ $factory->define(App\Dealer::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
     ];
 });
+$factory->define(App\Client::class, function (Faker\Generator $faker) {
+    return [
+        'dni' => $faker->unique()->numerify('########'),
+        'name' => $faker->name,
+        'last_name' => $faker->name,
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+    ];
+});
+$factory->define(App\Laboratory::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'health_code' => $faker->numerify('############'),
+        'authorization' => $faker->numerify('#################'),
+        'phone' => $faker->phoneNumber,
+    ];
+});
+$factory->define(App\Presentation::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});

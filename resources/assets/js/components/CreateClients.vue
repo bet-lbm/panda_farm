@@ -1,5 +1,5 @@
 <template> 
-<div class="col-md-9 col-md-offset-1">
+<div class="col-md-8 col-md-offset-1">
     <div class="alert alert-success alert-dismissible fade in" role="alert" v-bind:class="{ hidden: hasCreated }">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
         </button>
@@ -8,29 +8,37 @@
 
     <div class="x_panel">
         <div class="x_title">
-            <h2><small>Crear Distribuidores</small></h2>
+            <h2><small>Crear cliente</small></h2>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
         	<!-- start form for validation -->
             <form class="form-horizontal form-label-left" novalidate>
                 <div class="item form-group">
-                    <label class="control-label col-md-4 col-sm-5 col-xs-12" for="name">RUC <span class="required">*</span>
+                    <label class="control-label col-md-4 col-sm-5 col-xs-6" for="dni">DNI <span class="required">*</span>
                     </label>
                     <div class="col-md-8 col-sm-7 col-xs-12">
-                        <input id="ruc" class="form-control col-md-7 col-xs-12" data-validate-length-range="11" name="ruc" equired="required" type="text" v-model="newItem.ruc">
+                        <input id="dni" class="form-control col-md-7 col-xs-6" data-validate-length-range="8" name="dni" required="required" type="text" v-model="newItem.dni">
                     </div>
                 </div>
                 <div class="item form-group">
-                    <label class="control-label col-md-4 col-sm-5 col-xs-12" for="name">Razón Social <span class="required">*</span>
+                    <label class="control-label col-md-4 col-sm-5 col-xs-6" for="name">Nombre <span class="required">*</span>
                     </label>
                     <div class="col-md-8 col-sm-7 col-xs-12">
-                        <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" required="required" type="text" v-model="newItem.name">
+                        <input id="name" class="form-control col-md-7 col-xs-6" data-validate-length-range="6" data-validate-words="2" name="name"  required="required" type="text" v-model="newItem.name">
+                    </div>
+                </div>
+
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-5 col-xs-6" for="last_name">Apellidos<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8 col-sm-7 col-xs-12">
+                        <input id="last_name" class="form-control col-md-7 col-xs-6" data-validate-length-range="6" data-validate-words="2" name="last_name"  required="required" type="text" v-model="newItem.last_name">
                     </div>
                 </div>
                 
                 <div class="item form-group">
-                    <label class="control-label col-md-4 col-sm-5 col-xs-12" for="address">Dirección <span class="required">*</span>
+                    <label class="control-label col-md-4 col-sm-5 col-xs-6" for="address">Dirección <span class="required">*</span>
                     </label>
                     <div class="col-md-8 col-sm-7 col-xs-12">
                         <input id="address" type="text" name="address" data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12" v-model="newItem.address">
@@ -38,9 +46,9 @@
                 </div>
 
                 <div class="item form-group">
-                    <label class="control-label col-md-4 col-sm-5 col-xs-12" for="telephone">Telefono <span class="required">*</span>
+                    <label class="control-label col-md-4 col-sm-5 col-xs-6" for="phone">Telefono <span class="required">*</span>
                     </label>
-                    <div class="col-md-8 col-sm-7 col-xs-12">
+                    <div class="col-md-8 col-sm-7 col-xs-6">
                         <input type="tel" id="phone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" v-model="newItem.phone"> 
                     </div>
                 </div>
@@ -48,11 +56,12 @@
                 <div class="ln_solid"></div>
 
                 <div class="form-group text-center">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <button class="btn btn-primary" >Listar</button>
+                       
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                         <button class="btn btn-success" @click.prevent="createItem()">Guardar</button>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <button class="btn btn-success" @click.prevent="createItem()">Submit</button>
                     </div>
                 </div>
             </form>
@@ -65,7 +74,7 @@ export default {
     data(){ 
         return{
             items: [],
-            newItem : {'ruc':'','name':'','address':'' ,'phone': ''},
+            newItem : {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
             hasError: true,
             hasCreated: true,
             formErrors: {},
@@ -80,7 +89,7 @@ export default {
 
         getVueItems: function(){
             var that = this;
-            axios.get('/dealers').then(function (response) {
+            axios.get('/clients').then(function (response) {
                 that.items = response.data;
 
                 that.$nextTick(function() {
@@ -92,15 +101,15 @@ export default {
 
         createItem: function(){
             var input = this.newItem;
-            if((input['name'] == '')||(input['ruc'] == '')){
+            if(input['dni'] == ''){
                 this.hasError = false;
                 this.hasCreated = true;
             }
             else{
                 this.hasError = true;
-                axios.post('/dealers',input)
+                axios.post('/clients',input)
                 .then(response => {
-                    this.newItem = {'ruc':'','name':'','address':'' ,'phone': ''},
+                    this.newItem = {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
                     this.getVueItems();
                 });
                 this.hasCreated = false;
@@ -109,4 +118,3 @@ export default {
     }
 }
 </script>
-
