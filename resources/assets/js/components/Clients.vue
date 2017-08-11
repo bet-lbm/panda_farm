@@ -1,14 +1,8 @@
 <template>
 <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="alert alert-warning alert-dismissible fade in" role="alert" v-bind:class="{ hidden: hasDeleted }">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-        </button>
-        Deleted Successfully!
-    </div>
-
 	<div class="x_panel">
 		<div class="x_title">
-			<h2><small>Lista de Clientes</small></h2>
+			<h4><small>Lista de Clientes</small></h4>
 			<ul class="nav navbar-right panel_toolbox">
 				<li class="pull-right">
 					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
@@ -39,25 +33,24 @@
 						<td>{{ item.address }}</td>
 						<td>{{ item.phone }}</td>
 						<td width="10px">
-							<a class="btn btn-success"> 
+							<button class="btn btn-success" title="Show"> 
                                 <i class="fa fa-eye"></i>
-							</a>
+							</button>
 						</td>
 						<td width="10px">
-							<a title="Edit" data-toggle="modal" data-target=".bs-example-modal-lg" @click.prevent="editItem(item)" class="btn btn-warning"> <i class="fa fa-pencil"></i>
-							</a>
+							<button class="btn btn-warning" @click.prevent="editItem(item)" title="Edit">
+                            <i class="fa fa-pencil"></i>
+                            </button>
 						</td>
 						<td width="10px">
-                            <a  @click.prevent="deleteItem(item)" title="Delete" class="btn btn-danger"> 
-                                <i class="fa fa-trash"></i>
-                            </a>
+                            <button class="btn btn-danger" @click.prevent="deleteItem(item)" title="Delete"> <i class="fa fa-trash"></i>
+                            </button>
                         </td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
-        <div class="ln_solid"></div>
-        <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
+            <div class="ln_solid"></div>
+            <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
                 <ul class="pagination">
                     <li v-if="pagination.current_page > 1">
                         <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
@@ -75,51 +68,59 @@
                         </a>
                     </li>
                 </ul>
-        </nav>
+            </nav>
+		</div>
 	</div>
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <small class="modal-title" id="myModalLabel"> Editar cliente </small> 
+                    <h4> <small class="modal-title" id="myModalLabel"> Editar cliente </small> </h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="dni">dni</label>
-                        <input type="text" class="form-control" name="dni" v-model="fillItem.dni">
-                        <span v-if="formErrors['dni']" class="error text-danger">
-                        @{{ formErrors['dni'][0] }}
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Nombre: </label>
-                        <input type="text" class="form-control" name="name" v-model="fillItem.name">
-                        <span v-if="formErrors['name']" class="error text-danger">
-                            @{{ formErrors['name'][0] }}
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Apellidos: </label>
-                        <input type="text" class="form-control" name="last_name" v-model="fillItem.last_name">
-                        <span v-if="formErrors['last_name']" class="error text-danger">
-                            @{{ formErrors['last_name'][0] }}
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Dirección</label>
-                        <input type="text" class="form-control" name="address" v-model="fillItem.address">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Dirección</label>
-                        <input type="tel" class="form-control" name="phone" v-model="fillItem.phone">
-                    </div>
-                    <div class="pmd-modal-action">
-                        <button data-dismiss="modal" class="btn pmd-btn-raised btn-primary" type="button" @click.prevent="updateItem()">Save changes</button>
-                        <button data-dismiss="modal"  class="btn btn-default" type="button">Discard</button>
-                    </div>
-                    </div>
+                    <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
+                        <div class="form-group">
+                            <label for="dni">DNI</label>
+                            <input type="text" class="form-control" name="dni" v-model="fillItem.dni">
+                            <span v-if="formErrors['dni']" class="error text-danger">
+                            @{{ formErrors['dni'][0] }}
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nombre: </label>
+                            <input type="text" class="form-control" name="name" v-model="fillItem.name">
+                            <span v-if="formErrors['name']" class="error text-danger">
+                                @{{ formErrors['name'][0] }}
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Apellidos: </label>
+                            <input type="text" class="form-control" name="last_name" v-model="fillItem.last_name">
+                            <span v-if="formErrors['last_name']" class="error text-danger">
+                                @{{ formErrors['last_name'][0] }}
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Dirección</label>
+                            <input type="text" class="form-control" name="address" v-model="fillItem.address">
+                            <span v-if="formErrors['address']" class="error text-danger">
+                                @{{ formErrors['address'][0] }}
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" class="form-control" name="phone" v-model="fillItem.phone">
+                            <span v-if="formErrors['phone']" class="error text-danger">
+                                @{{ formErrors['phone'][0] }}
+                            </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
+                            <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>   
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -130,11 +131,7 @@
 export default {
     data(){ 
     	return{
-		    items: [],
-		    newItem : {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
-		    fillItem : {'dni':'','name':'','last_name':'','address':'' ,'phone': '', 'id':''},
-		    hasError: true,
-		    hasDeleted: true,
+		    items: [],		    
 		    pagination: {
                 total: 0,
                 per_page: 2,
@@ -145,6 +142,8 @@ export default {
             offset: 4,
             formErrors: {},
             formErrorsUpdate: {},
+            newItem : {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
+            fillItem : {'dni':'','name':'','last_name':'','address':'' ,'phone': '', 'id':''}
 		}
 	},
 	computed: {
@@ -200,33 +199,38 @@ export default {
 
         deleteItem: function(item){
             axios.delete('/clients/'+item.id).then((response) => {
-                this.getVueItems();
-                this.hasError = true,
-                this.hasDeleted = false
+                this.changePage(this.pagination.current_page);
+                toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
             });
         },
 
+
+        editItem: function(item) {
+            this.fillItem.id = item.id;
+            this.fillItem.dni = item.dni;
+            this.fillItem.name = item.name;
+            this.fillItem.last_name = item.last_name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#edit-item").modal('show');
+        },
+
+        updateItem: function(id) {
+            var input = this.fillItem;
+            axios.put('/clients/' + id, input).then((response) => {
+                this.changePage(this.pagination.current_page);
+                this.fillItem = {'dni':'','name':'','last_name': '','address':'' ,'phone': '', 'id':''};
+                $("#edit-item").modal('hide');
+                toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});
+                }, (response) => {
+                    this.formErrorsUpdate = response.data;
+                });
+        },
+        
         changePage: function(page) {
                 this.pagination.current_page = page;
                 this.getVueItems(page);
-        },
-
-        editItem: function(item) {
-            this.fillItem = item;
-            this.formErrors = '';
-        },
-
-        updateItem: function() {
-            var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/clients/' + id, input).then(function (response) {
-                that.getItems();
-            })
-            .catch(function (error) {
-                that.formErrors = error.response.data;
-            });
-        },
+        }
 	}
 }
 </script>

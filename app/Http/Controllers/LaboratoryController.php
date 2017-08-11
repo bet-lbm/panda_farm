@@ -27,7 +27,7 @@ class LaboratoryController extends Controller
             'data'=>$laboratories
 
         ];
-        return $response;
+        return response()->json($response);
     }
 
     /**
@@ -50,13 +50,14 @@ class LaboratoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data= new Laboratory();
-        $data->name=$request->name;
-        $data->health_code=$request->health_code;
-        $data->authorization=$request->authorization;
-        $data->phone=$request->phone;
-        $data->save();
-        return $data;
+        $this->validate($request, [
+            'name' => 'required',
+            'health_code' => 'required',
+            'authorization' => 'required',
+            'phone' => 'required',
+        ]);
+        $create = Laboratory::create($request->all());
+        return response()->json($create);
     }
 
     /**
@@ -67,18 +68,8 @@ class LaboratoryController extends Controller
      */
     public function show($id)
     {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return $laboratory;
+        $data = Laboratory::find($id);
+        return $data;
     }
 
     /**
@@ -88,9 +79,16 @@ class LaboratoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
-        $edit=Laboratory::findOrFail($id)->update();
+        $this->validate($request, [
+            'name' => 'required',
+            'health_code' => 'required',
+            'authorization' => 'required',
+            'phone' => 'required',
+        ]);
+        $edit = Laboratory::find($id)->update($request->all());
+        return response()->json($edit);
     }
 
     /**
@@ -101,6 +99,7 @@ class LaboratoryController extends Controller
      */
     public function delete($id)
     {
-        $data=Laboratory::destroy($id);
+        Laboratory::find($id)->delete();
+        return response()->json(['done']);
     }
 }

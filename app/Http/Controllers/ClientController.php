@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,6 @@ class ClientController extends Controller
     public function index()
     {
         $clients=Client::latest()->paginate(10);
-
         $response=[
             'pagination'=>[
                 'total'=>$clients->total(),
@@ -27,8 +30,7 @@ class ClientController extends Controller
             ],
             'data'=>$clients
         ];
-
-        return $response;
+        return response()->json($response);
     }
 
     /**
@@ -50,14 +52,15 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $data= new Client();
-        $data->dni=$request->dni;
-        $data->name=$request->name;
-        $data->last_name=$request->last_name;
-        $data->address=$request->address;
-        $data->phone=$request->phone;
-        $data->save();
-        return $data;
+        $this->validate($request, [
+            'dni' => 'required',
+            'name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+        $create = Dealer::create($request->all());
+        return response()->json($create);
     }
 
     /**
@@ -68,18 +71,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return $client;
+        
     }
 
     /**
@@ -91,7 +83,15 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $edit=Client::findOrFail($id)->save();
+        $this->validate($request, [
+            'dni' => 'required',
+            'name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+        $edit = Client::find($id)->update($request->all());
+        return response()->json($edit);
     }
 
     /**
@@ -102,6 +102,7 @@ class ClientController extends Controller
      */
     public function delete($id)
     {
-        $data=Client::destroy($id);
+        Client::find($id)->delete();
+        return response()->json(['done']);
     }
 }

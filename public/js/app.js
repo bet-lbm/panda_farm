@@ -877,7 +877,6 @@ module.exports = __webpack_require__(59);
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -41907,7 +41906,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Dealers.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Dealers.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Dealers.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42050,20 +42049,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             items: [],
-            newItem: { 'ruc': '', 'name': '', 'address': '', 'phone': '' },
-            fillItem: { 'ruc': '', 'name': '', 'address': '', 'phone': '', 'id': '' },
-            hasError: true,
-            hasDeleted: true,
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -42073,7 +42063,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             offset: 4,
             formErrors: {},
-            formErrorsUpdate: {}
+            formErrorsUpdate: {},
+            newItem: { 'id': '', 'ruc': '', 'name': '', 'address': '', 'phone': '' },
+            fillItem: { 'ruc': '', 'name': '', 'address': '', 'phone': '', 'id': '' }
         };
     },
 
@@ -42120,43 +42112,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        showItem: function showItem(id) {
-            this.get('/dealer/' + id + '/edit').then(function (response) {
-                this.item.ruc = response.data.ruc;
-                this.item.name = response.data.name;
-                this.item.address = response.data.address;
-                this.item.phone = response.data.pone;
-            });
-        },
-
         deleteItem: function deleteItem(item) {
             var _this = this;
 
-            axios.delete('/dealer/' + item.id).then(function (response) {
-                _this.getVueItems();
-                _this.hasError = true, _this.hasDeleted = false;
+            axios.delete('/dealers/' + item.id).then(function (response) {
+                _this.changePage(_this.pagination.current_page);
+                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
+            });
+        },
+
+        editItem: function editItem(item) {
+            this.fillItem.ruc = item.ruc;
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#edit-item").modal('show');
+        },
+
+        updateItem: function updateItem(id) {
+            var _this2 = this;
+
+            var input = this.fillItem;
+            axios.put('/dealers/' + id, input).then(function (response) {
+                _this2.changePage(_this2.pagination.current_page);
+                _this2.fillItem = { 'ruc': '', 'name': '', 'address': '', 'phone': '', 'id': '' };
+                $("#edit-item").modal('hide');
+                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+            }, function (response) {
+                _this2.formErrorsUpdate = response.data;
             });
         },
 
         changePage: function changePage(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);
-        },
-
-        editItem: function editItem(item) {
-            this.fillItem = item;
-            this.formErrors = '';
-        },
-
-        updateItem: function updateItem() {
-            var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/dealer/' + id, input).then(function (response) {
-                that.getItems();
-            }).catch(function (error) {
-                that.formErrors = error.response.data;
-            });
         }
     }
 });
@@ -42169,30 +42159,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "col-md-12 col-sm-12 col-xs-12"
   }, [_c('div', {
-    staticClass: "alert alert-warning alert-dismissible fade in",
-    class: {
-      hidden: _vm.hasDeleted
-    },
-    attrs: {
-      "role": "alert"
-    }
-  }, [_vm._m(0), _vm._v("\n        Deleted Successfully!\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "x_panel"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
     staticClass: "table table-hover"
-  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.ruc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _c('td', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.ruc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-warning",
       attrs: {
-        "title": "Edit",
-        "data-toggle": "modal",
-        "data-target": ".bs-example-modal-lg"
+        "title": "Edit"
       },
       on: {
         "click": function($event) {
@@ -42206,7 +42186,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-danger",
       attrs: {
         "title": "Delete"
@@ -42220,7 +42200,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-trash"
     })])])])
-  }))])]), _vm._v(" "), _c('div', {
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
   }), _vm._v(" "), (_vm.pagination.last_page > 1) ? _c('nav', {
     staticClass: "pull-right"
@@ -42267,26 +42247,42 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade bs-example-modal-lg",
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
     attrs: {
+      "id": "edit-item",
       "tabindex": "-1",
       "role": "dialog",
-      "aria-hidden": "true"
+      "aria-labelledby": "myModalLabel"
     }
   }, [_c('div', {
-    staticClass: "modal-dialog modal-lg"
+    staticClass: "modal-dialog modal-lg",
+    attrs: {
+      "role": "document"
+    }
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
+    attrs: {
+      "method": "POST",
+      "enctype": "multipart/form-data"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.updateItem(_vm.fillItem.id)
+      }
+    }
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "ruc"
     }
-  }, [_vm._v("RUC")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("RUC : ")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42307,15 +42303,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.ruc = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['ruc']) ? _c('span', {
+  }), _vm._v(" "), (_vm.formErrorsUpdate['ruc']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                        @" + _vm._s(_vm.formErrors['ruc'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['ruc']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Razón Social: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42336,15 +42332,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.name = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['last_name']) ? _c('span', {
+  }), _vm._v(" "), (_vm.formErrorsUpdate['name']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['name'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['name']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "address"
     }
-  }, [_vm._v("Dirección")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42365,13 +42361,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.address = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), (_vm.formErrorsUpdate['address']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['address']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "phone"
     }
-  }, [_vm._v("Dirección")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42380,7 +42378,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "tel",
+      "type": "text",
       "name": "phone"
     },
     domProps: {
@@ -42392,44 +42390,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "pmd-modal-action"
-  }, [_c('button', {
-    staticClass: "btn pmd-btn-raised btn-primary",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.updateItem()
-      }
-    }
-  }, [_vm._v("Save changes")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    }
-  }, [_vm._v("Discard")])])])])])])])
+  }), _vm._v(" "), (_vm.formErrorsUpdate['phone']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['phone']))]) : _vm._e()]), _vm._v(" "), _vm._m(4)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "alert",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_vm._v("Lista de distribuidores")])]), _vm._v(" "), _c('ul', {
+  }, [_c('h4', [_c('small', [_vm._v("Lista de distribuidores")])]), _vm._v(" "), _c('ul', {
     staticClass: "nav navbar-right panel_toolbox"
   }, [_c('li', {
     staticClass: "pull-right"
@@ -42445,7 +42412,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clearfix"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("RUC")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Dirección")]), _vm._v(" "), _c('th', [_vm._v("Telefono")]), _vm._v(" "), _c('th', {
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("RUC")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Dirección")]), _vm._v(" "), _c('th', [_vm._v("Teléfono")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "3"
     }
@@ -42455,8 +42422,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "10px"
     }
-  }, [_c('a', {
-    staticClass: "btn btn-success"
+  }, [_c('button', {
+    staticClass: "btn btn-success",
+    attrs: {
+      "title": "Show"
+    }
   }, [_c('i', {
     staticClass: "fa fa-eye"
   })])])
@@ -42473,12 +42443,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('small', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
     staticClass: "modal-title",
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_vm._v(" Editar Distribuidor ")])])
+  }, [_c('small', [_vm._v("Editar Distribuidor")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v(" Guadar Cambios ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "data-dismiss": "modal",
+      "type": "button"
+    }
+  }, [_vm._v("Cancelar")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -42505,7 +42490,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateDealers.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateDealers.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateDealers.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -42881,7 +42866,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Clients.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43038,15 +43023,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             items: [],
-            newItem: { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '' },
-            fillItem: { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '', 'id': '' },
-            hasError: true,
-            hasDeleted: true,
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -43056,7 +43038,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             offset: 4,
             formErrors: {},
-            formErrorsUpdate: {}
+            formErrorsUpdate: {},
+            newItem: { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '' },
+            fillItem: { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '', 'id': '' }
         };
     },
 
@@ -43116,30 +43100,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.delete('/clients/' + item.id).then(function (response) {
-                _this.getVueItems();
-                _this.hasError = true, _this.hasDeleted = false;
+                _this.changePage(_this.pagination.current_page);
+                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
+            });
+        },
+
+        editItem: function editItem(item) {
+            this.fillItem.id = item.id;
+            this.fillItem.dni = item.dni;
+            this.fillItem.name = item.name;
+            this.fillItem.last_name = item.last_name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#edit-item").modal('show');
+        },
+
+        updateItem: function updateItem(id) {
+            var _this2 = this;
+
+            var input = this.fillItem;
+            axios.put('/clients/' + id, input).then(function (response) {
+                _this2.changePage(_this2.pagination.current_page);
+                _this2.fillItem = { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '', 'id': '' };
+                $("#edit-item").modal('hide');
+                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+            }, function (response) {
+                _this2.formErrorsUpdate = response.data;
             });
         },
 
         changePage: function changePage(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);
-        },
-
-        editItem: function editItem(item) {
-            this.fillItem = item;
-            this.formErrors = '';
-        },
-
-        updateItem: function updateItem() {
-            var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/clients/' + id, input).then(function (response) {
-                that.getItems();
-            }).catch(function (error) {
-                that.formErrors = error.response.data;
-            });
         }
     }
 });
@@ -43152,30 +43144,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "col-md-12 col-sm-12 col-xs-12"
   }, [_c('div', {
-    staticClass: "alert alert-warning alert-dismissible fade in",
-    class: {
-      hidden: _vm.hasDeleted
-    },
-    attrs: {
-      "role": "alert"
-    }
-  }, [_vm._m(0), _vm._v("\n        Deleted Successfully!\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "x_panel"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
     staticClass: "table table-hover"
-  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.dni))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.last_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _c('td', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.dni))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.last_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-warning",
       attrs: {
-        "title": "Edit",
-        "data-toggle": "modal",
-        "data-target": ".bs-example-modal-lg"
+        "title": "Edit"
       },
       on: {
         "click": function($event) {
@@ -43189,7 +43171,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-danger",
       attrs: {
         "title": "Delete"
@@ -43203,7 +43185,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-trash"
     })])])])
-  }))])]), _vm._v(" "), _c('div', {
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
   }), _vm._v(" "), (_vm.pagination.last_page > 1) ? _c('nav', {
     staticClass: "pull-right"
@@ -43250,9 +43232,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade bs-example-modal-lg",
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
     attrs: {
+      "id": "edit-item",
       "tabindex": "-1",
       "role": "dialog",
       "aria-hidden": "true"
@@ -43261,15 +43244,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog modal-lg"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
+    attrs: {
+      "method": "POST",
+      "enctype": "multipart/form-data"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.updateItem(_vm.fillItem.id)
+      }
+    }
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "dni"
     }
-  }, [_vm._v("dni")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("DNI")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43292,7 +43287,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), (_vm.formErrors['dni']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                        @" + _vm._s(_vm.formErrors['dni'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['dni'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
@@ -43321,7 +43316,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['name'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['name'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
@@ -43350,7 +43345,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), (_vm.formErrors['last_name']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['last_name'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['last_name'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
@@ -43377,13 +43372,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.address = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), (_vm.formErrors['address']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['address'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "phone"
     }
-  }, [_vm._v("Dirección")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Teléfono")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43404,44 +43401,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "pmd-modal-action"
-  }, [_c('button', {
-    staticClass: "btn pmd-btn-raised btn-primary",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.updateItem()
-      }
-    }
-  }, [_vm._v("Save changes")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    }
-  }, [_vm._v("Discard")])])])])])])])
+  }), _vm._v(" "), (_vm.formErrors['phone']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['phone'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _vm._m(4)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "alert",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_vm._v("Lista de Clientes")])]), _vm._v(" "), _c('ul', {
+  }, [_c('h4', [_c('small', [_vm._v("Lista de Clientes")])]), _vm._v(" "), _c('ul', {
     staticClass: "nav navbar-right panel_toolbox"
   }, [_c('li', {
     staticClass: "pull-right"
@@ -43467,8 +43433,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "10px"
     }
-  }, [_c('a', {
-    staticClass: "btn btn-success"
+  }, [_c('button', {
+    staticClass: "btn btn-success",
+    attrs: {
+      "title": "Show"
+    }
   }, [_c('i', {
     staticClass: "fa fa-eye"
   })])])
@@ -43485,12 +43454,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('small', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', [_c('small', {
     staticClass: "modal-title",
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_vm._v(" Editar cliente ")])])
+  }, [_vm._v(" Editar cliente ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v(" Guadar Cambios ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "data-dismiss": "modal",
+      "type": "button"
+    }
+  }, [_vm._v("Cancelar")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -43517,7 +43501,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateClients.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43940,7 +43924,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Laboratories.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Laboratories.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Laboratories.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -44077,26 +44061,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             items: [],
-            newItem: { 'name': '', 'health_code': '', 'authorization': '', 'phone': '' },
-            fillItem: { 'name': '', 'health_code': '', 'authorization': '', 'phone': '', 'id': '' },
-            hasError: true,
-            hasDeleted: true,
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -44106,7 +44075,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             offset: 4,
             formErrors: {},
-            formErrorsUpdate: {}
+            formErrorsUpdate: {},
+            newItem: { 'name': '', 'health_code': '', 'authorization': '', 'phone': '' },
+            fillItem: { 'name': '', 'health_code': '', 'authorization': '', 'phone': '', 'id': '' }
         };
     },
 
@@ -44153,21 +44124,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        showItem: function showItem(id) {
-            this.get('/laboratories/' + id + '/edit').then(function (response) {
-                this.item.ruc = response.data.ruc;
-                this.item.name = response.data.name;
-                this.item.address = response.data.address;
-                this.item.phone = response.data.phone;
+        showItem: function showItem(item) {
+            var _this = this;
+
+            axios.get('/laboratories/' + item.id).then(function (response) {
+                _this.getVueItems();
             });
         },
 
         deleteItem: function deleteItem(item) {
-            var _this = this;
+            var _this2 = this;
 
             axios.delete('/laboratories/' + item.id).then(function (response) {
-                _this.getVueItems();
-                _this.hasError = true, _this.hasDeleted = false;
+                _this2.changePage(_this2.pagination.current_page);
+                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
             });
         },
 
@@ -44177,18 +44147,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         editItem: function editItem(item) {
-            this.fillItem = item;
-            this.formErrors = '';
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            this.fillItem.health_code = item.health_code;
+            this.fillItem.authorization = item.authorization;
+            this.fillItem.phone = item.phone;
+            $("#edit-item").modal('show');
         },
 
-        updateItem: function updateItem() {
+        updateItem: function updateItem(id) {
+            var _this3 = this;
+
             var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/laboratories/' + id, input).then(function (response) {
-                that.getItems();
-            }).catch(function (error) {
-                that.formErrors = error.response.data;
+            axios.put('/laboratories/' + id, input).then(function (response) {
+                _this3.changePage(_this3.pagination.current_page);
+                _this3.fillItem = { 'name': '', 'health_code': '', 'authorization': '', 'phone': '', 'id': '' };
+                $("#edit-item").modal('hide');
+                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+            }, function (response) {
+                _this3.formErrorsUpdate = response.data;
             });
         }
     }
@@ -44202,30 +44179,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "col-md-12 col-sm-12 col-xs-12"
   }, [_c('div', {
-    staticClass: "alert alert-warning alert-dismissible fade in",
-    class: {
-      hidden: _vm.hasDeleted
-    },
-    attrs: {
-      "role": "alert"
-    }
-  }, [_vm._m(0), _vm._v("\n        Deleted Successfully!\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "x_panel"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
     staticClass: "table table-hover"
-  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.health_code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.authorization))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _c('td', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.health_code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.authorization))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-warning",
       attrs: {
-        "title": "Edit",
-        "data-toggle": "modal",
-        "data-target": ".bs-example-modal-lg"
+        "title": "Edit"
       },
       on: {
         "click": function($event) {
@@ -44239,7 +44206,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-danger",
       attrs: {
         "title": "Delete"
@@ -44253,7 +44220,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-trash"
     })])])])
-  }))])]), _vm._v(" "), _c('div', {
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
   }), _vm._v(" "), (_vm.pagination.last_page > 1) ? _c('nav', {
     staticClass: "pull-right"
@@ -44300,9 +44267,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade bs-example-modal-lg",
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
     attrs: {
+      "id": "edit-item",
       "tabindex": "-1",
       "role": "dialog",
       "aria-hidden": "true"
@@ -44311,8 +44279,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog modal-lg"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
+  }, [_c('form', {
+    attrs: {
+      "method": "POST",
+      "enctype": "multipart/form-data"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.updateItem(_vm.fillItem.id)
+      }
+    }
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
@@ -44340,9 +44319,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.name = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
-    staticClass: "error text-danger"
-  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['name'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
@@ -44352,8 +44329,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.fillItem.healt_code),
-      expression: "fillItem.healt_code"
+      value: (_vm.fillItem.health_code),
+      expression: "fillItem.health_code"
     }],
     staticClass: "form-control",
     attrs: {
@@ -44361,23 +44338,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "health_code"
     },
     domProps: {
-      "value": (_vm.fillItem.healt_code)
+      "value": (_vm.fillItem.health_code)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.fillItem.healt_code = $event.target.value
+        _vm.fillItem.health_code = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['health_code']) ? _c('span', {
-    staticClass: "error text-danger"
-  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['health_code'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
       "for": "authorization"
     }
-  }, [_vm._v("Dirección")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Autorización: ")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -44404,7 +44379,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "phone"
     }
-  }, [_vm._v("Dirección")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Telefono: ")]), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -44425,44 +44400,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "pmd-modal-action"
-  }, [_c('button', {
-    staticClass: "btn pmd-btn-raised btn-primary",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.updateItem()
-      }
-    }
-  }, [_vm._v("Save changes")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    }
-  }, [_vm._v("Discard")])])])])])])])
+  })]), _vm._v(" "), _vm._m(4)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "alert",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_vm._v("Lista de Clientes")])]), _vm._v(" "), _c('ul', {
+  }, [_c('h4', [_c('small', [_vm._v("Lista de Laboratorio")])]), _vm._v(" "), _c('ul', {
     staticClass: "nav navbar-right panel_toolbox"
   }, [_c('li', {
     staticClass: "pull-right"
@@ -44488,8 +44430,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "10px"
     }
-  }, [_c('a', {
-    staticClass: "btn btn-success"
+  }, [_c('button', {
+    staticClass: "btn btn-success",
+    attrs: {
+      "title": "Show"
+    }
   }, [_c('i', {
     staticClass: "fa fa-eye"
   })])])
@@ -44506,12 +44451,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('small', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', [_c('small', {
     staticClass: "modal-title",
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_vm._v(" Editar Laboratorio ")])])
+  }, [_vm._v(" Editar Laboratorio ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v(" Guadar Cambios ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "data-dismiss": "modal",
+      "type": "button"
+    }
+  }, [_vm._v("Cancelar")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -44538,7 +44498,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateLaboratory.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateLaboratory.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateLaboratory.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -44919,7 +44879,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Presentations.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Presentations.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Presentations.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45033,29 +44993,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             items: [],
-            newItem: { 'name': '' },
-            fillItem: { 'name': '', 'id': '' },
-            hasError: true,
-            hasDeleted: true,
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -45065,7 +45007,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             offset: 4,
             formErrors: {},
-            formErrorsUpdate: {}
+            formErrorsUpdate: {},
+            newItem: { 'name': '' },
+            fillItem: { 'name': '', 'id': '' }
         };
     },
 
@@ -45122,8 +45066,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.delete('/presentations/' + item.id).then(function (response) {
-                _this.getVueItems();
-                _this.hasError = true, _this.hasDeleted = false;
+                _this.changePage(_this.pagination.current_page);
+                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
             });
         },
 
@@ -45133,18 +45077,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         editItem: function editItem(item) {
-            this.fillItem = item;
-            this.formErrors = '';
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            $("#edit-item").modal('show');
         },
 
-        updateItem: function updateItem() {
+        updateItem: function updateItem(id) {
+            var _this2 = this;
+
             var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/presentations/' + id, input).then(function (response) {
-                that.getItems();
-            }).catch(function (error) {
-                that.formErrors = error.response.data;
+            axios.put('/presentations/' + id, input).then(function (response) {
+                _this2.changePage(_this2.pagination.current_page);
+                _this2.fillItem = { 'title': '', 'description': '', 'id': '' };
+                $("#edit-item").modal('hide');
+                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+            }, function (response) {
+                _this2.formErrorsUpdate = response.data;
             });
         }
     }
@@ -45158,30 +45106,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "col-md-12 col-sm-12 col-xs-12"
   }, [_c('div', {
-    staticClass: "alert alert-warning alert-dismissible fade in",
-    class: {
-      hidden: _vm.hasDeleted
-    },
-    attrs: {
-      "role": "alert"
-    }
-  }, [_vm._m(0), _vm._v("\n        Deleted Successfully!\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "x_panel"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
     staticClass: "table table-hover"
-  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _c('td', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
+    return _c('tr', [_c('th', {
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', {
+      attrs: {
+        "width": "10px"
+      }
+    }, [_c('button', {
       staticClass: "btn btn-warning",
       attrs: {
-        "title": "Edit",
-        "data-toggle": "modal",
-        "data-target": ".bs-example-modal-lg"
+        "title": "Edit"
       },
       on: {
         "click": function($event) {
@@ -45195,7 +45137,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "width": "10px"
       }
-    }, [_c('a', {
+    }, [_c('button', {
       staticClass: "btn btn-danger",
       attrs: {
         "title": "Delete"
@@ -45209,7 +45151,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-trash"
     })])])])
-  }))])]), _vm._v(" "), _c('div', {
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
   }), _vm._v(" "), (_vm.pagination.last_page > 1) ? _c('nav', {
     staticClass: "pull-right"
@@ -45241,7 +45183,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.changePage(page)
         }
       }
-    }, [_vm._v("\n                            " + _vm._s(page) + "\n                        ")])])
+    }, [_vm._v("\n                                " + _vm._s(page) + "\n                            ")])])
   }), _vm._v(" "), (_vm.pagination.current_page < _vm.pagination.last_page) ? _c('li', [_c('a', {
     attrs: {
       "href": "#",
@@ -45256,9 +45198,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "modal fade bs-example-modal-lg",
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
     attrs: {
+      "id": "edit-item",
       "tabindex": "-1",
       "role": "dialog",
       "aria-hidden": "true"
@@ -45267,8 +45210,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog modal-lg"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
+    attrs: {
+      "method": "POST",
+      "enctype": "multipart/form-data"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.updateItem(_vm.fillItem.id)
+      }
+    }
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
@@ -45298,44 +45253,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['name'][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "pmd-modal-action"
-  }, [_c('button', {
-    staticClass: "btn pmd-btn-raised btn-primary",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    },
-    on: {
-      "click": function($event) {
-        $event.preventDefault();
-        _vm.updateItem()
-      }
-    }
-  }, [_vm._v("Save changes")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-default",
-    attrs: {
-      "data-dismiss": "modal",
-      "type": "button"
-    }
-  }, [_vm._v("Discard")])])])])])])])
+  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['name'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _vm._m(3)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "alert",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_vm._v("Lista de Presentaciones")])]), _vm._v(" "), _c('ul', {
+  }, [_c('h4', [_c('small', [_vm._v("Lista de Presentaciones")])]), _vm._v(" "), _c('ul', {
     staticClass: "nav navbar-right panel_toolbox"
   }, [_c('li', {
     staticClass: "pull-right"
@@ -45351,21 +45273,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "clearfix"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', {
-    attrs: {
-      "colspan": "3"
-    }
-  }, [_vm._v(" ")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', {
+  return _c('thead', [_c('tr', [_c('th', {
     attrs: {
       "width": "10px"
     }
-  }, [_c('a', {
-    staticClass: "btn btn-success"
-  }, [_c('i', {
-    staticClass: "fa fa-eye"
-  })])])
+  }, [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "colspan": "2"
+    }
+  }, [_vm._v(" ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
@@ -45379,12 +45295,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('small', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', [_c('small', {
     staticClass: "modal-title",
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_vm._v(" Editar Presentacion ")])])
+  }, [_vm._v(" Editar Presentacion ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v(" Guadar Cambios ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "data-dismiss": "modal",
+      "type": "button"
+    }
+  }, [_vm._v("Cancelar")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -45410,7 +45341,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreatePresentation.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreatePresentation.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 
 module.exports = Component.exports

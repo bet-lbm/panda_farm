@@ -7,97 +7,49 @@ use Illuminate\Http\Request;
 
 class PresentationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $presentations=Presentation::latest()->paginate(10);
-
-        $response=[
-            'pagination'=>[
-                'total'=>$presentations->total(),
-                'per_page'=>$presentations->perPage(),
-                'current_page'=>$presentations->lastPage(),
-                'last_page'=>$presentations->lastPage(),
-                'from'=>$presentations->firstItem(),
-                'to'=>$presentations->lastItem(),
-             ],
-            'data'=>$presentations
-
+    public function index() {
+        $presentations = Presentation::latest()->paginate(10);
+        $response = [
+            'pagination' => [
+                'total' => $presentations->total(),
+                'per_page' => $presentations->perPage(),
+                'current_page' => $presentations->currentPage(),
+                'last_page' => $presentations->lastPage(),
+                'from' => $presentations->firstItem(),
+                'to' => $presentations->lastItem(),
+            ],
+            'data' => $presentations
         ];
-        return $response;
+        return response()->json($response);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        $presentation= new Presentation;
-            return view('presentations.create');
+        $presentation = new Presentation;
+        return view('presentations.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  
+    public function store(Request $request) 
     {
-        $data= new Presentation();
-        $data->name=$request->name;
-        $data->save();
-        return $data;
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $create = Presentation::create($request->all());
+        return response()->json($create);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return $presentation;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $edit=Presentation::findOrFail($id)->update();
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $edit = Presentation::find($id)->update($request->all());
+        return response()->json($edit);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-       $data=Presentation::destroy($id);
+        Presentation::find($id)->delete();
+        return response()->json(['done']);
     }
 }

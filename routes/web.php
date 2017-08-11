@@ -16,17 +16,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 //----------------Deleaders-----------------------------
 Route::get('/list_dealers', function () {
     return view('dealers.index');
 });
-Route::get('/dealer/create', 'DealerController@create' );
-Route::post('/dealers', 'DealerController@store' );
-Route::patch('/dealer/{id}', 'DealerController@update');
-Route::delete('/dealer/{id}', 'DealerController@delete' );
-
-
-Route::get('/dealers', 'DealerController@index' );
+Route::resource('dealers','DealerController'); 
 
 //---------------------Clientes-------------------------
 Route::get('/list_clients',function(){
@@ -34,10 +29,8 @@ Route::get('/list_clients',function(){
 });
 Route::get('/clients/create','ClientController@create');
 Route::post('/clients','ClientController@store');
-Route::post('/clients/{id}','ClientController@update');
+Route::put('/clients/{id}','ClientController@update');
 Route::delete('/clients/{id}','ClientController@delete'); 
-
-
 Route::get('/clients','ClientController@index');
 
 //---------------------Laboratorio---------------------------------
@@ -46,9 +39,8 @@ Route::get('/list_laboratories',function(){
 });
 Route::get('/laboratories/create','LaboratoryController@create');
 Route::post('/laboratories','LaboratoryController@store');
-Route::patch('/laboratories/{id}','LaboratoryController@update');
+Route::put('/laboratories/{id}','LaboratoryController@update');
 Route::delete('/laboratories/{id}','LaboratoryController@delete');
-
 Route::get('/laboratories','LaboratoryController@index');
 
 //--------------------Presentacion---------------------------------
@@ -57,9 +49,7 @@ Route::get('/list_presentations',function(){
 });
 Route::get('/presentations/create','PresentationController@create');
 Route::post('/presentations','PresentationController@store');
-Route::patch('/presentations/{id}','PresentationController@update');
+Route::put('/presentations/{id}','PresentationController@update');
 Route::delete('/presentations/{id}','PresentationController@delete');
-
 Route::get('/presentations','PresentationController@index');
-
 //--------------------------------------------------------------------

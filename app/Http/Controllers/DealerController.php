@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class DealerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index() {
 		$dealers = Dealer::latest()->paginate(10);
-
         $response = [
             'pagination' => [
                 'total' => $dealers->total(),
@@ -21,34 +24,43 @@ class DealerController extends Controller
             ],
             'data' => $dealers
         ];
-
-        return $response;
+        return response()->json($response);
 	}
 	
 	public function create()
-   	{
-   		$dealer = new Dealer;
-      	return view('dealers.create');
-   	}
-   	public function store(Request $request) {
-		$data = new Dealer ();
-		$data->ruc = $request->ruc;
-		$data->name = $request->name;
-		$data->address = $request->address;
-		$data->phone = $request->phone;
-		$data->save ();
-		return $data;
-	}
-	public function edit(Dealer $dealer)
-  {
-      return $dealer;
-  }
-	public function update($id)
-	{
-		  $edit = Dealer::findOrFail($id)->update();
-      return $edit;
-	}
-	public function delete($id) {
-		$data = Dealer::destroy($id);
-	}
+    {
+        $dealer = new Dealer;
+        return view('dealers.create');
+    }
+  
+    public function store(Request $request) 
+    {
+    	$this->validate($request, [
+            'ruc' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+        $create = Dealer::create($request->all());
+        return response()->json($create);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'ruc' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+        $edit = Dealer::find($id)->update($request->all());
+        return response()->json($edit);
+    }
+
+    public function destroy($id)
+    {
+        Dealer::find($id)->delete();
+        return response()->json(['done']);
+    }
+
 }

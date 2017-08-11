@@ -1,14 +1,8 @@
 <template>
 <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="alert alert-warning alert-dismissible fade in" role="alert" v-bind:class="{ hidden: hasDeleted }">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-        </button>
-        Deleted Successfully!
-    </div>
-
 	<div class="x_panel">
 		<div class="x_title">
-			<h2><small>Lista de Presentaciones</small></h2>
+			<h4><small>Lista de Presentaciones</small></h4>
 			<ul class="nav navbar-right panel_toolbox">
 				<li class="pull-right">
 					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
@@ -21,76 +15,68 @@
 			<table class="table table-hover"> 
 				<thead>
 					<tr>
-						<th>#</th>
+						<th width="10px">#</th>
                         <th>Nombre</th>
-						<th colspan="3">&nbsp;</th>
+						<th colspan="2">&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(item, index) in items">
-						<th>{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
+						<th width="10px">{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
                         <td>{{ item.name }}</td>
 						<td width="10px">
-							<a class="btn btn-success"> 
-                                <i class="fa fa-eye"></i>
-							</a>
+							<button class="btn btn-warning" title="Edit" @click.prevent="editItem(item)"><i class="fa fa-pencil"></i></button>
 						</td>
 						<td width="10px">
-							<a title="Edit" data-toggle="modal" data-target=".bs-example-modal-lg" @click.prevent="editItem(item)" class="btn btn-warning"> <i class="fa fa-pencil"></i>
-							</a>
-						</td>
-						<td width="10px">
-                            <a  @click.prevent="deleteItem(item)" title="Delete" class="btn btn-danger"> 
-                                <i class="fa fa-trash"></i>
-                            </a>
+                            <button class="btn btn-danger" title="Delete" @click.prevent="deleteItem(item)"><i class="fa fa-trash"></i></button>
                         </td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
-        <div class="ln_solid"></div>
-        <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
-                <ul class="pagination">
-                    <li v-if="pagination.current_page > 1">
-                        <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '' ]">
-                        <a href="#" @click="changePage(page)">
-                            {{ page }}
-                        </a>
-                    </li>
-                    <li v-if="pagination.current_page < pagination.last_page">
-                        <a href="#" aria-label="Next" @click="changePage(pagination.current_page + 1)">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-        </nav>
+            <div class="ln_solid"></div>
+            <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
+                    <ul class="pagination">
+                        <li v-if="pagination.current_page > 1">
+                            <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '' ]">
+                            <a href="#" @click="changePage(page)">
+                                {{ page }}
+                            </a>
+                        </li>
+                        <li v-if="pagination.current_page < pagination.last_page">
+                            <a href="#" aria-label="Next" @click="changePage(pagination.current_page + 1)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+            </nav>
+        </div>
 	</div>
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <small class="modal-title" id="myModalLabel"> Editar Presentacion </small> 
+                    <h4><small class="modal-title" id="myModalLabel"> Editar Presentacion </small></h4>  
                 </div>
                 <div class="modal-body">
-                    
-                    <div class="form-group">
-                        <label for="name">Nombre: </label>
-                        <input type="text" class="form-control" name="name" v-model="fillItem.name">
-                        <span v-if="formErrors['name']" class="error text-danger">
-                            @{{ formErrors['name'][0] }}
-                        </span>
-                    </div>
-                    <div class="pmd-modal-action">
-                        <button data-dismiss="modal" class="btn pmd-btn-raised btn-primary" type="button" @click.prevent="updateItem()">Save changes</button>
-                        <button data-dismiss="modal"  class="btn btn-default" type="button">Discard</button>
-                    </div>
-                    </div>
+                    <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
+                        <div class="form-group">
+                            <label for="name">Nombre: </label>
+                            <input type="text" class="form-control" name="name" v-model="fillItem.name">
+                            <span v-if="formErrors['name']" class="error text-danger">
+                                @{{ formErrors['name'][0] }}
+                            </span>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
+                                <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>
+                        </div> 
+                    </form>
                 </div>
             </div>
         </div>
@@ -102,11 +88,7 @@ export default {
     data(){ 
     	return{
 		    items: [],
-		    newItem : {'name':''},
-		    fillItem : {'name':'','id':''},
-		    hasError: true,
-		    hasDeleted: true,
-		    pagination: {
+            pagination: {
                 total: 0,
                 per_page: 2,
                 from: 1,
@@ -116,7 +98,9 @@ export default {
             offset: 4,
             formErrors: {},
             formErrorsUpdate: {},
-		}
+		    newItem : {'name':''},
+		    fillItem : {'name':'','id':''}
+        }
 	},
 	computed: {
             isActived: function() {
@@ -149,7 +133,7 @@ export default {
     methods : {
 
         getVueItems: function(page){
-        	var that = this;
+            var that = this;
             axios.get('/presentations?page='+page).then(function (response) {
                 that.items = response.data.data.data;
                 that.pagination = response.data.pagination;
@@ -160,6 +144,7 @@ export default {
             });
         },
 
+
         showItem: function(id) {
             this.get('/presentations/' + id + '/edit').then(function(response) {
                 this.item.name = response.data.name;
@@ -168,9 +153,8 @@ export default {
 
         deleteItem: function(item){
             axios.delete('/presentations/'+item.id).then((response) => {
-                this.getVueItems();
-                this.hasError = true,
-                this.hasDeleted = false
+                this.changePage(this.pagination.current_page);
+                toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
             });
         },
 
@@ -180,19 +164,21 @@ export default {
         },
 
         editItem: function(item) {
-            this.fillItem = item;
-            this.formErrors = '';
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            $("#edit-item").modal('show');
         },
 
-        updateItem: function() {
+        updateItem: function(id) {
             var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/presentations/' + id, input).then(function (response) {
-                that.getItems();
-            })
-            .catch(function (error) {
-                that.formErrors = error.response.data;
+            axios.put('/presentations/'+id,input).then((response) => {
+                this.changePage(this.pagination.current_page);
+                this.fillItem = {'title':'','description':'','id':''};
+                $("#edit-item").modal('hide');
+                toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});
+            }, 
+            (response) => {
+                    this.formErrorsUpdate = response.data;
             });
         },
 	}

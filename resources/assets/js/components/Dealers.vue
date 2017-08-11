@@ -1,131 +1,122 @@
 <template>
-<div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="alert alert-warning alert-dismissible fade in" role="alert" v-bind:class="{ hidden: hasDeleted }">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-        </button>
-        Deleted Successfully!
-    </div>
-
-	<div class="x_panel">
-		<div class="x_title">
-			<h2><small>Lista de distribuidores</small></h2>
-			<ul class="nav navbar-right panel_toolbox">
-				<li class="pull-right">
-					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
-				</li>
-			</ul>
-			<div class="clearfix"></div>
-		</div>
-        
-		<div class="x_content">
-			<table class="table table-hover"> 
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>RUC</th>
-						<th>Nombre</th>
-						<th>Dirección</th>
-						<th>Telefono</th>
-						<th colspan="3">&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(item, index) in items">
-						<th>{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
-						<td>{{ item.ruc }}</td>
-						<td>{{ item.name }}</td>
-						<td>{{ item.address }}</td>
-						<td>{{ item.phone }}</td>
-						<td width="10px">
-							<a class="btn btn-success"> 
-                                <i class="fa fa-eye"></i>
-							</a>
-						</td>
-						<td width="10px">
-							<a title="Edit" data-toggle="modal" data-target=".bs-example-modal-lg" @click.prevent="editItem(item)" class="btn btn-warning"> <i class="fa fa-pencil"></i>
-							</a>
-						</td>
-						<td width="10px">
-                            <a  @click.prevent="deleteItem(item)" title="Delete" class="btn btn-danger"> 
+    <div class="col-md-12 col-sm-12 col-xs-12">
+    	<div class="x_panel">
+    		<div class="x_title">
+    			<h4><small>Lista de distribuidores</small> </h4>
+    			<ul class="nav navbar-right panel_toolbox">
+    				<li class="pull-right">
+    					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
+    				</li>
+    			</ul>
+    			<div class="clearfix"></div>
+    		</div>
+            
+    		<div class="x_content">
+    			<table class="table table-hover"> 
+    				<thead>
+    					<tr>
+    						<th>#</th>
+    						<th>RUC</th>
+    						<th>Nombre</th>
+    						<th>Dirección</th>
+    						<th>Teléfono</th>
+    						<th colspan="3">&nbsp;</th>
+    					</tr>
+    				</thead>
+    				<tbody>
+    					<tr v-for="(item, index) in items">
+    						<th>{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
+    						<td>{{ item.ruc }}</td>
+    						<td>{{ item.name }}</td>
+    						<td>{{ item.address }}</td>
+    						<td>{{ item.phone }}</td>
+    						<td width="10px">
+    							<button class="btn btn-success" title="Show"> 
+                                    <i class="fa fa-eye"></i>
+    							</button>
+    						</td>
+    						<td width="10px">
+                                <button class="btn btn-warning" @click.prevent="editItem(item)" title="Edit">    
+                                <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
+    						<td width="10px">
+                                <button class="btn btn-danger" @click.prevent="deleteItem(item)" title="Delete">
                                 <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+    					</tr>
+    				</tbody>
+    			</table>
+                <div class="ln_solid"></div>
+                <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
+                    <ul class="pagination">
+                        <li v-if="pagination.current_page > 1">
+                            <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
+                                <span aria-hidden="true">&laquo;</span>
                             </a>
-                        </td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-        <div class="ln_solid"></div>
-        <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
-                <ul class="pagination">
-                    <li v-if="pagination.current_page > 1">
-                        <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '' ]">
-                        <a href="#" @click="changePage(page)">
-                            {{ page }}
-                        </a>
-                    </li>
-                    <li v-if="pagination.current_page < pagination.last_page">
-                        <a href="#" aria-label="Next" @click="changePage(pagination.current_page + 1)">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-        </nav>
-	</div>
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <small class="modal-title" id="myModalLabel"> Editar Distribuidor </small> 
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="ruc">RUC</label>
-                        <input type="text" class="form-control" name="ruc" v-model="fillItem.ruc">
-                        <span v-if="formErrors['ruc']" class="error text-danger">
-                        @{{ formErrors['ruc'][0] }}
-                        </span>
+                        </li>
+                        <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '' ]">
+                            <a href="#" @click="changePage(page)">
+                                {{ page }}
+                            </a>
+                        </li>
+                        <li v-if="pagination.current_page < pagination.last_page">
+                            <a href="#" aria-label="Next" @click="changePage(pagination.current_page + 1)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+    		</div>   
+    	</div>
+        
+        <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"> <small>Editar Distribuidor</small> </h4> 
                     </div>
-                    <div class="form-group">
-                        <label for="name">Razón Social: </label>
-                        <input type="text" class="form-control" name="name" v-model="fillItem.name">
-                        <span v-if="formErrors['last_name']" class="error text-danger">
-                            @{{ formErrors['name'][0] }}
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Dirección</label>
-                        <input type="text" class="form-control" name="address" v-model="fillItem.address">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Dirección</label>
-                        <input type="tel" class="form-control" name="phone" v-model="fillItem.phone">
-                    </div>
-                    <div class="pmd-modal-action">
-                        <button data-dismiss="modal" class="btn pmd-btn-raised btn-primary" type="button" @click.prevent="updateItem()">Save changes</button>
-                        <button data-dismiss="modal"  class="btn btn-default" type="button">Discard</button>
-                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
+                            <div class="form-group">
+                                <label  for="ruc">RUC : </label>
+                                <input type="text" name="ruc" class="form-control" v-model="fillItem.ruc" />
+                                <span v-if="formErrorsUpdate['ruc']" class="error text-danger">{{ formErrorsUpdate['ruc'] }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Razón Social : </label>
+                                <input type="text" name="name" class="form-control" v-model="fillItem.name"/>
+                                <span v-if="formErrorsUpdate['name']" class="error text-danger">{{ formErrorsUpdate['name'] }}</span> 
+                            </div>             
+                            <div class="form-group">
+                                <label for="address">Dirección : </label>
+                                <input type="text" name="address" class="form-control" v-model="fillItem.address" />
+                                <span v-if="formErrorsUpdate['address']" class="error text-danger">{{ formErrorsUpdate['address'] }}</span>
+                            </div> 
+                            <div class="form-group">
+                                <label for="phone">Teléfono : </label>
+                                <input type="text" name="phone" class="form-control" v-model="fillItem.phone"/>
+                                <span v-if="formErrorsUpdate['phone']" class="error text-danger">{{ formErrorsUpdate['phone'] }}</span>
+                            </div> 
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
+                                <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>
+                            </div> 
+                        </form> 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 <script>
 export default {
     data(){ 
     	return{
 		    items: [],
-		    newItem : {'ruc':'','name':'','address':'' ,'phone': ''},
-		    fillItem : {'ruc':'','name':'','address':'' ,'phone': '', 'id':''},
-		    hasError: true,
-		    hasDeleted: true,
 		    pagination: {
                 total: 0,
                 per_page: 2,
@@ -136,6 +127,8 @@ export default {
             offset: 4,
             formErrors: {},
             formErrorsUpdate: {},
+            newItem : {'id': '','ruc':'','name':'','address':'' ,'phone': ''},
+            fillItem : {'ruc':'','name':'','address':'' ,'phone': '', 'id':''}
 		}
 	},
 	computed: {
@@ -180,44 +173,38 @@ export default {
             });
         },
 
-        showItem: function(id) {
-            this.get('/dealer/' + id + '/edit').then(function(response) {
-                this.item.ruc = response.data.ruc;
-                this.item.name = response.data.name;
-                this.item.address = response.data.address;
-                this.item.phone = response.data.pone;
+        deleteItem: function(item){
+            axios.delete('/dealers/'+item.id).then((response) => {
+            this.changePage(this.pagination.current_page);
+            toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
             });
         },
 
-        deleteItem: function(item){
-            axios.delete('/dealer/'+item.id).then((response) => {
-                this.getVueItems();
-                this.hasError = true,
-                this.hasDeleted = false
+        editItem: function(item){
+            this.fillItem.ruc = item.ruc;
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#edit-item").modal('show');
+        },
+
+        updateItem: function(id){
+            var input = this.fillItem;
+            axios.put('/dealers/'+id,input).then((response) => {
+            this.changePage(this.pagination.current_page);
+            this.fillItem = {'ruc':'','name':'','address':'' ,'phone': '', 'id':''};
+            $("#edit-item").modal('hide');
+            toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});
+            }, (response) => {
+                this.formErrorsUpdate = response.data;
             });
         },
 
         changePage: function(page) {
-                this.pagination.current_page = page;
-                this.getVueItems(page);
-        },
-
-        editItem: function(item) {
-            this.fillItem = item;
-            this.formErrors = '';
-        },
-
-        updateItem: function() {
-            var input = this.fillItem;
-            var id = this.fillItem.id;
-            var that = this;
-            axios.patch('/dealer/' + id, input).then(function (response) {
-                that.getItems();
-            })
-            .catch(function (error) {
-                that.formErrors = error.response.data;
-            });
-        },
+            this.pagination.current_page = page;
+            this.getVueItems(page);
+        }
 	}
 }
 </script>
