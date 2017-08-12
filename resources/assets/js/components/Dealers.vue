@@ -3,16 +3,13 @@
     	<div class="x_panel">
     		<div class="x_title">
     			<h4><small>Lista de distribuidores</small> </h4>
-    			<ul class="nav navbar-right panel_toolbox">
-    				<li class="pull-right">
-    					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
-    				</li>
-    			</ul>
+    			<a class="pull-right" href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
+    				
     			<div class="clearfix"></div>
     		</div>
             
     		<div class="x_content">
-    			<table class="table table-hover"> 
+    			<table class="table table-hover" role="grid"> 
     				<thead>
     					<tr>
     						<th>#</th>
@@ -31,7 +28,7 @@
     						<td>{{ item.address }}</td>
     						<td>{{ item.phone }}</td>
     						<td width="10px">
-    							<button class="btn btn-success" title="Show"> 
+    							<button class="btn btn-success"  @click.prevent="showItem(item)" title="Show"> 
                                     <i class="fa fa-eye"></i>
     							</button>
     						</td>
@@ -72,7 +69,7 @@
     	</div>
         
         <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -82,23 +79,31 @@
                     <div class="modal-body">
                         <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
                             <div class="form-group">
-                                <label  for="ruc">RUC : </label>
-                                <input type="text" name="ruc" class="form-control" v-model="fillItem.ruc" />
+                                <label class="control-label col-md-3" for="ruc">RUC : </label>
+                                <div class="col-md-7 col-xs-12">
+                                    <input class="form-control" disabled="true" type="text" name="ruc" v-model="fillItem.ruc" />
+                                </div>
                                 <span v-if="formErrorsUpdate['ruc']" class="error text-danger">{{ formErrorsUpdate['ruc'] }}</span>
                             </div>
                             <div class="form-group">
-                                <label for="name">Razón Social : </label>
-                                <input type="text" name="name" class="form-control" v-model="fillItem.name"/>
+                                <label class="control-label col-md-3" for="name">Razón Social : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input class="form-control" type="text" name="name" v-model="fillItem.name" autofocus/>
+                                </div>
                                 <span v-if="formErrorsUpdate['name']" class="error text-danger">{{ formErrorsUpdate['name'] }}</span> 
                             </div>             
                             <div class="form-group">
-                                <label for="address">Dirección : </label>
-                                <input type="text" name="address" class="form-control" v-model="fillItem.address" />
+                                <label class="control-label col-md-3" for="address">Dirección : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input type="text" name="address" class="form-control" v-model="fillItem.address" />
+                                </div>
                                 <span v-if="formErrorsUpdate['address']" class="error text-danger">{{ formErrorsUpdate['address'] }}</span>
                             </div> 
                             <div class="form-group">
-                                <label for="phone">Teléfono : </label>
-                                <input type="text" name="phone" class="form-control" v-model="fillItem.phone"/>
+                                <label class="control-label col-md-3" for="phone">Teléfono : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input type="text" name="phone" class="form-control" v-model="fillItem.phone"/>
+                                </div>
                                 <span v-if="formErrorsUpdate['phone']" class="error text-danger">{{ formErrorsUpdate['phone'] }}</span>
                             </div> 
                             <div class="modal-footer">
@@ -110,6 +115,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal" id="show-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"> <small>Detalles de distribuidor</small> </h4> 
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal form-label-left" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="ruc">RUC : </label>
+                                <div class="col-md-7 col-xs-12">
+                                    <input class="form-control" disabled="true" type="text" name="ruc" v-model="fillItem.ruc" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="name">Razón Social : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input class="form-control" disabled="true" type="text" name="name" v-model="fillItem.name"/>
+                                </div>
+                            </div>             
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="address">Dirección : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input type="text"  disabled="true" name="address" class="form-control" v-model="fillItem.address" />
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="phone">Teléfono : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input type="text" disabled="true" name="phone" class="form-control" v-model="fillItem.phone"/>
+                                </div>
+                            </div>                
+                        </form> 
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 <script>
@@ -173,11 +220,14 @@ export default {
             });
         },
 
-        deleteItem: function(item){
-            axios.delete('/dealers/'+item.id).then((response) => {
-            this.changePage(this.pagination.current_page);
-            toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
-            });
+        showItem: function(item){
+            this.fillItem.ruc = item.ruc;
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#show-item").modal('show');
+            
         },
 
         editItem: function(item){
@@ -192,15 +242,22 @@ export default {
         updateItem: function(id){
             var input = this.fillItem;
             axios.put('/dealers/'+id,input).then((response) => {
-            this.changePage(this.pagination.current_page);
-            this.fillItem = {'ruc':'','name':'','address':'' ,'phone': '', 'id':''};
-            $("#edit-item").modal('hide');
-            toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});
-            }, (response) => {
+                this.changePage(this.pagination.current_page);
+                this.fillItem = {'ruc':'','name':'','address':'' ,'phone': '', 'id':''};
+                $("#edit-item").modal('hide');
+                toastr.success('Distribuidor correctamente editado.', {timeOut: 5000});
+            }, 
+            (response) => {
                 this.formErrorsUpdate = response.data;
             });
         },
 
+        deleteItem: function(item){
+            axios.delete('/dealers/'+item.id).then((response) => {
+            this.changePage(this.pagination.current_page);
+            toastr.error('Distribuidor eliminado.', {timeOut: 5000});
+            });
+        },
         changePage: function(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);

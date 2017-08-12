@@ -42049,6 +42049,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -42112,13 +42159,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        deleteItem: function deleteItem(item) {
-            var _this = this;
-
-            axios.delete('/dealers/' + item.id).then(function (response) {
-                _this.changePage(_this.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
-            });
+        showItem: function showItem(item) {
+            this.fillItem.ruc = item.ruc;
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#show-item").modal('show');
         },
 
         editItem: function editItem(item) {
@@ -42131,19 +42178,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         updateItem: function updateItem(id) {
-            var _this2 = this;
+            var _this = this;
 
             var input = this.fillItem;
             axios.put('/dealers/' + id, input).then(function (response) {
-                _this2.changePage(_this2.pagination.current_page);
-                _this2.fillItem = { 'ruc': '', 'name': '', 'address': '', 'phone': '', 'id': '' };
+                _this.changePage(_this.pagination.current_page);
+                _this.fillItem = { 'ruc': '', 'name': '', 'address': '', 'phone': '', 'id': '' };
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+                toastr.success('Distribuidor correctamente editado.', { timeOut: 5000 });
             }, function (response) {
-                _this2.formErrorsUpdate = response.data;
+                _this.formErrorsUpdate = response.data;
             });
         },
 
+        deleteItem: function deleteItem(item) {
+            var _this2 = this;
+
+            axios.delete('/dealers/' + item.id).then(function (response) {
+                _this2.changePage(_this2.pagination.current_page);
+                toastr.error('Distribuidor eliminado.', { timeOut: 5000 });
+            });
+        },
         changePage: function changePage(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);
@@ -42163,9 +42218,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
-    staticClass: "table table-hover"
+    staticClass: "table table-hover",
+    attrs: {
+      "role": "grid"
+    }
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.ruc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('td', {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.ruc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _c('td', {
+      attrs: {
+        "width": "10px"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-success",
+      attrs: {
+        "title": "Show"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.showItem(item)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-eye"
+    })])]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
@@ -42256,13 +42331,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-labelledby": "myModalLabel"
     }
   }, [_c('div', {
-    staticClass: "modal-dialog modal-lg",
+    staticClass: "modal-dialog",
     attrs: {
       "role": "document"
     }
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('form', {
     staticClass: "form-horizontal form-label-left",
@@ -42279,10 +42354,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "ruc"
     }
-  }, [_vm._v("RUC : ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42291,6 +42369,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
+      "disabled": "true",
       "type": "text",
       "name": "ruc"
     },
@@ -42303,15 +42382,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.ruc = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrorsUpdate['ruc']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['ruc']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['ruc']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42321,7 +42403,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "name": "name"
+      "name": "name",
+      "autofocus": ""
     },
     domProps: {
       "value": (_vm.fillItem.name)
@@ -42332,15 +42415,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.name = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrorsUpdate['name']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['name']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['name']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "address"
     }
-  }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42361,15 +42447,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.address = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrorsUpdate['address']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['address']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['address']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "phone"
     }
-  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -42390,17 +42479,162 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrorsUpdate['phone']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['phone']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['phone']))]) : _vm._e()]), _vm._v(" "), _vm._m(4)])])])])])])
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['phone']))]) : _vm._e()]), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal",
+    attrs: {
+      "id": "show-item",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-labelledby": "myModalLabel"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
+    attrs: {
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3",
+    attrs: {
+      "for": "ruc"
+    }
+  }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.ruc),
+      expression: "fillItem.ruc"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": "true",
+      "type": "text",
+      "name": "ruc"
+    },
+    domProps: {
+      "value": (_vm.fillItem.ruc)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.ruc = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3",
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.name),
+      expression: "fillItem.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": "true",
+      "type": "text",
+      "name": "name"
+    },
+    domProps: {
+      "value": (_vm.fillItem.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3",
+    attrs: {
+      "for": "address"
+    }
+  }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.address),
+      expression: "fillItem.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "address"
+    },
+    domProps: {
+      "value": (_vm.fillItem.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.address = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3",
+    attrs: {
+      "for": "phone"
+    }
+  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.phone),
+      expression: "fillItem.phone"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "phone"
+    },
+    domProps: {
+      "value": (_vm.fillItem.phone)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.phone = $event.target.value
+      }
+    }
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h4', [_c('small', [_vm._v("Lista de distribuidores")])]), _vm._v(" "), _c('ul', {
-    staticClass: "nav navbar-right panel_toolbox"
-  }, [_c('li', {
-    staticClass: "pull-right"
-  }, [_c('a', {
+  }, [_c('h4', [_c('small', [_vm._v("Lista de distribuidores")])]), _vm._v(" "), _c('a', {
+    staticClass: "pull-right",
     attrs: {
       "href": "#",
       "role": "button",
@@ -42408,7 +42642,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-plus"
-  })])])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -42417,19 +42651,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "colspan": "3"
     }
   }, [_vm._v(" ")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', {
-    attrs: {
-      "width": "10px"
-    }
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "title": "Show"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-eye"
-  })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
@@ -42464,6 +42685,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     }
   }, [_vm._v("Cancelar")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title",
+    attrs: {
+      "id": "myModalLabel"
+    }
+  }, [_c('small', [_vm._v("Detalles de distribuidor")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -44125,19 +44365,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         showItem: function showItem(item) {
-            var _this = this;
-
-            axios.get('/laboratories/' + item.id).then(function (response) {
-                _this.getVueItems();
-            });
+            this.fillItem.id = item.id;
+            this.fillItem.name = item.name;
+            this.fillItem.health_code = item.health_code;
+            this.fillItem.authorization = item.authorization;
+            this.fillItem.phone = item.phone;
+            $("#show-item").modal('show');
         },
 
         deleteItem: function deleteItem(item) {
-            var _this2 = this;
+            var _this = this;
 
             axios.delete('/laboratories/' + item.id).then(function (response) {
-                _this2.changePage(_this2.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
+                _this.changePage(_this.pagination.current_page);
+                toastr.erro('Laboratorio eliminado correctamente.', { timeOut: 5000 });
             });
         },
 
@@ -44156,16 +44397,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         updateItem: function updateItem(id) {
-            var _this3 = this;
+            var _this2 = this;
 
             var input = this.fillItem;
             axios.put('/laboratories/' + id, input).then(function (response) {
-                _this3.changePage(_this3.pagination.current_page);
-                _this3.fillItem = { 'name': '', 'health_code': '', 'authorization': '', 'phone': '', 'id': '' };
+                _this2.changePage(_this2.pagination.current_page);
+                _this2.fillItem = { 'name': '', 'health_code': '', 'authorization': '', 'phone': '', 'id': '' };
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+                toastr.success('Laboratorio editado correctamente.', { timeOut: 5000 });
             }, function (response) {
-                _this3.formErrorsUpdate = response.data;
+                _this2.formErrorsUpdate = response.data;
             });
         }
     }
@@ -44185,7 +44426,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('table', {
     staticClass: "table table-hover"
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.health_code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.authorization))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('td', {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.health_code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.authorization))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _c('td', {
+      attrs: {
+        "width": "10px"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-success",
+      attrs: {
+        "title": "Show"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.showItem(item)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-eye"
+    })])]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
@@ -44279,7 +44537,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog modal-lg"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('form', {
     attrs: {
@@ -44400,7 +44658,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(4)])])])])])])
+  })]), _vm._v(" "), _vm._m(3)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
@@ -44425,19 +44683,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "colspan": "3"
     }
   }, [_vm._v(" ")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', {
-    attrs: {
-      "width": "10px"
-    }
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "title": "Show"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-eye"
-  })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
@@ -45056,18 +45301,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        showItem: function showItem(id) {
-            this.get('/presentations/' + id + '/edit').then(function (response) {
-                this.item.name = response.data.name;
-            });
-        },
-
         deleteItem: function deleteItem(item) {
             var _this = this;
 
             axios.delete('/presentations/' + item.id).then(function (response) {
                 _this.changePage(_this.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
+                toastr.erro('Presentación de medicamente eliminado', { timeOut: 5000 });
             });
         },
 
@@ -45090,7 +45329,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.changePage(_this2.pagination.current_page);
                 _this2.fillItem = { 'title': '', 'description': '', 'id': '' };
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+                toastr.success('Presentación editada', { timeOut: 5000 });
             }, function (response) {
                 _this2.formErrorsUpdate = response.data;
             });

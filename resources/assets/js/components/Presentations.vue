@@ -144,17 +144,10 @@ export default {
             });
         },
 
-
-        showItem: function(id) {
-            this.get('/presentations/' + id + '/edit').then(function(response) {
-                this.item.name = response.data.name;
-            });
-        },
-
         deleteItem: function(item){
             axios.delete('/presentations/'+item.id).then((response) => {
                 this.changePage(this.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                toastr.erro('Presentación de medicamente eliminado', {timeOut: 5000});
             });
         },
 
@@ -175,7 +168,7 @@ export default {
                 this.changePage(this.pagination.current_page);
                 this.fillItem = {'title':'','description':'','id':''};
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});
+                toastr.success('Presentación editada', {timeOut: 5000});
             }, 
             (response) => {
                     this.formErrorsUpdate = response.data;

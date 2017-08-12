@@ -31,7 +31,7 @@
 						<td>{{ item.authorization}}</td>
 						<td>{{ item.phone }}</td>
 						<td width="10px">
-                          <button class="btn btn-success" title="Show"><i class="fa fa-eye"></i></button>
+                          <button class="btn btn-success" @click.prevent="showItem(item)" title="Show"><i class="fa fa-eye"></i></button>
 						</td>
 						<td width="10px">
                             <button class="btn btn-warning" @click.prevent="editItem(item)" title="Edit"><i class="fa fa-pencil"></i></button>
@@ -168,15 +168,18 @@ export default {
         },
 
         showItem: function(item) {
-           axios.get('/laboratories/'+item.id).then((response) => {
-                this.getVueItems();
-            });
+            this.fillItem.id = item.id; 
+            this.fillItem.name = item.name;
+            this.fillItem.health_code = item.health_code;
+            this.fillItem.authorization = item.authorization;
+            this.fillItem.phone = item.phone;
+            $("#show-item").modal('show');  
         },
 
         deleteItem: function(item){
             axios.delete('/laboratories/'+item.id).then((response) => {
                 this.changePage(this.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                toastr.erro('Laboratorio eliminado correctamente.', {timeOut: 5000});
             });
         },
 
@@ -200,7 +203,7 @@ export default {
                 this.changePage(this.pagination.current_page);
                 this.fillItem = {'name':'','health_code':'','authorization':'' ,'phone': '', 'id':''}; 
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});          
+                toastr.success('Laboratorio editado correctamente.', {timeOut: 5000});          
             },
             (response) => {
               this.formErrorsUpdate = response.data;
