@@ -42199,6 +42199,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 toastr.error('Distribuidor eliminado.', { timeOut: 5000 });
             });
         },
+
         changePage: function changePage(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);
@@ -42354,12 +42355,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "ruc"
     }
   }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42387,12 +42388,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['ruc']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "name"
     }
   }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42420,12 +42421,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['name']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "address"
     }
   }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42452,12 +42453,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['address']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "phone"
     }
   }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42506,12 +42507,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "ruc"
     }
   }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42537,12 +42538,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "name"
     }
   }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42568,12 +42569,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "address"
     }
   }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42599,12 +42600,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-3",
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "phone"
     }
   }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-7 col-xs-12"
+    staticClass: "col-md-6 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42815,12 +42816,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -42855,12 +42850,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var input = this.newItem;
             if (input['name'] == '' || input['ruc'] == '') {
-                this.hasError = false;
-                this.hasCreated = true;
+                toastr.warning('Complete todos los campos', { timeOut: 5000 });
             } else {
                 this.hasError = true;
                 axios.post('/dealers', input).then(function (response) {
-                    _this.newItem = { 'ruc': '', 'name': '', 'address': '', 'phone': '' }, _this.getVueItems();
+                    _this.newItem = { 'ruc': '', 'name': '', 'address': '', 'phone': '' }, toastr.success('Distribuidor creado', { timeOut: 5000 });
                 });
                 this.hasCreated = false;
             }
@@ -42876,16 +42870,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "col-md-9 col-md-offset-1"
   }, [_c('div', {
-    staticClass: "alert alert-success alert-dismissible fade in",
-    class: {
-      hidden: _vm.hasCreated
-    },
-    attrs: {
-      "role": "alert"
-    }
-  }, [_vm._m(0), _vm._v("\n        Add Successfully!\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "x_panel"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('form', {
     staticClass: "form-horizontal form-label-left",
@@ -42894,8 +42880,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "item form-group"
-  }, [_vm._m(2), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8 col-sm-7 col-xs-12"
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42922,8 +42908,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])]), _vm._v(" "), _c('div', {
     staticClass: "item form-group"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8 col-sm-7 col-xs-12"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42951,8 +42937,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])]), _vm._v(" "), _c('div', {
     staticClass: "item form-group"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8 col-sm-7 col-xs-12"
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42978,8 +42964,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])]), _vm._v(" "), _c('div', {
     staticClass: "item form-group"
-  }, [_vm._m(5), _vm._v(" "), _c('div', {
-    staticClass: "col-md-8 col-sm-7 col-xs-12"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-sm-7 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -43008,7 +42994,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "ln_solid"
   }), _vm._v(" "), _c('div', {
     staticClass: "form-group text-center"
-  }, [_vm._m(6), _vm._v(" "), _c('div', {
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "col-md-6 col-sm-6 col-xs-12"
   }, [_c('button', {
     staticClass: "btn btn-success",
@@ -43020,19 +43006,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Guardar")])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('button', {
-    staticClass: "close",
-    attrs: {
-      "type": "button",
-      "data-dismiss": "alert",
-      "aria-label": "Close"
-    }
-  }, [_c('span', {
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v("×")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
   }, [_c('h2', [_c('small', [_vm._v("Crear Distribuidores")])]), _vm._v(" "), _c('div', {
@@ -43264,6 +43237,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -43327,22 +43362,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
-        showItem: function showItem(id) {
-            this.get('/clients/' + id + '/edit').then(function (response) {
-                this.item.ruc = response.data.ruc;
-                this.item.name = response.data.name;
-                this.item.address = response.data.address;
-                this.item.phone = response.data.phone;
-            });
-        },
-
-        deleteItem: function deleteItem(item) {
-            var _this = this;
-
-            axios.delete('/clients/' + item.id).then(function (response) {
-                _this.changePage(_this.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', { timeOut: 5000 });
-            });
+        showItem: function showItem(item) {
+            this.fillItem.id = item.id;
+            this.fillItem.dni = item.dni;
+            this.fillItem.name = item.name;
+            this.fillItem.last_name = item.last_name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#show-item").modal('show');
         },
 
         editItem: function editItem(item) {
@@ -43356,16 +43383,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         updateItem: function updateItem(id) {
-            var _this2 = this;
+            var _this = this;
 
             var input = this.fillItem;
             axios.put('/clients/' + id, input).then(function (response) {
-                _this2.changePage(_this2.pagination.current_page);
-                _this2.fillItem = { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '', 'id': '' };
+                _this.changePage(_this.pagination.current_page);
+                _this.fillItem = { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '', 'id': '' };
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', { timeOut: 5000 });
+                toastr.success('Cliente editado', { timeOut: 5000 });
             }, function (response) {
-                _this2.formErrorsUpdate = response.data;
+                _this.formErrorsUpdate = response.data;
+            });
+        },
+
+        deleteItem: function deleteItem(item) {
+            var _this2 = this;
+
+            axios.delete('/clients/' + item.id).then(function (response) {
+                _this2.changePage(_this2.pagination.current_page);
+                toastr.error('Cliente eliminado', { timeOut: 5000 });
             });
         },
 
@@ -43390,7 +43426,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('table', {
     staticClass: "table table-hover"
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.dni))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.last_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('td', {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.dni))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.last_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _c('td', {
+      attrs: {
+        "width": "10px"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-success",
+      attrs: {
+        "title": "Show"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.showItem(item)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-eye"
+    })])]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
@@ -43481,10 +43534,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   }, [_c('div', {
-    staticClass: "modal-dialog modal-lg"
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('form', {
     staticClass: "form-horizontal form-label-left",
@@ -43501,10 +43557,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "dni"
     }
-  }, [_vm._v("DNI")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("DNI")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43514,6 +43573,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
+      "disabled": "true",
       "name": "dni"
     },
     domProps: {
@@ -43525,15 +43585,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.dni = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['dni']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrors['dni']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v("\n                            @" + _vm._s(_vm.formErrors['dni'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Nombre: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Nombre: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43554,15 +43617,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.name = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['name'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "last_name"
     }
-  }, [_vm._v("Apellidos: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Apellidos: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43583,15 +43649,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.last_name = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['last_name']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrors['last_name']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['last_name'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "address"
     }
-  }, [_vm._v("Dirección")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Dirección")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43612,15 +43681,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.address = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['address']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrors['address']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['address'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "phone"
     }
-  }, [_vm._v("Teléfono")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Teléfono")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -43641,9 +43713,188 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['phone']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrors['phone']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['phone'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _vm._m(4)])])])])])])
+  }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['phone'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal fade",
+    attrs: {
+      "id": "show-item",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-hidden": "true"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
+    attrs: {
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "dni"
+    }
+  }, [_vm._v("DNI")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.dni),
+      expression: "fillItem.dni"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "dni"
+    },
+    domProps: {
+      "value": (_vm.fillItem.dni)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.dni = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Nombre: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.name),
+      expression: "fillItem.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "name"
+    },
+    domProps: {
+      "value": (_vm.fillItem.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "last_name"
+    }
+  }, [_vm._v("Apellidos: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.last_name),
+      expression: "fillItem.last_name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "last_name"
+    },
+    domProps: {
+      "value": (_vm.fillItem.last_name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.last_name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "address"
+    }
+  }, [_vm._v("Dirección")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.address),
+      expression: "fillItem.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "address"
+    },
+    domProps: {
+      "value": (_vm.fillItem.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.address = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "phone"
+    }
+  }, [_vm._v("Teléfono")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.phone),
+      expression: "fillItem.phone"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "tel",
+      "disabled": "true",
+      "name": "phone"
+    },
+    domProps: {
+      "value": (_vm.fillItem.phone)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.phone = $event.target.value
+      }
+    }
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
@@ -43668,19 +43919,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "colspan": "3"
     }
   }, [_vm._v(" ")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', {
-    attrs: {
-      "width": "10px"
-    }
-  }, [_c('button', {
-    staticClass: "btn btn-success",
-    attrs: {
-      "title": "Show"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-eye"
-  })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
@@ -43715,6 +43953,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     }
   }, [_vm._v("Cancelar")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', [_c('small', {
+    staticClass: "modal-title",
+    attrs: {
+      "id": "myModalLabel"
+    }
+  }, [_vm._v(" Detalles de cliente ")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -44301,6 +44558,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -44378,7 +44687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.delete('/laboratories/' + item.id).then(function (response) {
                 _this.changePage(_this.pagination.current_page);
-                toastr.erro('Laboratorio eliminado correctamente.', { timeOut: 5000 });
+                toastr.error('Laboratorio eliminado correctamente.', { timeOut: 5000 });
             });
         },
 
@@ -44531,15 +44840,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "edit-item",
       "tabindex": "-1",
       "role": "dialog",
-      "aria-hidden": "true"
+      "aria-labelledby": "myModalLabel"
     }
   }, [_c('div', {
-    staticClass: "modal-dialog modal-lg"
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
   }, [_c('div', {
     staticClass: "modal-content"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
     attrs: {
       "method": "POST",
       "enctype": "multipart/form-data"
@@ -44553,10 +44866,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Nombre: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Nombre Laboratorio: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -44566,7 +44882,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "name": "name"
+      "name": "name",
+      "autofocus": ""
     },
     domProps: {
       "value": (_vm.fillItem.name)
@@ -44577,13 +44894,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.name = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['name']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['name']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "health_code"
     }
-  }, [_vm._v("Codigo Sanitario: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Codigo Sanitario: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -44604,13 +44926,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.health_code = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['health_code']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['health_code']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "authorization"
     }
-  }, [_vm._v("Autorización: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Autorización: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -44631,13 +44958,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.authorization = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['authorization']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['authorization']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "phone"
     }
-  }, [_vm._v("Telefono: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-7 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -44646,7 +44978,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "tel",
+      "type": "text",
       "name": "phone"
     },
     domProps: {
@@ -44658,7 +44990,157 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.phone = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(3)])])])])])])
+  })]), _vm._v(" "), (_vm.formErrorsUpdate['phone']) ? _c('span', {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['phone']))]) : _vm._e()]), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal",
+    attrs: {
+      "id": "show-item",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-labelledby": "myModalLabel"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left",
+    attrs: {
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Nombre Laboratorio: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.name),
+      expression: "fillItem.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": "true",
+      "type": "text",
+      "name": "name"
+    },
+    domProps: {
+      "value": (_vm.fillItem.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "authorization"
+    }
+  }, [_vm._v("Autorización : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.authorization),
+      expression: "fillItem.authorization"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "authorization"
+    },
+    domProps: {
+      "value": (_vm.fillItem.authorization)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.authorization = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "health_code"
+    }
+  }, [_vm._v("Codigo Sanitario: ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.health_code),
+      expression: "fillItem.health_code"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": "true",
+      "type": "text",
+      "name": "health_code"
+    },
+    domProps: {
+      "value": (_vm.fillItem.health_code)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.health_code = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4",
+    attrs: {
+      "for": "phone"
+    }
+  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.fillItem.phone),
+      expression: "fillItem.phone"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "true",
+      "name": "phone"
+    },
+    domProps: {
+      "value": (_vm.fillItem.phone)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.fillItem.phone = $event.target.value
+      }
+    }
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
@@ -44696,12 +45178,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', [_c('small', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
     staticClass: "modal-title",
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_vm._v(" Editar Laboratorio ")])])])
+  }, [_c('small', [_vm._v("Editar Laboratorio")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-footer"
@@ -44717,6 +45199,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     }
   }, [_vm._v("Cancelar")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title",
+    attrs: {
+      "id": "myModalLabel"
+    }
+  }, [_c('small', [_vm._v("Detalles de distribuidor")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -44878,6 +45379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.hasError = true;
                 axios.post('/laboratories', input).then(function (response) {
                     _this.newItem = { 'name': '', 'health_code': '', 'authorization': '', 'phone': '' }, _this.getVueItems();
+                    toastr.success('Laboratorio creado', { timeOut: 5000 });
                 });
                 this.hasCreated = false;
             }
@@ -45238,6 +45740,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -45306,7 +45810,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.delete('/presentations/' + item.id).then(function (response) {
                 _this.changePage(_this.pagination.current_page);
-                toastr.erro('Presentación de medicamente eliminado', { timeOut: 5000 });
+                toastr.error('Presentación de medicamento eliminado', { timeOut: 5000 });
             });
         },
 
@@ -45327,7 +45831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var input = this.fillItem;
             axios.put('/presentations/' + id, input).then(function (response) {
                 _this2.changePage(_this2.pagination.current_page);
-                _this2.fillItem = { 'title': '', 'description': '', 'id': '' };
+                _this2.fillItem = { 'name': '', 'id': '' };
                 $("#edit-item").modal('hide');
                 toastr.success('Presentación editada', { timeOut: 5000 });
             }, function (response) {
@@ -45446,7 +45950,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   }, [_c('div', {
-    staticClass: "modal-dialog modal-lg"
+    staticClass: "modal-dialog"
   }, [_c('div', {
     staticClass: "modal-content"
   }, [_vm._m(2), _vm._v(" "), _c('div', {
@@ -45466,10 +45970,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
+    staticClass: "control-label col-md-4",
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Nombre: ")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Presentación :")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-xs-12"
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -45490,7 +45997,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.fillItem.name = $event.target.value
       }
     }
-  }), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
+  })]), _vm._v(" "), (_vm.formErrors['name']) ? _c('span', {
     staticClass: "error text-danger"
   }, [_vm._v("\n                                @" + _vm._s(_vm.formErrors['name'][0]) + "\n                            ")]) : _vm._e()]), _vm._v(" "), _vm._m(3)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

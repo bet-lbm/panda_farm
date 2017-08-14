@@ -79,29 +79,29 @@
                     <div class="modal-body">
                         <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="ruc">RUC : </label>
-                                <div class="col-md-7 col-xs-12">
+                                <label class="control-label col-md-4" for="ruc">RUC : </label>
+                                <div class="col-md-6 col-xs-12">
                                     <input class="form-control" disabled="true" type="text" name="ruc" v-model="fillItem.ruc" />
                                 </div>
                                 <span v-if="formErrorsUpdate['ruc']" class="error text-danger">{{ formErrorsUpdate['ruc'] }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="name">Razón Social : </label>
-                                <div class="col-md-7 col-xs-12">    
+                                <label class="control-label col-md-4" for="name">Razón Social : </label>
+                                <div class="col-md-6 col-xs-12">    
                                     <input class="form-control" type="text" name="name" v-model="fillItem.name" autofocus/>
                                 </div>
                                 <span v-if="formErrorsUpdate['name']" class="error text-danger">{{ formErrorsUpdate['name'] }}</span> 
                             </div>             
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="address">Dirección : </label>
-                                <div class="col-md-7 col-xs-12">    
+                                <label class="control-label col-md-4" for="address">Dirección : </label>
+                                <div class="col-md-6 col-xs-12">    
                                     <input type="text" name="address" class="form-control" v-model="fillItem.address" />
                                 </div>
                                 <span v-if="formErrorsUpdate['address']" class="error text-danger">{{ formErrorsUpdate['address'] }}</span>
                             </div> 
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="phone">Teléfono : </label>
-                                <div class="col-md-7 col-xs-12">    
+                                <label class="control-label col-md-4" for="phone">Teléfono : </label>
+                                <div class="col-md-6 col-xs-12">    
                                     <input type="text" name="phone" class="form-control" v-model="fillItem.phone"/>
                                 </div>
                                 <span v-if="formErrorsUpdate['phone']" class="error text-danger">{{ formErrorsUpdate['phone'] }}</span>
@@ -127,26 +127,26 @@
                     <div class="modal-body">
                         <form class="form-horizontal form-label-left" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="ruc">RUC : </label>
-                                <div class="col-md-7 col-xs-12">
+                                <label class="control-label col-md-4" for="ruc">RUC : </label>
+                                <div class="col-md-6 col-xs-12">
                                     <input class="form-control" disabled="true" type="text" name="ruc" v-model="fillItem.ruc" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="name">Razón Social : </label>
-                                <div class="col-md-7 col-xs-12">    
+                                <label class="control-label col-md-4" for="name">Razón Social : </label>
+                                <div class="col-md-6 col-xs-12">    
                                     <input class="form-control" disabled="true" type="text" name="name" v-model="fillItem.name"/>
                                 </div>
                             </div>             
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="address">Dirección : </label>
-                                <div class="col-md-7 col-xs-12">    
+                                <label class="control-label col-md-4" for="address">Dirección : </label>
+                                <div class="col-md-6 col-xs-12">    
                                     <input type="text"  disabled="true" name="address" class="form-control" v-model="fillItem.address" />
                                 </div>
                             </div> 
                             <div class="form-group">
-                                <label class="control-label col-md-3" for="phone">Teléfono : </label>
-                                <div class="col-md-7 col-xs-12">    
+                                <label class="control-label col-md-4" for="phone">Teléfono : </label>
+                                <div class="col-md-6 col-xs-12">    
                                     <input type="text" disabled="true" name="phone" class="form-control" v-model="fillItem.phone"/>
                                 </div>
                             </div>                
@@ -254,10 +254,11 @@ export default {
 
         deleteItem: function(item){
             axios.delete('/dealers/'+item.id).then((response) => {
-            this.changePage(this.pagination.current_page);
-            toastr.error('Distribuidor eliminado.', {timeOut: 5000});
+                this.changePage(this.pagination.current_page);
+                toastr.error('Distribuidor eliminado.', {timeOut: 5000});
             });
         },
+
         changePage: function(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);

@@ -33,7 +33,7 @@
 						<td>{{ item.address }}</td>
 						<td>{{ item.phone }}</td>
 						<td width="10px">
-							<button class="btn btn-success" title="Show"> 
+							<button class="btn btn-success" @click.prevent="showItem(item)"title="Show"> 
                                 <i class="fa fa-eye"></i>
 							</button>
 						</td>
@@ -71,8 +71,9 @@
             </nav>
 		</div>
 	</div>
+
     <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -82,36 +83,46 @@
                 <div class="modal-body">
                     <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
                         <div class="form-group">
-                            <label for="dni">DNI</label>
-                            <input type="text" class="form-control" name="dni" v-model="fillItem.dni">
+                            <label class="control-label col-md-4" for="dni">DNI</label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" disabled="true" class="form-control" name="dni" v-model="fillItem.dni">
+                            </div>
                             <span v-if="formErrors['dni']" class="error text-danger">
                             @{{ formErrors['dni'][0] }}
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="name">Nombre: </label>
-                            <input type="text" class="form-control" name="name" v-model="fillItem.name">
+                            <label class="control-label col-md-4" for="name">Nombre: </label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" name="name" v-model="fillItem.name">
+                            </div>
                             <span v-if="formErrors['name']" class="error text-danger">
                                 @{{ formErrors['name'][0] }}
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Apellidos: </label>
-                            <input type="text" class="form-control" name="last_name" v-model="fillItem.last_name">
+                            <label class="control-label col-md-4" for="last_name">Apellidos: </label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" name="last_name" v-model="fillItem.last_name">
+                            </div>
                             <span v-if="formErrors['last_name']" class="error text-danger">
                                 @{{ formErrors['last_name'][0] }}
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="address">Dirección</label>
-                            <input type="text" class="form-control" name="address" v-model="fillItem.address">
+                            <label class="control-label col-md-4" for="address">Dirección</label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" name="address" v-model="fillItem.address">
+                            </div>
                             <span v-if="formErrors['address']" class="error text-danger">
                                 @{{ formErrors['address'][0] }}
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" class="form-control" name="phone" v-model="fillItem.phone">
+                            <label class="control-label col-md-4" for="phone">Teléfono</label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="tel" class="form-control" name="phone" v-model="fillItem.phone">
+                            </div>
                             <span v-if="formErrors['phone']" class="error text-danger">
                                 @{{ formErrors['phone'][0] }}
                             </span>
@@ -122,6 +133,57 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="show-item" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4> <small class="modal-title" id="myModalLabel"> Detalles de cliente </small> </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form-label-left" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="dni">DNI</label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" disabled="true" name="dni" v-model="fillItem.dni">
+                            </div>
+                        
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="name">Nombre: </label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" disabled="true" name="name" v-model="fillItem.name">
+                            </div>
+                        
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="last_name">Apellidos: </label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" disabled="true" name="last_name" v-model="fillItem.last_name">
+                            </div>
+                        
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="address">Dirección</label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="text" class="form-control" disabled="true" name="address" v-model="fillItem.address">
+                            </div>
+                        
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4" for="phone">Teléfono</label>
+                            <div class="col-md-6 col-xs-12">  
+                               <input type="tel" class="form-control" disabled="true" name="phone" v-model="fillItem.phone">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
@@ -188,22 +250,15 @@ export default {
             });
         },
 
-        showItem: function(id) {
-            this.get('/clients/' + id + '/edit').then(function(response) {
-                this.item.ruc = response.data.ruc;
-                this.item.name = response.data.name;
-                this.item.address = response.data.address;
-                this.item.phone = response.data.phone;
-            });
+        showItem: function(item) {
+            this.fillItem.id = item.id;
+            this.fillItem.dni = item.dni;
+            this.fillItem.name = item.name;
+            this.fillItem.last_name = item.last_name;
+            this.fillItem.address = item.address;
+            this.fillItem.phone = item.phone;
+            $("#show-item").modal('show');
         },
-
-        deleteItem: function(item){
-            axios.delete('/clients/'+item.id).then((response) => {
-                this.changePage(this.pagination.current_page);
-                toastr.success('Item Deleted Successfully.', 'Success Alert', {timeOut: 5000});
-            });
-        },
-
 
         editItem: function(item) {
             this.fillItem.id = item.id;
@@ -221,12 +276,19 @@ export default {
                 this.changePage(this.pagination.current_page);
                 this.fillItem = {'dni':'','name':'','last_name': '','address':'' ,'phone': '', 'id':''};
                 $("#edit-item").modal('hide');
-                toastr.success('Item Updated Successfully.', 'Success Alert', {timeOut: 5000});
+                toastr.success('Cliente editado', {timeOut: 5000});
                 }, (response) => {
                     this.formErrorsUpdate = response.data;
                 });
         },
         
+        deleteItem: function(item){
+            axios.delete('/clients/'+item.id).then((response) => {
+                this.changePage(this.pagination.current_page);
+                toastr.error('Cliente eliminado', {timeOut: 5000});
+            });
+        },
+
         changePage: function(page) {
                 this.pagination.current_page = page;
                 this.getVueItems(page);

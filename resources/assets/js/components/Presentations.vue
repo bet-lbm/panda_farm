@@ -56,7 +56,7 @@
         </div>
 	</div>
     <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -66,8 +66,10 @@
                 <div class="modal-body">
                     <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
                         <div class="form-group">
-                            <label for="name">Nombre: </label>
-                            <input type="text" class="form-control" name="name" v-model="fillItem.name">
+                            <label class="control-label col-md-4" for="name">Presentación :</label>
+                            <div class="col-md-6 col-xs-12" >
+                                <input type="text" class="form-control" name="name" v-model="fillItem.name">
+                            </div>
                             <span v-if="formErrors['name']" class="error text-danger">
                                 @{{ formErrors['name'][0] }}
                             </span>
@@ -147,7 +149,7 @@ export default {
         deleteItem: function(item){
             axios.delete('/presentations/'+item.id).then((response) => {
                 this.changePage(this.pagination.current_page);
-                toastr.erro('Presentación de medicamente eliminado', {timeOut: 5000});
+                toastr.error('Presentación de medicamento eliminado', {timeOut: 5000});
             });
         },
 
@@ -166,7 +168,7 @@ export default {
             var input = this.fillItem;
             axios.put('/presentations/'+id,input).then((response) => {
                 this.changePage(this.pagination.current_page);
-                this.fillItem = {'title':'','description':'','id':''};
+                this.fillItem = {'name':'','id':''};
                 $("#edit-item").modal('hide');
                 toastr.success('Presentación editada', {timeOut: 5000});
             }, 

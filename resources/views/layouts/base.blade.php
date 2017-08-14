@@ -9,7 +9,7 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>PANDA</title>
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -36,7 +36,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="{{ url('/') }}" class="site_title"><i class="fa fa-plus"></i>  {{ config('app.name', 'Laravel') }}</a>
+            <a href="{{ url('/') }}" class="site_title"><i class="fa fa-plus"></i> <span class="text-center">PANDA</span></a>
           </div>
 
           <div class="clearfix"></div>

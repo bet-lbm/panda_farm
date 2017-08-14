@@ -106,6 +106,7 @@ export default {
                 .then(response => {
                     this.newItem = {'name':'','health_code':'','authorization':'' ,'phone': ''},
                     this.getVueItems();
+                    toastr.success('Laboratorio creado', {timeOut: 5000});
                 });
                 this.hasCreated = false;
             }

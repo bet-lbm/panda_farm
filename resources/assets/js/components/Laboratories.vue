@@ -64,46 +64,98 @@
             </nav>
 		</div>
 	</div>
-
-    <div  class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4> <small class="modal-title" id="myModalLabel"> Editar Laboratorio </small> </h4> 
-                </div>
-                <div class="modal-body">    
-                    <form <form method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
-                        <div class="form-group">
-                            <label for="name">Nombre: </label>
-                            <input type="text" class="form-control" name="name" v-model="fillItem.name">
-                           
-                        </div>
-                        <div class="form-group">
-                            <label for="health_code">Codigo Sanitario: </label>
-                            <input type="text" class="form-control" name="health_code" v-model="fillItem.health_code">
-                            
-                        </div>
-                        <div class="form-group">
-                            <label for="authorization">Autorización: </label>
-                            <input type="text" class="form-control" name="authorization" v-model="fillItem.authorization">
-                            
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefono: </label>
-                            <input type="tel" class="form-control" name="phone" v-model="fillItem.phone">
-                            
-                        </div>
-                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
-                            <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>
-                        </div> 
-                    </form>
+    
+    <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"> <small>Editar Laboratorio</small> </h4> 
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="name">Nombre Laboratorio: </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input class="form-control" type="text" name="name" v-model="fillItem.name" autofocus/>
+                                </div>
+                                <span v-if="formErrorsUpdate['name']" class="error text-danger">{{ formErrorsUpdate['name'] }}</span> 
+                            </div>             
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="health_code">Codigo Sanitario: </label>
+                                <div class="col-md-7 col-xs-12">
+                                    <input class="form-control" type="text" name="health_code" v-model="fillItem.health_code" />
+                                </div>
+                                <span v-if="formErrorsUpdate['health_code']" class="error text-danger">{{ formErrorsUpdate['health_code'] }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="authorization">Autorización: </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input type="text" name="authorization" class="form-control" v-model="fillItem.authorization" />
+                                </div>
+                                <span v-if="formErrorsUpdate['authorization']" class="error text-danger">{{ formErrorsUpdate['authorization'] }}</span>
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="phone">Teléfono : </label>
+                                <div class="col-md-7 col-xs-12">    
+                                    <input type="text" name="phone" class="form-control" v-model="fillItem.phone"/>
+                                </div>
+                                <span v-if="formErrorsUpdate['phone']" class="error text-danger">{{ formErrorsUpdate['phone'] }}</span>
+                            </div> 
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
+                                <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>
+                            </div> 
+                        </form> 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="modal" id="show-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel"> <small>Detalles de distribuidor</small> </h4> 
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal form-label-left" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="name">Nombre Laboratorio: </label>
+                                <div class="col-md-6 col-xs-12">   
+                                    <input class="form-control" disabled="true" type="text" name="name" v-model="fillItem.name"/>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="authorization">Autorización : </label>
+                                <div class="col-md-6 col-xs-12">    
+                                    <input type="text"  disabled="true" name="authorization" class="form-control" v-model="fillItem.authorization" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="health_code">Codigo Sanitario: </label>
+                                <div class="col-md-6 col-xs-12">
+                                    <input class="form-control" disabled="true" type="text" name="health_code" v-model="fillItem.health_code" />
+                                </div>
+                            </div> 
+                             
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="phone">Teléfono : </label>
+                                <div class="col-md-6 col-xs-12">    
+                                    <input type="text" disabled="true" name="phone" class="form-control" v-model="fillItem.phone"/>
+                                </div>
+                            </div>                
+                        </form> 
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+    
+
 </div>
 </template>
 <script>
@@ -179,7 +231,7 @@ export default {
         deleteItem: function(item){
             axios.delete('/laboratories/'+item.id).then((response) => {
                 this.changePage(this.pagination.current_page);
-                toastr.erro('Laboratorio eliminado correctamente.', {timeOut: 5000});
+                toastr.error('Laboratorio eliminado correctamente.', {timeOut: 5000});
             });
         },
 
