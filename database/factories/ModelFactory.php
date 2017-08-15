@@ -52,8 +52,28 @@ $factory->define(Panda\Presentation::class, function (Faker\Generator $faker) {
         'name' => $faker->word,
     ];
 });
-$factory->define(Panda\Presentation::class, function (Faker\Generator $faker) {
+$factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
     return [
+        'batch' => $faker->numberBetween($min = 1, $max = 99),
+        'presentation_id' => function () {
+            return factory(App\Presentation::class)->create()->id;
+        },
+        'presentation_name' => function (array $medicines) {
+            return App\Presentation::find($medicines['presentation_id'])->name;
+        },
+
+        'type' => ['generico','comercial'],
         'name' => $faker->word,
+        'component' => $faker->numerify('###'),
+        'concentration' => $faker->numerify('###g'),
+        'expiration_date' => $faker->date,
+        'production_date' => $faker->dateBetween('-3 years','-1 year'),
+        'description'=> $faker->text(100),
+        'stock' => $faker->numberBetween($min=1, $max=1000), 
+        'purchanse_price' => $faker->randomFloat($nbMaxDecimals = 2),
+        'sale_price' => $faker->randomFloat($nbMaxDecimals = 2),
+        'igv' => function($sale_price){
+            return $sale_price * 0.18;
+        },
     ];
 });
