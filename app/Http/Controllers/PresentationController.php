@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Panda\Http\Controllers;
 
-use App\Presentation;
+use Panda\Presentation;
 use Illuminate\Http\Request;
 
 class PresentationController extends Controller

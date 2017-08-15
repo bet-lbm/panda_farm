@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Panda\Http\Controllers;
 
-use App\Dealer;
+use Panda\Dealer;
 use Illuminate\Http\Request;
 
 class DealerController extends Controller

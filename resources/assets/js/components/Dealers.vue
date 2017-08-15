@@ -14,7 +14,7 @@
     					<tr>
     						<th>#</th>
     						<th>RUC</th>
-    						<th>Nombre</th>
+    						<th>Razón Social</th>
     						<th>Dirección</th>
     						<th>Teléfono</th>
     						<th colspan="3">&nbsp;</th>
@@ -107,7 +107,7 @@
                                 <span v-if="formErrorsUpdate['phone']" class="error text-danger">{{ formErrorsUpdate['phone'] }}</span>
                             </div> 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
+                                <button type="submit" class="btn btn-primary"> Guadar cambios </button>
                                 <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>
                             </div> 
                         </form> 

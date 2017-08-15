@@ -61,7 +61,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <h4><small class="modal-title" id="myModalLabel"> Editar Presentacion </small></h4>  
+                    <h4><small class="modal-title" id="myModalLabel"> Editar Presentación </small></h4>  
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
@@ -75,7 +75,7 @@
                             </span>
                         </div>
                         <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"> Guadar Cambios </button>
+                                <button type="submit" class="btn btn-primary"> Guadar cambios </button>
                                 <button data-dismiss="modal"  class="btn btn-default" type="button">Cancelar</button>
                         </div> 
                     </form>

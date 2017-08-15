@@ -9,7 +9,7 @@
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>PANDA</title>
+  <title>{{ config('app.name', 'Laravel') }}</title>
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -36,7 +36,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="{{ url('/') }}" class="site_title"><i class="fa fa-plus"></i> <span class="text-center">PANDA</span></a>
+            <a href="{{ url('/') }}" class="site_title"><i class="fa fa-plus"></i> {{ config('app.name', 'Laravel') }}</a>
           </div>
 
           <div class="clearfix"></div>
@@ -121,32 +121,32 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="fa fa-angle-down"></span>
-                                </a>
+              <!-- Authentication Links -->
+              @if (Auth::guest())
+                  <li><a href="{{ route('login') }}">Login</a></li>
+                  <li><a href="{{ route('register') }}">Register</a></li>
+              @else
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          {{ Auth::user()->name }} <span class="fa fa-angle-down"></span>
+                      </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li>
+                              <a href="{{ route('logout') }}"
+                                  onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                  Logout
+                              </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  {{ csrf_field() }}
+                              </form>
+                          </li>
+                      </ul>
+                  </li>
+              @endif
+          </ul>
           </nav>
         </div>
       </div>

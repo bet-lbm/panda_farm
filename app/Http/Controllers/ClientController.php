@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Panda\Http\Controllers;
 
-use App\Client;
+use Panda\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -59,7 +59,7 @@ class ClientController extends Controller
             'address' => 'required',
             'phone' => 'required',
         ]);
-        $create = Dealer::create($request->all());
+        $create = Client::create($request->all());
         return response()->json($create);
     }
 

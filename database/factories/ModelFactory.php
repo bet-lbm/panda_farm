@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(Panda\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -22,7 +22,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
-$factory->define(App\Dealer::class, function (Faker\Generator $faker) {
+$factory->define(Panda\Dealer::class, function (Faker\Generator $faker) {
     return [
     	'ruc' => $faker->unique()->numerify('###########'),
         'name' => $faker->name,
@@ -30,25 +30,30 @@ $factory->define(App\Dealer::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
     ];
 });
-$factory->define(App\Client::class, function (Faker\Generator $faker) {
+$factory->define(Panda\Client::class, function (Faker\Generator $faker) {
     return [
         'dni' => $faker->unique()->numerify('########'),
         'name' => $faker->name,
-        'last_name' => $faker->name,
+        'last_name' => $faker->firstName,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
     ];
 });
-$factory->define(App\Laboratory::class, function (Faker\Generator $faker) {
+$factory->define(Panda\Laboratory::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->company,
         'health_code' => $faker->numerify('############'),
         'authorization' => $faker->numerify('#################'),
         'phone' => $faker->phoneNumber,
     ];
 });
-$factory->define(App\Presentation::class, function (Faker\Generator $faker) {
+$factory->define(Panda\Presentation::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->word,
+    ];
+});
+$factory->define(Panda\Presentation::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
     ];
 });

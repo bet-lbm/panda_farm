@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Panda;
 
 use Illuminate\Database\Eloquent\Model;
 

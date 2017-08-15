@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Panda\Providers\AppServiceProvider::class,
+        Panda\Providers\AuthServiceProvider::class,
+        // Panda\Providers\BroadcastServiceProvider::class,
+        Panda\Providers\EventServiceProvider::class,
+        Panda\Providers\RouteServiceProvider::class,
 
     ],
 

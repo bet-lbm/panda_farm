@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Panda\Http\Controllers;
 
-use App\Laboratory;
+use Panda\Laboratory;
 use Illuminate\Http\Request;
 
 class LaboratoryController extends Controller
