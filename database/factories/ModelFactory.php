@@ -53,27 +53,26 @@ $factory->define(Panda\Presentation::class, function (Faker\Generator $faker) {
     ];
 });
 $factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
+    
     return [
-        'batch' => $faker->numberBetween($min = 1, $max = 99),
-        'presentation_id' => function () {
-            return factory(App\Presentation::class)->create()->id;
-        },
-        'presentation_name' => function (array $medicines) {
-            return App\Presentation::find($medicines['presentation_id'])->name;
-        },
-
-        'type' => ['generico','comercial'],
-        'name' => $faker->word,
-        'component' => $faker->numerify('###'),
-        'concentration' => $faker->numerify('###g'),
-        'expiration_date' => $faker->date,
-        'production_date' => $faker->dateBetween('-3 years','-1 year'),
+        'batch' => $faker->numberBetween(1,99),
+        'name' => $faker->sentence(2),
         'description'=> $faker->text(100),
-        'stock' => $faker->numberBetween($min=1, $max=1000), 
-        'purchanse_price' => $faker->randomFloat($nbMaxDecimals = 2),
-        'sale_price' => $faker->randomFloat($nbMaxDecimals = 2),
-        'igv' => function($sale_price){
-            return $sale_price * 0.18;
-        },
+
+        'presentation_id' => \random_int(1, \Panda\Presentation::all()->count()),
+        /*'presentation_name' => function (array $medicines) {
+            return Panda\Presentation::find($medicines['presentation_id'])->name;
+        },*/
+        
+        'type' => $faker->randomElement($array = array ('generico','comercial')),      
+        'stock' => $faker->numberBetween($min=1, $max=1000),
+
+        'component' => $faker->numerify('###'),
+        'concentration' => $faker->numerify('### g'),
+        'purchanse_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+        'sale_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 150),
+        'igv' => $faker->randomFloat($nbMaxDecimals = 2, $min= 0, $max = 18),
+        'expiration_date' => $faker->date,
+        'production_date' => $faker->date,
     ];
 });

@@ -1,7 +1,7 @@
 <?php
 
-use App\Client;
 use Illuminate\Database\Seeder;
+use Panda\Client;
 
 class ClientsTableSeeder extends Seeder
 {

@@ -52,4 +52,9 @@ Route::post('/presentations','PresentationController@store');
 Route::put('/presentations/{id}','PresentationController@update');
 Route::delete('/presentations/{id}','PresentationController@delete');
 Route::get('/presentations','PresentationController@index');
-//--------------------------------------------------------------------
+
+//-------------------------Medicine------------------------------------
+Route::get('/list_medicines', function () {
+    return view('medicines.index');
+});
+Route::resource('medicines','MedicineController'); 

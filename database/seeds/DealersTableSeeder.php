@@ -1,7 +1,7 @@
 <?php
 
-use App\Dealer;
 use Illuminate\Database\Seeder;
+use Panda\Dealer;
 
 class DealersTableSeeder extends Seeder
 {

@@ -2,12 +2,8 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
-			<h4><small>Lista de Clientes</small></h4>
-			<ul class="nav navbar-right panel_toolbox">
-				<li class="pull-right">
-					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
-				</li>
-			</ul>
+			<h5>Lista de Clientes</h5>
+			<a class="pull-right"><i class="fa fa-plus"></i></a>
 			<div class="clearfix"></div>
 		</div>
         

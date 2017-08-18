@@ -2,8 +2,8 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
     	<div class="x_panel">
     		<div class="x_title">
-    			<h4><small>Lista de distribuidores</small> </h4>
-    			<a class="pull-right" href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
+    			<h5> Lista de distribuidores </h5>
+    			<a class="pull-right"><i class="fa fa-plus"></i></a>
     				
     			<div class="clearfix"></div>
     		</div>

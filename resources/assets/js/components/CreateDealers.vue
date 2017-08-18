@@ -9,7 +9,7 @@
         	<!-- start form for validation -->
             <form class="form-horizontal form-label-left" novalidate>
                 <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-5 col-xs-12" for="name">RUC <span class="required">*</span>
+                    <label class="control-label col-md-3 col-sm-5 col-xs-12" for="ruc">RUC <span class="required">*</span>
                     </label>
                     <div class="col-md-8 col-sm-7 col-xs-12">
                         <input id="ruc" class="form-control col-md-7 col-xs-12" data-validate-length-range="11" name="ruc" equired="required" type="text" v-model="newItem.ruc">

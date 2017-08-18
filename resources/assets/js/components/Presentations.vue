@@ -2,13 +2,9 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
-			<h4><small>Lista de Presentaciones</small></h4>
-			<ul class="nav navbar-right panel_toolbox">
-				<li class="pull-right">
-					<a href="#" role="button" aria-expanded="false"><i class="fa fa-plus"></i></a>
-				</li>
-			</ul>
-			<div class="clearfix"></div>
+			<h5>Lista de Presentaciones</h5>
+			<a class="pull-right"><i class="fa fa-plus"></i></a>
+            <div class="clearfix"></div>
 		</div>
         
 		<div class="x_content">

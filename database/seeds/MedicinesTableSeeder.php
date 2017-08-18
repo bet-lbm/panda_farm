@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Panda\Medicine;
 
 class MedicinesTableSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class MedicinesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Medicine::class,20)->create();
     }
 }

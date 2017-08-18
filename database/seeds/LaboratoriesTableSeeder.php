@@ -1,7 +1,7 @@
 <?php
 
-use App\Laboratory;
 use Illuminate\Database\Seeder;
+use Panda\Laboratory;
 
 class LaboratoriesTableSeeder extends Seeder
 {
