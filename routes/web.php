@@ -52,6 +52,7 @@ Route::post('/presentations','PresentationController@store');
 Route::put('/presentations/{id}','PresentationController@update');
 Route::delete('/presentations/{id}','PresentationController@delete');
 Route::get('/presentations','PresentationController@index');
+Route::get('/presentations/c','PresentationController@combo');
 
 //-------------------------Medicine------------------------------------
 Route::get('/list_medicines', function () {

@@ -22,6 +22,10 @@ class PresentationController extends Controller
         ];
         return response()->json($response);
     }
+    public function combo() {
+        $presentations = Presentation::orderBy('name', 'asc')->get();
+        return response()->json($presentations);
+    }
     
     public function create()
     {

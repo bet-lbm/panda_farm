@@ -8,7 +8,7 @@ use Panda\Medicine;
 class MedicineController extends Controller
 {
 	public function index() {
-		$medicines = Medicine::latest()->paginate(10);
+		$medicines = Medicine::latest()->paginate(5);
         $response = [
             'pagination' => [
                 'total' => $medicines->total(),
@@ -24,25 +24,25 @@ class MedicineController extends Controller
 
     public function create()
     {
-        $medicine = new Medicine;
         return view('medicines.create');
     }
 	
     public function store(Request $request) 
     {
     	$this->validate($request, [
-    		'batch'  => 'required',
-    		'type'  => 'required',
+            'batch'  => 'required',
     		'name'  => 'required',
-    		'component'  => 'required',
-    		'concentration'  => 'required',
-    		'expiration_date'  => 'required',
-    		'production_date'  => 'required',
     		'description'  => 'required',
-    		'stock'  => 'required',
-    		'purchanse_price'  => 'required',
-    		'sale_price'  => 'required',
-    		'igv'  => 'required',
+            'presentation_id' => 'required',
+            'type'  => 'required',
+            'component'  => 'required',
+            'concentration'  => 'required',
+            'stock'  => 'required',
+            'purchanse_price'  => 'required',
+            'sale_price'  => 'required',
+            'igv'  => 'required',
+            'expiration_date'  => 'required',
+            'production_date'  => 'required',
         ]);
         $create = Medicine::create($request->all());
         return response()->json($create);
@@ -52,19 +52,26 @@ class MedicineController extends Controller
     {
         $this->validate($request, [
             'batch'  => 'required',
-    		'type'  => 'required',
-    		'name'  => 'required',
-    		'component'  => 'required',
-    		'concentration'  => 'required',
-    		'expiration_date'  => 'required',
-    		'production_date'  => 'required',
-    		'description'  => 'required',
-    		'stock'  => 'required',
-    		'purchanse_price'  => 'required',
-    		'sale_price'  => 'required',
-    		'igv'  => 'required',
+            'name'  => 'required',
+            'description'  => 'required',
+            'presentation_id' => 'required',
+            'type'  => 'required',
+            'component'  => 'required',
+            'concentration'  => 'required',
+            'stock'  => 'required',
+            'purchanse_price'  => 'required',
+            'sale_price'  => 'required',
+            'igv'  => 'required',
+            'production_date'  => 'required',
+            'expiration_date'  => 'required',
         ]);
         $edit = Medicine::find($id)->update($request->all());
         return response()->json($edit);
+    }
+
+    public function destroy($id)
+    {
+        Medicine::find($id)->delete();
+        return response()->json(['done']);
     }
 }

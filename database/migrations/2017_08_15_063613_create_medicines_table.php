@@ -15,23 +15,22 @@ class CreateMedicinesTable extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('batch');
+            $table->string('batch');
             $table->string('name');
             $table->text('description');
             $table->integer('presentation_id')->unsigned()->nullable();
             $table->foreign('presentation_id')
                   ->references('id')->on('presentations')
-                  ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->string('type');
-            $table->integer('component');
+            $table->string('component');
             $table->string('concentration');
             $table->integer('stock');
             $table->float('purchanse_price');
             $table->float('sale_price');
             $table->float('igv');
-            $table->date('expiration_date');
             $table->date('production_date');
+            $table->date('expiration_date');
             $table->timestamps();
         });
     }

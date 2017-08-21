@@ -49,13 +49,13 @@ $factory->define(Panda\Laboratory::class, function (Faker\Generator $faker) {
 });
 $factory->define(Panda\Presentation::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->unique()->word,
     ];
 });
 $factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
     
     return [
-        'batch' => $faker->numberBetween(1,99),
+        'batch' => $faker->numerify('# - ##'),
         'name' => $faker->sentence(2),
         'description'=> $faker->text(100),
 
@@ -67,12 +67,12 @@ $factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
         'type' => $faker->randomElement($array = array ('generico','comercial')),      
         'stock' => $faker->numberBetween($min=1, $max=1000),
 
-        'component' => $faker->numerify('###'),
+        'component' => $faker->sentence('2'),
         'concentration' => $faker->numerify('### g'),
         'purchanse_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
         'sale_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 150),
         'igv' => $faker->randomFloat($nbMaxDecimals = 2, $min= 0, $max = 18),
-        'expiration_date' => $faker->date,
         'production_date' => $faker->date,
+        'expiration_date' => $faker->date,
     ];
 });

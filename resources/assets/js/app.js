@@ -27,7 +27,7 @@ Vue.component('presentations',require('./components/Presentations.vue'));
 Vue.component('addpresentation',require('./components/CreatePresentation.vue'))
 //-------------------Presentacion--------------------------------------------
 Vue.component('medicines',require('./components/Medicines.vue'));
-Vue.component('addmedicine',require('./components/CreateMedicine.vue'))
+Vue.component('addmedicine',require('./components/CreateMedicine.vue'));
 
 const app = new Vue({
     el: '#app'

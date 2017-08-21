@@ -10,7 +10,7 @@ class Medicine extends Model
 {
     protected $table = 'medicines';
   	
-    protected $fillable = ['batch','name','description','type','component','concentration','expiration_date','production_date','stock','purchanse_price','sale_price','igv'];
+    protected $fillable = ['batch','name','description','presentation_id','type','component','concentration','stock','purchanse_price','sale_price','igv','production_date','expiration_date'];
 
     public function presentation()
     {
