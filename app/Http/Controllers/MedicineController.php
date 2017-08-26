@@ -38,7 +38,7 @@ class MedicineController extends Controller
             'component'  => 'required',
             'concentration'  => 'required',
             'stock'  => 'required',
-            'purchanse_price'  => 'required',
+            'purchase_price'  => 'required',
             'sale_price'  => 'required',
             'igv'  => 'required',
             'expiration_date'  => 'required',
@@ -59,7 +59,7 @@ class MedicineController extends Controller
             'component'  => 'required',
             'concentration'  => 'required',
             'stock'  => 'required',
-            'purchanse_price'  => 'required',
+            'purchase_price'  => 'required',
             'sale_price'  => 'required',
             'igv'  => 'required',
             'production_date'  => 'required',
@@ -73,5 +73,9 @@ class MedicineController extends Controller
     {
         Medicine::find($id)->delete();
         return response()->json(['done']);
+    }
+    public function combo() {
+        $medicines = Medicine::orderBy('name', 'asc')->get();
+        return response()->json($medicines);
     }
 }

@@ -26,7 +26,7 @@ class CreateMedicinesTable extends Migration
             $table->string('component');
             $table->string('concentration');
             $table->integer('stock');
-            $table->float('purchanse_price');
+            $table->float('purchase_price');
             $table->float('sale_price');
             $table->float('igv');
             $table->date('production_date');

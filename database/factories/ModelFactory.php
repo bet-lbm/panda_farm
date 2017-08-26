@@ -33,8 +33,8 @@ $factory->define(Panda\Dealer::class, function (Faker\Generator $faker) {
 $factory->define(Panda\Client::class, function (Faker\Generator $faker) {
     return [
         'dni' => $faker->unique()->numerify('########'),
-        'name' => $faker->name,
-        'last_name' => $faker->firstName,
+        'name' => $faker->firstname,
+        'last_name' => $faker->lastName,
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
     ];
@@ -69,10 +69,30 @@ $factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
 
         'component' => $faker->sentence('2'),
         'concentration' => $faker->numerify('### g'),
-        'purchanse_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+        'purchase_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
         'sale_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 150),
         'igv' => $faker->randomFloat($nbMaxDecimals = 2, $min= 0, $max = 18),
         'production_date' => $faker->date,
         'expiration_date' => $faker->date,
+    ];
+});
+$factory->define(Panda\Purchase::class, function (Faker\Generator $faker) {
+    return [
+
+        'code' => $faker->unique()->numerify('C-000##'),
+        'dealer_id' => \random_int(1, \Panda\Dealer::all()->count()),
+        'laboratory_id' => \random_int(1, \Panda\Laboratory::all()->count()),
+        'date' => $faker->date('Y-m-d','now'),
+        'total_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+    ];
+});
+$factory->define(Panda\PurchaseDetail::class, function (Faker\Generator $faker) {
+    return [
+
+        'purchase_id' => \random_int(1, \Panda\Purchase::all()->count()),
+        'medicine_id' => \random_int(1, \Panda\Medicine::all()->count()),
+        'quantity' => $faker->numberBetween($min=1, $max=1000),
+        'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+        'subtotal' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
     ];
 });

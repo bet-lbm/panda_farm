@@ -25,9 +25,12 @@ Vue.component('addlaboratory',require('./components/CreateLaboratory.vue'));
 //-------------------Presentacion--------------------------------------------
 Vue.component('presentations',require('./components/Presentations.vue'));
 Vue.component('addpresentation',require('./components/CreatePresentation.vue'))
-//-------------------Presentacion--------------------------------------------
+//-------------------- Medicine -------------------------------------------
 Vue.component('medicines',require('./components/Medicines.vue'));
 Vue.component('addmedicine',require('./components/CreateMedicine.vue'));
+//------------------------- Purchase --------------------------------------
+Vue.component('purchases',require('./components/Purchases.vue'));
+Vue.component('addpurchase',require('./components/CreatePurchase.vue'));
 
 const app = new Vue({
     el: '#app'

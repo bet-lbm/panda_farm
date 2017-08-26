@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/list_dealers', function () {
     return view('dealers.index');
 });
+Route::get('/dealers/combo','DealerController@combo');
 Route::resource('dealers','DealerController'); 
 
 //---------------------Clientes-------------------------
@@ -42,6 +43,7 @@ Route::post('/laboratories','LaboratoryController@store');
 Route::put('/laboratories/{id}','LaboratoryController@update');
 Route::delete('/laboratories/{id}','LaboratoryController@delete');
 Route::get('/laboratories','LaboratoryController@index');
+Route::get('/laboratories/combo','LaboratoryController@combo');
 
 //--------------------Presentacion---------------------------------
 Route::get('/list_presentations',function(){
@@ -52,10 +54,24 @@ Route::post('/presentations','PresentationController@store');
 Route::put('/presentations/{id}','PresentationController@update');
 Route::delete('/presentations/{id}','PresentationController@delete');
 Route::get('/presentations','PresentationController@index');
-Route::get('/presentations/c','PresentationController@combo');
+Route::get('/presentations/combo','PresentationController@combo');
 
 //-------------------------Medicine------------------------------------
-Route::get('/list_medicines', function () {
+Route::get('/medicines/list', function () {
     return view('medicines.index');
 });
+Route::get('/medicines/combo','MedicineController@combo');
 Route::resource('medicines','MedicineController'); 
+
+//--------------------PurchaseDetail---------------------------------
+Route::post('/purchasedetails','PurchaseDetailController@store');
+Route::get('/purchasedetails/{id}','PurchaseDetailController@find');
+
+//-------------------------Purchase------------------------------------
+Route::get('/purchases/list',function(){
+	return view('purchases.index');
+});
+Route::get('/purchases/code','PurchaseController@code');
+Route::post('/purchases','PurchaseController@store');
+Route::get('/purchases/create','PurchaseController@create');
+Route::get('/purchases','PurchaseController@index');

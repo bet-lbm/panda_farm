@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Panda\Dealer;
+use Panda\Purchase;
 
-class DealersTableSeeder extends Seeder
+class PurchasesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class DealersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Dealer::class,5)->create();
+        factory(Purchase::class,5)->create();
     }
 }

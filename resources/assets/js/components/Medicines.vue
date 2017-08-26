@@ -109,7 +109,7 @@
 
                                 <div class="well" style="overflow: auto">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <p><i class="fa fa-money"></i><b> Precio de compra : S/.</b> {{ fillItem.purchanse_price }} </p>
+                                        <p><i class="fa fa-money"></i><b> Precio de compra : S/.</b> {{ fillItem.purchase_price }} </p>
                                         <p><i class="fa fa-calendar"></i> <b> Fecha de producción: </b>{{ fillItem.production_date }} </p>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -208,7 +208,7 @@
                                         </label>
                                         <div class="input-group col-md-7 col-sm-7 col-xs-6">
                                             <span class="input-group-addon">S/.</span>
-                                            <input id="purchanse_price" name="purchanse_price" required="required" type="number"  min="0" class="form-control" v-model="fillItem.purchanse_price" step="any">
+                                            <input id="purchase_price" name="purchase_price" required="required" type="number"  min="0" class="form-control" v-model="fillItem.purchase_price" step="any">
 
                                         </div>
                                     </div>
@@ -285,7 +285,7 @@
 	            offset: 4,
 	            formErrors: {},
 	            formErrorsUpdate: {},
-                fillItem:  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchanse_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
+                fillItem:  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
 			}
 		},
         components:{
@@ -369,7 +369,7 @@
                 this.fillItem.component=item.component;
                 this.fillItem.concentration=item.concentration;
                 this.fillItem.stock=item.stock;
-                this.fillItem.purchanse_price=item.purchanse_price;
+                this.fillItem.purchase_price=item.purchase_price;
                 this.fillItem.sale_price=item.sale_price;
                 this.fillItem.igv=item.igv;
                 this.fillItem.production_date=item.production_date;
@@ -387,7 +387,7 @@
                 this.fillItem.component=item.component;
                 this.fillItem.concentration=item.concentration;
                 this.fillItem.stock=item.stock;
-                this.fillItem.purchanse_price=item.purchanse_price;
+                this.fillItem.purchase_price=item.purchase_price;
                 this.fillItem.sale_price=item.sale_price;
                 this.fillItem.igv=item.igv;
                 this.fillItem.production_date=item.production_date;
@@ -399,7 +399,7 @@
                 var input = this.fillItem;
                 axios.put('/medicines/'+id,input).then((response) => {
                     this.changePage(this.pagination.current_page);
-                    this.fillItem = {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchanse_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''};
+                    this.fillItem = {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''};
                     this.date = '';
                     this.date2 = '';
                     $("#edit-item").modal('hide');

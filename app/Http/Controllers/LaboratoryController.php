@@ -102,4 +102,8 @@ class LaboratoryController extends Controller
         Laboratory::find($id)->delete();
         return response()->json(['done']);
     }
+    public function combo() {
+        $laboratories = Laboratory::orderBy('name', 'asc')->get();
+        return response()->json($laboratories);
+    }
 }
