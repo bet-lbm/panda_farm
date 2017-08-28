@@ -287,12 +287,10 @@
 	            offset: 4,
 	            formErrors: {},
 	            formErrorsUpdate: {},
-<<<<<<< HEAD
-                fillItem:  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchanse_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
-                queryString:''
-=======
+
                 fillItem:  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
->>>>>>> 1b5542c0c7c5159d16bf675ddeb9fb5db6f42c28
+                queryString:''
+
 			}
 		},
         components:{

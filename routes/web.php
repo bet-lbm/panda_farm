@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //----------------Deleaders-----------------------------
-Route::get('/list_dealers', function () {
+Route::get('/dealers/list', function () {
     return view('dealers.index');
 });
 
@@ -28,7 +28,7 @@ Route::resource('dealers','DealerController');
 
 
 //---------------------Clientes-------------------------
-Route::get('/list_clients',function(){
+Route::get('/clients/list',function(){
 	return view('clients.index');
 });
 Route::get('/clients/search','ClientController@search');
@@ -39,7 +39,7 @@ Route::delete('/clients/{id}','ClientController@delete');
 Route::get('/clients','ClientController@index');
 
 //---------------------Laboratorio---------------------------------
-Route::get('/list_laboratories',function(){
+Route::get('/laboratories/list',function(){
 	return view('laboratories.index');
 });
 Route::get('/laboratories/search','LaboratoryController@search');
@@ -51,7 +51,7 @@ Route::get('/laboratories','LaboratoryController@index');
 Route::get('/laboratories/combo','LaboratoryController@combo');
 
 //--------------------Presentacion---------------------------------
-Route::get('/list_presentations',function(){
+Route::get('/presentations/list',function(){
 	return view('presentations.index');
 });
 Route::get('/presentations/search','PresentationController@search');
