@@ -21,12 +21,14 @@ Auth::routes();
 Route::get('/list_dealers', function () {
     return view('dealers.index');
 });
-Route::resource('dealers','DealerController'); 
+Route::get('/dealers/search','DealerController@search');
+Route::resource('dealers','DealerController');
 
 //---------------------Clientes-------------------------
 Route::get('/list_clients',function(){
 	return view('clients.index');
 });
+Route::get('/clients/search','ClientController@search');
 Route::get('/clients/create','ClientController@create');
 Route::post('/clients','ClientController@store');
 Route::put('/clients/{id}','ClientController@update');
@@ -37,6 +39,7 @@ Route::get('/clients','ClientController@index');
 Route::get('/list_laboratories',function(){
 	return view('laboratories.index');
 });
+Route::get('/laboratories/search','LaboratoryController@search');
 Route::get('/laboratories/create','LaboratoryController@create');
 Route::post('/laboratories','LaboratoryController@store');
 Route::put('/laboratories/{id}','LaboratoryController@update');
@@ -47,6 +50,7 @@ Route::get('/laboratories','LaboratoryController@index');
 Route::get('/list_presentations',function(){
 	return view('presentations.index');
 });
+Route::get('/presentations/search','PresentationController@search');
 Route::get('/presentations/create','PresentationController@create');
 Route::post('/presentations','PresentationController@store');
 Route::put('/presentations/{id}','PresentationController@update');
@@ -58,4 +62,5 @@ Route::get('/presentations/c','PresentationController@combo');
 Route::get('/list_medicines', function () {
     return view('medicines.index');
 });
+Route::get('/medicines/search','MedicineController@search');
 Route::resource('medicines','MedicineController'); 

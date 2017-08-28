@@ -7,7 +7,9 @@
     				
     			<div class="clearfix"></div>
     		</div>
-            
+            <div class="input-group">
+                <input  class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="BUSCAR">
+            </div>
     		<div class="x_content">
     			<table class="table table-hover" role="grid"> 
     				<thead>
@@ -286,6 +288,7 @@
 	            formErrors: {},
 	            formErrorsUpdate: {},
                 fillItem:  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchanse_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
+                queryString:''
 			}
 		},
         components:{
@@ -359,6 +362,13 @@
 	                })
 	            });
 	        },
+            getResults(){
+                 var that=this;
+                axios.get('/medicines/search',{params:{queryString:this.queryString}}).then(response=>{
+                    that.items=response.data.data.data;
+                    that.pagination=response.data.pagination;
+                 })
+             },
             showItem: function(item){
                 this.fillItem.id = item.id;
                 this.fillItem.batch=item.batch;

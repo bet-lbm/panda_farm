@@ -26,6 +26,24 @@ class DealerController extends Controller
         ];
         return response()->json($response);
 	}
+    public function search(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $dealers=Dealer::where('name','like','%'.$queryString.'%')->latest()->paginate(10);
+        $response=[
+            'pagination'=>[
+                'total'=>$dealers->total(),
+                'per_page'=>$dealers->perPage(),
+                'current_page'=>$dealers->currentPage(),
+                'last_page'=>$dealers->lastPage(),
+                'from'=>$dealers->firstItem(),
+                'to'=>$dealers->lastItem(),
+            ],
+            'data'=>$dealers
+        ];
+        return response()->json($response);
+    }
+
 	
 	public function create()
     {

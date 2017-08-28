@@ -30,6 +30,24 @@ class LaboratoryController extends Controller
         return response()->json($response);
     }
 
+    public function search(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $laboratories=Laboratory::where('name','like','%'.$queryString.'%')->latest()->paginate(10);
+        $response=[
+            'pagination'=>[
+                'total'=>$laboratories->total(),
+                'per_page'=>$laboratories->perPage(),
+                'current_page'=>$laboratories->currentPage(),
+                'last_page'=>$laboratories->lastPage(),
+                'from'=>$laboratories->firstItem(),
+                'to'=>$laboratories->lastItem(),
+            ],
+            'data'=>$laboratories
+        ];
+        return response()->json($response);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
