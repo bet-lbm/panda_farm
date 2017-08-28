@@ -86,7 +86,7 @@
 				                    </label>
 				                    <div class="input-group col-md-7 col-sm-7 col-xs-6">
 										<span class="input-group-addon">S/.</span>
-										<input id="purchanse_price" name="purchanse_price" required="required" type="number"  min="0" class="form-control" v-model="newItem.purchanse_price" step="any">
+										<input id="purchase_price" name="purchase_price" required="required" type="number"  min="0" class="form-control"  placeholder="1.00" v-model="newItem.purchase_price" step="any">
 
 									</div>
 				                </div>
@@ -96,7 +96,7 @@
 				                    </label>
 				                    <div class="input-group col-md-7 col-sm-7 col-xs-6">
 										<span class="input-group-addon">S/.</span>
-										<input class="input form-control" id="sale_price" name="sale_price" required="required" type="number"  min="0" v-model="newItem.sale_price" step="any">
+										<input class="input form-control" id="sale_price" name="sale_price" required="required" type="number"  min="0" placeholder="1.00" v-model="newItem.sale_price" step="any">
 									</div>
 				                </div>
 
@@ -180,7 +180,7 @@
 	        	presentations: [],
 	        	newPresentation : {'name':''},
 	        	items:[],
-	            newItem :  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchanse_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
+	            newItem :  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
 	            formErrors: {},
 	            formErrorsUpdate: {},
 	        }
@@ -227,7 +227,7 @@
 
 	    	getPresentation: function(){
 	            var that = this;
-	            axios.get('/presentations/c').then(function (response) {
+	            axios.get('/presentations/combo').then(function (response) {
 	                that.presentations = response.data;
 	            });
 	        },
@@ -240,7 +240,7 @@
 	            else{
 	                axios.post('/medicines',input)
 		            .then(response => {
-		                this.newItem = {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchanse_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
+		                this.newItem = {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
 		                toastr.success('Medicamento creado', {timeOut: 5000});
 		            });
 	            }

@@ -80,5 +80,9 @@ class DealerController extends Controller
         Dealer::find($id)->delete();
         return response()->json(['done']);
     }
+    public function combo() {
+        $dealers = Dealer::orderBy('name', 'asc')->get();
+        return response()->json($dealers);
+    }
 
 }
