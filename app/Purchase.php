@@ -21,7 +21,7 @@ class Purchase extends Model
     {
         return $this->belongsTo(Laboratory::class);
     }
-    public function purchasedetail()
+    public function purchasedetails()
     {
         return $this->hasMany(PurchaseDetail::class);
     }

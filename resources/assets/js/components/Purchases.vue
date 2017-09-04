@@ -59,6 +59,8 @@ export default {
     data(){ 
     	return{
 		    items: [],
+            fillItem: {'code','dealer_id','laboratory_id','date','total_price'},
+            details: [],
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -118,6 +120,21 @@ export default {
                 this.getVueItems(page);
         },
 
+        showItem: function(item){
+            this.fillItem.code = item.code;
+            this.fillItem.dealer_id=item.dealer_id;
+            this.fillItem.laboratory_id = item.laboratory_id;
+            this.fillItem.date = item.date;
+            this.fillItem.total_price = item.total_price;
+            axios.get('/purchases/' + item.code).then(function (response) {
+                that.details = response.data.data.data;
+                that.pagination = response.data.pagination;
+                that.$nextTick(function() {
+                    $('[data-toggle="popover"]').popover();
+                })
+            });
+
+        }
 	}
 }
 </script>

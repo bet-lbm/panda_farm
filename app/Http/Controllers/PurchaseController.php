@@ -4,6 +4,7 @@ namespace Panda\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Panda\Purchase;
+use Panda\PurchaseDetail;
 
 class PurchaseController extends Controller
 {
@@ -57,5 +58,11 @@ class PurchaseController extends Controller
         }
         
         return $formato;
+    }
+
+    public function showDetails($id)
+    {
+        $detail = PurchaseDetail::where('purchase_id', $id)->get();
+        return $detail;
     }
 }

@@ -65,13 +65,18 @@ Route::resource('medicines','MedicineController');
 
 //--------------------PurchaseDetail---------------------------------
 Route::post('/purchasedetails','PurchaseDetailController@store');
-Route::get('/purchasedetails/{id}','PurchaseDetailController@find');
+Route::get('/purchasedetails/{id}','PurchaseDetailController@updateStock');
+
+Route::get('/purchasedetails','PurchaseDetailController@find');
+
 
 //-------------------------Purchase------------------------------------
 Route::get('/purchases/list',function(){
 	return view('purchases.index');
 });
 Route::get('/purchases/code','PurchaseController@code');
-Route::post('/purchases','PurchaseController@store');
 Route::get('/purchases/create','PurchaseController@create');
+Route::post('/purchases','PurchaseController@store');
 Route::get('/purchases','PurchaseController@index');
+Route::get('/purchases/{id}','PurchaseController@showDetails');
+

@@ -48722,6 +48722,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -48754,6 +48762,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		calculateSubtotal: function calculateSubtotal() {
 			return this.newDetail.subtotal = Math.round(this.newDetail.quantity * this.newDetail.price * 100) / 100;
+		},
+		calculateTotal: function calculateTotal() {
+			var array = this.details;
+			var result = 0;
+			for (var i = 0; i < array.length; i++) {
+				result = result + array[i].subtotal;
+			}
+			return this.newItem.total_price = result;
 		}
 	},
 	created: function created() {
@@ -48797,25 +48813,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (input['medicine_id'] == '' || input['quantity'] == '' || input['price'] == '' || input['subtotal'] == '') {
 				toastr.warning('Complete todos los campos', { timeOut: 5000 });
 			} else {
-
-				this.details.push(this.newDetail);
-				this.newDetail = { 'purchase_id': '', 'medicine_id': '', 'quantity': '', 'price': '', 'subtotal': '' }, toastr.success('Agregado a la compra', { timeOut: 5000 });
+				if (this.details.map(function (i) {
+					return i.medicine_id;
+				}).includes(input['medicine_id'])) {
+					toastr.error('Escoja otro medicamento para agregar a la compra', 'MEDICAMENTO YA AGREGADO', { timeOut: 5000 });
+				} else {
+					this.details.push(this.newDetail);
+					toastr.success('Agregado a la compra', { timeOut: 5000 });
+				}
+				this.newDetail = { 'purchase_id': '', 'medicine_id': '', 'quantity': '', 'price': '', 'subtotal': '' };
 			}
 		},
+
 		deleteDetail: function deleteDetail(index) {
 			this.details.splice(index, 1);
 		},
+
 		createItem: function createItem() {
 			var _this = this;
 
 			var input = this.newItem;
+			var array = this.details;
 			if (input['dealer_id'] == '' || input['laboratory_id'] == '' || input['date'] == '' || input['total_price'] == '') {
 				toastr.warning('Complete todos los campos', { timeOut: 5000 });
 			} else {
 				axios.post('/purchases', input).then(function (response) {
-					_this.newItem = { 'code': '', 'dealer_id': '', 'laboratory_id': '', 'date': '', 'total_price': '' }, toastr.success('Actualice sus precios de venta', 'COMPRA REALIZADA', { timeOut: 5000 });
-					_this.getCode();
+					for (var i = 0; i < array.length; i++) {
+						array[i].purchase_id = input['code'];
+						axios.post('/purchasedetails', array[i]);
+					};
+					toastr.success('Actualice sus precios de venta', 'COMPRA REALIZADA', { timeOut: 5000 });
+					_this.newItem = { 'code': '', 'dealer_id': '', 'laboratory_id': '', 'date': '', 'total_price': '' }, _this.getCode();
 				});
+				this.details = [];
 			}
 		}
 	}
@@ -48877,7 +48907,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "required": "required"
+      "required": "required",
+      "autofocus": "autofocus"
     },
     on: {
       "change": function($event) {
@@ -48946,9 +48977,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "newDetail.medicine_id"
     }],
     staticClass: "form-control",
-    attrs: {
-      "required": "required"
-    },
     on: {
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
@@ -48980,10 +49008,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "newDetail.quantity"
     }],
     staticClass: "form-control",
+    staticStyle: {
+      "text-align": "right"
+    },
     attrs: {
       "id": "stock",
       "name": "stock",
-      "required": "required",
       "type": "number",
       "min": "5",
       "aria-hidden": ""
@@ -49013,10 +49043,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "newDetail.price"
     }],
     staticClass: "form-control",
+    staticStyle: {
+      "text-align": "right"
+    },
     attrs: {
       "id": "price",
       "name": "price",
-      "required": "required",
       "type": "number",
       "min": "0",
       "step": "any"
@@ -49056,7 +49088,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n\t\t\t\t\t\t\t\tDetalle de Compra\n\t\t\t\t\t\t\t")]), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
-    staticClass: "table table-hover",
+    staticClass: "table table-hover table-striped",
     attrs: {
       "role": "grid"
     }
@@ -49065,12 +49097,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "width": "20px"
       }
-    }, [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(detail.medicine_id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(detail.quantity))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(detail.price))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(detail.subtotal))]), _vm._v(" "), _c('td', {
+    }, [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c('td', {
+      attrs: {
+        "width": "350px"
+      }
+    }, [_vm._v(_vm._s(detail.medicine_id))]), _vm._v(" "), _c('td', {
+      staticClass: "text-center"
+    }, [_vm._v(_vm._s(detail.quantity))]), _vm._v(" "), _c('td', {
+      staticClass: "text-center"
+    }, [_vm._v(_vm._s(detail.price))]), _vm._v(" "), _c('td', {
+      staticClass: "text-right"
+    }, [_vm._v(_vm._s(detail.subtotal))]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
     }, [_c('button', {
-      staticClass: "btn btn-link",
+      staticClass: "btn-link",
       attrs: {
         "title": "Quitar"
       },
@@ -49083,17 +49125,46 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-close"
     })])])])
-  }))])])]), _vm._v(" "), _c('div', {
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "ln_solid"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-md-4 col-sm-4 col-xs-12 pull-right"
+  }, [_c('label', {
+    staticClass: "control-label col-md-5 col-sm-5 col-xs-6"
+  }, [_vm._v("TOTAL = ")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group col-md-6 col-sm-6 col-xs-6"
+  }, [_c('span', {
+    staticClass: "input-group-addon"
+  }, [_vm._v("S/.")]), _vm._v(" "), _c('output', {
+    staticClass: "form-control",
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "id": "total",
+      "name": "total",
+      "type": "number",
+      "disabled": "disabled"
+    }
+  }, [_vm._v(" " + _vm._s(_vm.calculateTotal) + " ")])])])])]), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
   }), _vm._v(" "), _vm._m(1)])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', {
-    staticClass: "text-center"
-  }, [_c('th', {
+  return _c('thead', [_c('tr', [_c('th', {
     attrs: {
       "width": "20px"
     }
-  }, [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Detalle")]), _vm._v(" "), _c('th', [_vm._v("Cantidad")]), _vm._v(" "), _c('th', [_vm._v("Precio Unitario (S/.)")]), _vm._v(" "), _c('th', [_vm._v("Subtotal (S/.)")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("#")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "width": "350px"
+    }
+  }, [_vm._v("Detalle")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Cantidad")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Precio Unitario (S/.)")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Subtotal (S/.)")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "1"
     }
