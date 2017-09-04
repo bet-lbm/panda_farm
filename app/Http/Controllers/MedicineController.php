@@ -8,7 +8,7 @@ use Panda\Medicine;
 class MedicineController extends Controller
 {
 	public function index() {
-		$medicines = Medicine::latest()->paginate(5);
+		$medicines = Medicine::latest()->paginate(10);
         $response = [
             'pagination' => [
                 'total' => $medicines->total(),
@@ -21,6 +21,24 @@ class MedicineController extends Controller
             'data' => $medicines  ];
         return response()->json($response);
 	}
+
+    public function search(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $medicines=Medicine::where('name','like','%'.$queryString.'%')->latest()->paginate(10);
+        $response=[
+            'pagination'=>[
+                'total'=>$medicines->total(),
+                'per_page'=>$medicines->perPage(),
+                'current_page'=>$medicines->currentPage(),
+                'last_page'=>$medicines->lastPage(),
+                'from'=>$medicines->firstItem(),
+                'to'=>$medicines->lastItem(),
+            ],
+            'data'=>$medicines
+        ];
+        return response()->json($response);
+    }
 
     public function create()
     {

@@ -6,7 +6,9 @@
 			<a class="pull-right"><i class="fa fa-plus"></i></a> 
 			<div class="clearfix"></div>
 		</div>
-        
+        <div class="input-group">
+                <input  class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="BUSCAR">
+        </div>
 		<div class="x_content">
 			<table class="table table-hover"> 
 				<thead>
@@ -170,7 +172,8 @@ export default {
             formErrors: {},
             formErrorsUpdate: {},
             newItem : {'name':'','health_code':'','authorization':'' ,'phone': ''},
-            fillItem : {'name':'','health_code':'','authorization':'' ,'phone': '', 'id':''} 
+            fillItem : {'name':'','health_code':'','authorization':'' ,'phone': '', 'id':''},
+            queryString:'' 
 		}
 	},
 	computed: {
@@ -213,6 +216,16 @@ export default {
                     $('[data-toggle="popover"]').popover();
                 })
             });
+        },
+        getResults(){
+            var that=this;
+            axios.get('/laboratories/search',{params:{queryString:this.queryString}}).then(response=>{
+                that.items=response.data.data.data;
+                that.pagination=response.data.pagination;
+               /* that.$nextTick(function() {
+                    $('[data-toggle="popover"]').popover();
+                })*/
+            })
         },
 
         showItem: function(item) {

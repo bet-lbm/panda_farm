@@ -22,6 +22,25 @@ class PresentationController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function search(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $presentations=Presentation::where('name','like','%'.$queryString.'%')->latest()->paginate(10);
+        $response=[
+            'pagination'=>[
+                'total'=>$presentations->total(),
+                'per_page'=>$presentations->perPage(),
+                'current_page'=>$presentations->currentPage(),
+                'last_page'=>$presentations->lastPage(),
+                'from'=>$presentations->firstItem(),
+                'to'=>$presentations->lastItem(),
+            ],
+            'data'=>$presentations
+        ];
+        return response()->json($response);
+    }
+
     public function combo() {
         $presentations = Presentation::orderBy('name', 'asc')->get();
         return response()->json($presentations);

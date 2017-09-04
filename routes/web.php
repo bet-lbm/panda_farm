@@ -18,16 +18,20 @@ Route::get('/', function () {
 Auth::routes();
 
 //----------------Deleaders-----------------------------
-Route::get('/list_dealers', function () {
+Route::get('/dealers/list', function () {
     return view('dealers.index');
 });
+
+Route::get('/dealers/search','DealerController@search');
 Route::get('/dealers/combo','DealerController@combo');
 Route::resource('dealers','DealerController'); 
 
+
 //---------------------Clientes-------------------------
-Route::get('/list_clients',function(){
+Route::get('/clients/list',function(){
 	return view('clients.index');
 });
+Route::get('/clients/search','ClientController@search');
 Route::get('/clients/create','ClientController@create');
 Route::post('/clients','ClientController@store');
 Route::put('/clients/{id}','ClientController@update');
@@ -35,9 +39,10 @@ Route::delete('/clients/{id}','ClientController@delete');
 Route::get('/clients','ClientController@index');
 
 //---------------------Laboratorio---------------------------------
-Route::get('/list_laboratories',function(){
+Route::get('/laboratories/list',function(){
 	return view('laboratories.index');
 });
+Route::get('/laboratories/search','LaboratoryController@search');
 Route::get('/laboratories/create','LaboratoryController@create');
 Route::post('/laboratories','LaboratoryController@store');
 Route::put('/laboratories/{id}','LaboratoryController@update');
@@ -46,9 +51,10 @@ Route::get('/laboratories','LaboratoryController@index');
 Route::get('/laboratories/combo','LaboratoryController@combo');
 
 //--------------------Presentacion---------------------------------
-Route::get('/list_presentations',function(){
+Route::get('/presentations/list',function(){
 	return view('presentations.index');
 });
+Route::get('/presentations/search','PresentationController@search');
 Route::get('/presentations/create','PresentationController@create');
 Route::post('/presentations','PresentationController@store');
 Route::put('/presentations/{id}','PresentationController@update');
@@ -60,6 +66,8 @@ Route::get('/presentations/combo','PresentationController@combo');
 Route::get('/medicines/list', function () {
     return view('medicines.index');
 });
+
+Route::get('/medicines/search','MedicineController@search');
 Route::get('/medicines/combo','MedicineController@combo');
 Route::resource('medicines','MedicineController'); 
 
@@ -79,4 +87,5 @@ Route::get('/purchases/create','PurchaseController@create');
 Route::post('/purchases','PurchaseController@store');
 Route::get('/purchases','PurchaseController@index');
 Route::get('/purchases/{id}','PurchaseController@showDetails');
+
 

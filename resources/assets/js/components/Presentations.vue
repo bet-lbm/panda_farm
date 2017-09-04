@@ -6,7 +6,9 @@
 			<a class="pull-right"><i class="fa fa-plus"></i></a>
             <div class="clearfix"></div>
 		</div>
-        
+        <div class="input-group">
+                <input  class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="BUSCAR">
+            </div>
 		<div class="x_content">
 			<table class="table table-hover"> 
 				<thead>
@@ -97,7 +99,8 @@ export default {
             formErrors: {},
             formErrorsUpdate: {},
 		    newItem : {'name':''},
-		    fillItem : {'name':'','id':''}
+		    fillItem : {'name':'','id':''},
+            queryString:''
         }
 	},
 	computed: {
@@ -141,6 +144,13 @@ export default {
                 })
             });
         },
+        getResults(){
+            var that=this;
+            axios.get('/presentations/search',{params:{queryString:this.queryString}}).then(response=>{
+                that.items=response.data.data.data;
+                that.pagination=response.data.pagination;
+             })
+         },
 
         deleteItem: function(item){
             axios.delete('/presentations/'+item.id).then((response) => {

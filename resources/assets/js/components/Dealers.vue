@@ -7,7 +7,9 @@
     				
     			<div class="clearfix"></div>
     		</div>
-            
+            <div class="input-group">
+                <input  class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="BUSCAR">
+            </div>
     		<div class="x_content">
     			<table class="table table-hover" role="grid"> 
     				<thead>
@@ -175,7 +177,8 @@ export default {
             formErrors: {},
             formErrorsUpdate: {},
             newItem : {'id': '','ruc':'','name':'','address':'' ,'phone': ''},
-            fillItem : {'ruc':'','name':'','address':'' ,'phone': '', 'id':''}
+            fillItem : {'ruc':'','name':'','address':'' ,'phone': '', 'id':''},
+            queryString:''
 		}
 	},
 	computed: {
@@ -219,7 +222,16 @@ export default {
                 })
             });
         },
-
+        getResults(){
+            var that=this;
+            axios.get('/dealers/search',{params:{queryString:this.queryString}}).then(response=>{
+                that.items=response.data.data.data;
+                that.pagination=response.data.pagination;
+               /* that.$nextTick(function() {
+                    $('[data-toggle="popover"]').popover();
+                })*/
+            })
+        },
         showItem: function(item){
             this.fillItem.ruc = item.ruc;
             this.fillItem.id = item.id;
