@@ -53,7 +53,7 @@
 				                    <label class="control-label col-md-5 col-sm-5 col-xs-6">Precio Compra</label>
 				                    <div class="input-group col-md-7 col-sm-7 col-xs-6">
 										<span class="input-group-addon">S/.</span>
-										<input style="text-align:right;" id="price" name="price" type="number"  min="0" class="form-control" step="any" v-model="newDetail.price">
+										<input style="text-align:right;" id="price" name="price" type="number"  min="0" class="form-control" step="any" v-model="newDetail.price" placeholder="00.00">
 									</div>
 				                </div>
 				                <div class="form-group col-md-1 col-sm-1 col-xs-12">
@@ -71,7 +71,7 @@
 				    				<thead> 
 				    					<tr>
 				    						<th width="20px">#</th>
-				    						<th width="350px">Detalle</th>
+				    						<th width="350px">Descripción</th>
 				    						<th class="text-center">Cantidad</th>
 				    						<th class="text-center">Precio Unitario (S/.)</th>
 				    						<th class="text-center">Subtotal (S/.)</th>
@@ -81,7 +81,7 @@
 				    				<tbody>
 				    					<tr v-for="(detail,index) in details">
 				    						<th width="20px">{{ index + 1 }}</th>
-				    						<td width="350px">{{ detail.medicine_id }}</td>
+				    						<td width="300px">{{ description[index] }}</td>
 				    						<td class="text-center">{{ detail.quantity }}</td>
 				    						<td class="text-center">{{ detail.price }}</td>
 				    						<td class="text-right">{{ detail.subtotal }}</td>
@@ -125,6 +125,7 @@
 	        	medicines: [],
 	        	details:[],
 	        	items:[],
+	        	description: [],
 	            newItem :  {'code':'','dealer_id':'','laboratory_id':'','date':'','total_price':''},
 	            newDetail: {'purchase_id':'','medicine_id':'','quantity':'','price':'','subtotal':''},
 	            formErrors: {},
@@ -154,7 +155,7 @@
 	        	for (var i = 0; i < array.length; i++) { 
 					result = result + array[i].subtotal; 
 				}
-				return this.newItem.total_price = result;
+				return this.newItem.total_price = Math.round(result*100)/100 ; ;
 	        }
 	    },
 	   created() {
@@ -169,7 +170,6 @@
 	    		var that = this;
 	    		axios.get('/purchases/code').then( function (response) {
 	    			that.newItem.code = response.data;
-	    			that.newDetail.purchase_id = response.data;
 	    		});
 	    	},
 
@@ -193,6 +193,8 @@
 	        },
 
 	        createDetail:function(){
+	        	var that = this;
+
 	        	var input = this.newDetail;
 	        	if((input['medicine_id'] == '')||(input['quantity'] == '')||(input['price'] == '')||(input['subtotal'] == '')){
 	                toastr.warning('Complete todos los campos', {timeOut: 5000});
@@ -204,6 +206,9 @@
 	            	else{
 	            		this.details.push(this.newDetail);
 			            toastr.success('Agregado a la compra',{timeOut: 5000});
+			            axios.get('/medicines/'+input['medicine_id']).then(function (response) {
+	            			that.description.push(response.data);
+	            		});
 	            	}
 	            	this.newDetail = {'purchase_id':'','medicine_id':'','quantity':'','price':'','subtotal':''};
 	           	}
@@ -211,6 +216,7 @@
 
 	        deleteDetail:function(index){
 	        	this.details.splice(index,1);
+	        	this.description.splice(index,1);
 	        },
 	        
 	        createItem: function(){
@@ -224,13 +230,15 @@
 		            .then(response => {
 			        	for (var i = 0; i < array.length; i++) { 
 							array[i].purchase_id = input['code'];
-							axios.post('/purchasedetails', array[i]);				
+							axios.post('/purchasedetails', array[i]);
+							axios.put('/purchasedetails/stock');				
 						};
 		                toastr.success('Actualice sus precios de venta','COMPRA REALIZADA',{timeOut: 5000});
 		                this.newItem = {'code':'','dealer_id':'','laboratory_id':'','date':'','total_price':''},
 		                this.getCode();
 		            });
 		            this.details = [];
+		            this.description = [];
 		        }
 	        },	
 	    }

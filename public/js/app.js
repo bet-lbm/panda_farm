@@ -41919,7 +41919,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Dealers.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Dealers.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Dealers.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -41948,6 +41948,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -42242,7 +42243,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12 col-sm-12 col-xs-12"
   }, [_c('div', {
     staticClass: "x_panel"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "row x_title"
+  }, [_c('h5', {
+    staticClass: "col-md-6 "
+  }, [_vm._v(" Lista de distribuidores ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-4 pull-right top_search"
+  }, [_c('div', {
     staticClass: "input-group"
   }, [_c('input', {
     directives: [{
@@ -42254,7 +42261,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "BUSCAR"
+      "placeholder": "Buscar"
     },
     domProps: {
       "value": (_vm.queryString)
@@ -42268,7 +42275,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.queryString = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  }), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('table', {
     staticClass: "table table-hover",
@@ -42684,15 +42693,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-footer"
   })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "x_title"
-  }, [_c('h5', [_vm._v(" Lista de distribuidores ")]), _vm._v(" "), _c('a', {
-    staticClass: "pull-right"
+  return _c('span', {
+    staticClass: "input-group-btn"
+  }, [_c('button', {
+    staticClass: "btn btn-default"
   }, [_c('i', {
-    staticClass: "fa fa-plus"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])
+    staticClass: "fa fa-search"
+  })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("RUC")]), _vm._v(" "), _c('th', [_vm._v("Razón Social")]), _vm._v(" "), _c('th', [_vm._v("Dirección")]), _vm._v(" "), _c('th', [_vm._v("Teléfono")]), _vm._v(" "), _c('th', {
     attrs: {
@@ -42778,7 +42785,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateDealers.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateDealers.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateDealers.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43122,7 +43129,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Clients.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Clients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Clients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -44070,7 +44077,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateClients.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateClients.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateClients.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -44461,7 +44468,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Laboratories.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Laboratories.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Laboratories.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45312,7 +45319,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateLaboratory.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateLaboratory.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateLaboratory.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -45661,7 +45668,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Presentations.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Presentations.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Presentations.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46148,7 +46155,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreatePresentation.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreatePresentation.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreatePresentation.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -46344,7 +46351,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Medicines.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Medicines.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Medicines.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -47595,7 +47602,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreateMedicine.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreateMedicine.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateMedicine.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -48510,7 +48517,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/Purchases.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/Purchases.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Purchases.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -48595,11 +48602,70 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             items: [],
+            fillItem: { 'code': '', 'dealer_id': '', 'laboratory_id': '', 'date': '', 'total_price': '' },
+            details: [],
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -48659,8 +48725,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changePage: function changePage(page) {
             this.pagination.current_page = page;
             this.getVueItems(page);
-        }
+        },
 
+        showItem: function showItem(item) {
+            var that = this;
+            this.fillItem.code = item.code;
+            this.fillItem.dealer_id = item.dealer_id;
+            this.fillItem.laboratory_id = item.laboratory_id;
+            this.fillItem.date = item.date;
+            this.fillItem.total_price = item.total_price;
+            $("#show-item").modal('show');
+            axios.get('/purchases/' + item.code).then(function (response) {
+                that.details = response.data;
+                that.$nextTick(function () {
+                    $('[data-toggle="popover"]').popover();
+                });
+            });
+        }
     }
 });
 
@@ -48743,7 +48824,74 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()])])])
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "modal",
+    attrs: {
+      "id": "show-item",
+      "tabindex": "-1",
+      "role": "dialog",
+      "aria-labelledby": "myModalLabel"
+    }
+  }, [_c('div', {
+    staticClass: "modal-dialog",
+    attrs: {
+      "role": "document"
+    }
+  }, [_c('div', {
+    staticClass: "modal-content"
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_c('div', {
+    staticClass: "x_panel"
+  }, [_c('div', {
+    staticClass: "x_title"
+  }, [_c('h2', [_c('small', [_c('i', {
+    staticClass: "fa fa-shopping-cart"
+  }), _vm._v(" CODIGO DE COMPRA: " + _vm._s(_vm.fillItem.code))])]), _vm._v(" "), _c('ul', {
+    staticClass: "nav navbar-right panel_toolbox"
+  }, [_c('li', [_c('h2', [_c('small', [_c('i', {
+    staticClass: "fa fa-calendar"
+  }), _vm._v(" " + _vm._s(_vm.fillItem.date))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "x_content "
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('p', {
+    staticClass: "col-md-6 col-sm-6 col-xs-12"
+  }, [_c('i', {
+    staticClass: "fa fa-ambulance"
+  }), _c('b', [_vm._v(" Distribuidor: ")]), _vm._v(" " + _vm._s(_vm.fillItem.dealer_id) + "  ")]), _vm._v(" "), _c('p', {
+    staticClass: "col-md-6 col-sm-6 col-xs-12"
+  }, [_c('i', {
+    staticClass: "fa fa-flask"
+  }), _c('b', [_vm._v(" Laboratorio: ")]), _vm._v(" " + _vm._s(_vm.fillItem.laboratory_id))])]), _vm._v(" "), _c('div', {
+    staticClass: "divider-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "col-md-12 col-sm-12 col-xs-12"
+  }, [_c('table', {
+    staticClass: "table table-striped table-bordered"
+  }, [_vm._m(3), _vm._v(" "), _c('tbody', _vm._l((_vm.details), function(detail, index) {
+    return _c('tr', [_c('td', {
+      attrs: {
+        "width": "10px"
+      }
+    }, [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c('td', {
+      attrs: {
+        "width": "300px"
+      }
+    }, [_vm._v(_vm._s(detail.medicine_id))]), _vm._v(" "), _c('td', {
+      staticClass: "text-right"
+    }, [_vm._v(_vm._s(detail.quantity))]), _vm._v(" "), _c('td', {
+      staticClass: "text-right"
+    }, [_vm._v(_vm._s(detail.price))]), _vm._v(" "), _c('td', {
+      staticClass: "text-right"
+    }, [_vm._v(_vm._s(detail.subtotal))])])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-5 col-sm-5 col-xs-12 pull-right"
+  }, [_c('p', {
+    staticClass: "pull-right"
+  }, [_c('big', [_vm._v("TOTAL: S/." + _vm._s(_vm.fillItem.total_price))])], 1)])])])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
@@ -48754,6 +48902,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "colspan": "1"
     }
   }, [_vm._v(" ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "modal-title",
+    attrs: {
+      "id": "myModalLabel"
+    }
+  }, [_c('small', [_vm._v("DETALLES DE COMPRA")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', {
+    attrs: {
+      "width": "10px"
+    }
+  }, [_vm._v("N°")]), _vm._v(" "), _c('th', {
+    attrs: {
+      "width": "300px"
+    }
+  }, [_vm._v("Descripción")]), _vm._v(" "), _c('th', [_vm._v("Cantidad")]), _vm._v(" "), _c('th', [_vm._v("P.U.(S/.)")]), _vm._v(" "), _c('th', [_vm._v("Subotal(S/.)")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -48780,7 +48957,7 @@ var Component = __webpack_require__(1)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/gregori/web/panda_farm/resources/assets/js/components/CreatePurchase.vue"
+Component.options.__file = "/home/betzabe/web/panda_farm/resources/assets/js/components/CreatePurchase.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreatePurchase.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -48938,6 +49115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			medicines: [],
 			details: [],
 			items: [],
+			description: [],
 			newItem: { 'code': '', 'dealer_id': '', 'laboratory_id': '', 'date': '', 'total_price': '' },
 			newDetail: { 'purchase_id': '', 'medicine_id': '', 'quantity': '', 'price': '', 'subtotal': '' },
 			formErrors: {},
@@ -48965,7 +49143,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			for (var i = 0; i < array.length; i++) {
 				result = result + array[i].subtotal;
 			}
-			return this.newItem.total_price = result;
+			return this.newItem.total_price = Math.round(result * 100) / 100;;
 		}
 	},
 	created: function created() {
@@ -48981,7 +49159,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var that = this;
 			axios.get('/purchases/code').then(function (response) {
 				that.newItem.code = response.data;
-				that.newDetail.purchase_id = response.data;
 			});
 		},
 
@@ -49005,6 +49182,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 
 		createDetail: function createDetail() {
+			var that = this;
+
 			var input = this.newDetail;
 			if (input['medicine_id'] == '' || input['quantity'] == '' || input['price'] == '' || input['subtotal'] == '') {
 				toastr.warning('Complete todos los campos', { timeOut: 5000 });
@@ -49016,6 +49195,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				} else {
 					this.details.push(this.newDetail);
 					toastr.success('Agregado a la compra', { timeOut: 5000 });
+					axios.get('/medicines/' + input['medicine_id']).then(function (response) {
+						that.description.push(response.data);
+					});
 				}
 				this.newDetail = { 'purchase_id': '', 'medicine_id': '', 'quantity': '', 'price': '', 'subtotal': '' };
 			}
@@ -49023,6 +49205,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		deleteDetail: function deleteDetail(index) {
 			this.details.splice(index, 1);
+			this.description.splice(index, 1);
 		},
 
 		createItem: function createItem() {
@@ -49037,11 +49220,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					for (var i = 0; i < array.length; i++) {
 						array[i].purchase_id = input['code'];
 						axios.post('/purchasedetails', array[i]);
+						axios.put('/purchasedetails/stock');
 					};
 					toastr.success('Actualice sus precios de venta', 'COMPRA REALIZADA', { timeOut: 5000 });
 					_this.newItem = { 'code': '', 'dealer_id': '', 'laboratory_id': '', 'date': '', 'total_price': '' }, _this.getCode();
 				});
 				this.details = [];
+				this.description = [];
 			}
 		}
 	}
@@ -49247,7 +49432,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "price",
       "type": "number",
       "min": "0",
-      "step": "any"
+      "step": "any",
+      "placeholder": "00.00"
     },
     domProps: {
       "value": (_vm.newDetail.price)
@@ -49295,9 +49481,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c('td', {
       attrs: {
-        "width": "350px"
+        "width": "300px"
       }
-    }, [_vm._v(_vm._s(detail.medicine_id))]), _vm._v(" "), _c('td', {
+    }, [_vm._v(_vm._s(_vm.description[index]))]), _vm._v(" "), _c('td', {
       staticClass: "text-center"
     }, [_vm._v(_vm._s(detail.quantity))]), _vm._v(" "), _c('td', {
       staticClass: "text-center"
@@ -49354,7 +49540,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "width": "350px"
     }
-  }, [_vm._v("Detalle")]), _vm._v(" "), _c('th', {
+  }, [_vm._v("Descripción")]), _vm._v(" "), _c('th', {
     staticClass: "text-center"
   }, [_vm._v("Cantidad")]), _vm._v(" "), _c('th', {
     staticClass: "text-center"

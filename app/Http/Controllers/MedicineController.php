@@ -96,4 +96,9 @@ class MedicineController extends Controller
         $medicines = Medicine::orderBy('name', 'asc')->get();
         return response()->json($medicines);
     }
+    public function getMedicine($id)
+    {
+        $medicine = Medicine::find($id);
+        return $medicine['name'];
+    }
 }
