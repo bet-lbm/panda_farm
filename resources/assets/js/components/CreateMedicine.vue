@@ -36,7 +36,7 @@
 							    <div class="form-group">
 				                    <label class="control-label col-md-3 col-sm-3 col-xs-6">Presentación <span class="required">*</span></label>
 				                    <div class="col-md-6 col-sm-6 col-xs-3">
-										<select class="form-control" v-model="newItem.presentation_id">
+										<select class="form-control" v-model="newItem.presentation_id" @change="getPresentationName()">
 											<option v-for="presentation in presentations" :value="presentation.id">{{ presentation.name }}</option>
 										</select>
 				                    </div>
@@ -44,7 +44,6 @@
 									<button class="col-md-1 col-sm-1 col-xs-1 btn btn-primary" title="Nuevo" type="submit" ><i class="fa fa-plus"></i></button>
 									</form>
 				                </div>
-	
 								<div class="form-group">
 				                    <label class="control-label col-md-3 col-sm-3 col-xs-6">Tipo <span class="required">*</span></label>
 				                    <div class="col-md-8 col-sm-8 col-xs-6">
@@ -180,7 +179,7 @@
 	        	presentations: [],
 	        	newPresentation : {'name':''},
 	        	items:[],
-	            newItem :  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
+	            newItem :  {'batch':'','name':'','description':'','presentation_id':'','presentation_name':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
 	            formErrors: {},
 	            formErrorsUpdate: {},
 	        }
@@ -203,7 +202,7 @@
 		      	return this.newItem.expiration_date = date.getFullYear() + '-'
                                         + ('0' + (date.getMonth()+1)).slice(-2) + '-'
                                         + ('0' + date.getDate()).slice(-2);
-		    }
+		    },
 	    },
 	   created() {
 	        this.getPresentation();
@@ -212,6 +211,14 @@
 	    methods : {
 	    	customFormatter(date) {
       			return moment(date).format('DD-MM-YYYY');
+    		},
+    		
+    		getPresentationName: function(){
+    			var that = this 
+    			axios.get('/presentations/get/'+that.newItem.presentation_id).then(function(response){
+    				that.newItem.presentation_name = response.data;
+    			});		
+				return that.newItem.presentation_name;
     		},
     		
     		getVueItems: function(){
@@ -240,7 +247,7 @@
 	            else{
 	                axios.post('/medicines',input)
 		            .then(response => {
-		                this.newItem = {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
+		                this.newItem = {'batch':'','name':'','description':'','presentation_id':'','presentation_name':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'' },
 		                toastr.success('Medicamento creado', {timeOut: 5000});
 		            });
 	            }

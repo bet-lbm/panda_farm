@@ -206,7 +206,7 @@
 	            	else{
 	            		this.details.push(this.newDetail);
 			            toastr.success('Agregado a la compra',{timeOut: 5000});
-			            axios.get('/medicines/'+input['medicine_id']).then(function (response) {
+			            axios.get('/medicines/get/'+input['medicine_id']).then(function (response) {
 	            			that.description.push(response.data);
 	            		});
 	            	}

@@ -13,48 +13,46 @@
                         <th>Distribuidor</th>
                         <th>Laboratorio</th>
                         <th>Fecha</th>
-                        <th>Total(S/.)</th>
 						<th colspan="1">&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="item in items">
+					<tr v-for="(item,index) in items">
 						<td>{{ item.code }}</td>
-                        <td>{{ item.dealer_id }}</td>
-                        <td>{{ item.laboratory_id }}</td>
+                        <td>{{ dealers[index] }}</td>
+                        <td>{{ laboratories[index] }}</td>
                         <td>{{ item.date }}</td>
-                        <td>{{ item.total_price }}</td>
 						<td width="10px">
-							<button class="btn btn-success" title="Edit" @click.prevent="showItem(item)"><i class="fa fa-eye"></i></button>
+							<button class="btn btn-success" type="button" title="Edit" @click.prevent="showItem(item)"><i class="fa fa-eye"></i></button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
             <div class="ln_solid"></div>
             <nav class="pull-right" v-if="pagination.last_page > 1"  v-cloak>
-                    <ul class="pagination">
-                        <li v-if="pagination.current_page > 1">
-                            <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '' ]">
-                            <a href="#" @click="changePage(page)">
-                                {{ page }}
-                            </a>
-                        </li>
-                        <li v-if="pagination.current_page < pagination.last_page">
-                            <a href="#" aria-label="Next" @click="changePage(pagination.current_page + 1)">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a href="#" aria-label="Previous" @click="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '' ]">
+                        <a href="#" @click="changePage(page)">
+                            {{ page }}
+                        </a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a href="#" aria-label="Next" @click="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
         </div>
 	</div>
 
     <div class="modal" id="show-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -63,21 +61,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="x_panel">
-                        <div class="x_title">
-                           <h2><small><i class="fa fa-shopping-cart"></i> CODIGO DE COMPRA: {{ fillItem.code }}</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><h2><small><i class="fa fa-calendar"></i> {{ fillItem.date }}</small></h2>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>  
+                        <div class="row x_title">
+                            <p class="col-md-6 col-sm-6 col-xs-6"><i class="fa fa-shopping-cart"></i> CODIGO: {{ fillItem.code }}</p>
+                            <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
+                                <p class="pull-right"><i class="fa fa-calendar"></i> {{ fillItem.date }}</p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
                         <div class="x_content ">
                             <div class="row">
-                                <p class="col-md-6 col-sm-6 col-xs-12"><i class="fa fa-ambulance"></i><b> Distribuidor: </b> {{ fillItem.dealer_id }}  </p>
-                                <p class="col-md-6 col-sm-6 col-xs-12"><i class="fa fa-flask"></i><b> Laboratorio: </b> {{ fillItem.laboratory_id }}</p>
+                                <p class="col-md-6 col-sm-6 col-xs-12 text-justify"><i class="fa fa-ambulance"></i><b> Distribuidor: </b> {{ fillItem.dealer }}  </p>
+                                <p class="col-md-6 col-sm-6 col-xs-12 text-left"><i class="fa fa-flask"></i><b> Laboratorio: </b> {{ fillItem.laboratory }}</p>
                             </div>
                             <div class="divider-dashed"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row col-md-12 col-sm-12 col-xs-12">
                                 <table class="table table-striped table-bordered"> 
                                     <thead>
                                         <tr>
@@ -91,7 +88,7 @@
                                     <tbody>
                                         <tr v-for="(detail,index) in details">
                                             <td width="10px">{{ index + 1 }}</td>
-                                            <td width="300px">{{ detail.medicine_id}}</td>
+                                            <td width="300px">{{ medicines[index] }}</td>
                                             <td class="text-right">{{ detail.quantity }}</td>
                                             <td class="text-right">{{ detail.price }}</td>
                                             <td class="text-right">{{ detail.subtotal }}</td>
@@ -105,6 +102,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</button>
+                    <button class="btn btn-default" type="button" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -116,8 +117,11 @@ export default {
     data(){ 
     	return{
 		    items: [],
-            fillItem: {'code': '','dealer_id': '','laboratory_id': '','date': '','total_price': ''},
+            fillItem: {'code': '','dealer': '','laboratory': '','date': '','total_price': ''},
             details: [],
+            dealers: [],
+            laboratories: [],
+            medicines: [],
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -131,29 +135,29 @@ export default {
         }
 	},
 	computed: {
-            isActived: function() {
-                return this.pagination.current_page;
-            },
+        isActived: function() {
+            return this.pagination.current_page;
+        },
 
-            pagesNumber: function() {
-                if (!this.pagination.to) {
-                    return [];
-                }
-                var from = this.pagination.current_page - this.offset;
-                if (from < 1) {
-                    from = 1;
-                }
-                var to = from + (this.offset * 2);
-                if (to >= this.pagination.last_page) {
-                    to = this.pagination.last_page;
-                }
-                var pagesArray = [];
-                while (from <= to) {
-                    pagesArray.push(from);
-                    from++;
-                }
-                return pagesArray;
+        pagesNumber: function() {
+            if (!this.pagination.to) {
+                return [];
             }
+            var from = this.pagination.current_page - this.offset;
+            if (from < 1) {
+                from = 1;
+            }
+            var to = from + (this.offset * 2);
+            if (to >= this.pagination.last_page) {
+                to = this.pagination.last_page;
+            }
+            var pagesArray = [];
+            while (from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+            return pagesArray;
+        }
     },
     mounted() {
         this.getVueItems(this.pagination.current_page);
@@ -164,8 +168,17 @@ export default {
             var that = this;
             axios.get('/purchases?page='+page).then(function (response) {
                 that.items = response.data.data.data;
+                for (var i = 0; i < that.items.length; i++) { 
+                    axios.get('/dealers/get/'+ that.items[i].dealer_id).then(function (response) {
+                        that.dealers.push(response.data);
+                    });
+                    axios.get('/laboratories/get/'+ that.items[i].laboratory_id).then(function (response) {
+                        that.laboratories.push(response.data);
+                    });
+                }
+                that.dealers = [];
+                that.laboratories =[];
                 that.pagination = response.data.pagination;
-
                 that.$nextTick(function() {
                     $('[data-toggle="popover"]').popover();
                 })
@@ -173,25 +186,33 @@ export default {
         },
 
         changePage: function(page) {
-                this.pagination.current_page = page;
-                this.getVueItems(page);
+            this.dealers = [];
+            this.laboratories =[];
+            this.pagination.current_page = page;
+            this.getVueItems(page);
         },
 
         showItem: function(item){
             var that = this;
             this.fillItem.code = item.code;
-            this.fillItem.dealer_id=item.dealer_id;
-            this.fillItem.laboratory_id = item.laboratory_id;
+            axios.get('/dealers/get/'+ item.dealer_id).then(function (response) {
+                that.fillItem.dealer =response.data;
+            });
+            axios.get('/laboratories/get/'+ item.laboratory_id).then(function (response) {
+                that.fillItem.laboratory =response.data;
+            });
             this.fillItem.date = item.date;
             this.fillItem.total_price = item.total_price;
             $("#show-item").modal('show');
-            axios.get('/purchases/' + item.code).then(function (response) {
+            axios.get('/purchases/show/' + item.code).then(function (response) {
                 that.details = response.data;
-                that.$nextTick(function() {
-                    $('[data-toggle="popover"]').popover();
-                })
+                for (var j = 0; j < that.details.length; j++) {
+                    axios.get('/medicines/get/'+ that.details[j].medicine_id).then(function (response) {
+                        that.medicines.push(response.data);
+                    });
+                }
             });
-
+            this.medicines = [];   
         }
 	}
 }

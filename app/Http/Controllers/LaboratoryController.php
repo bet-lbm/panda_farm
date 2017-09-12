@@ -78,17 +78,6 @@ class LaboratoryController extends Controller
         return response()->json($create);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $data = Laboratory::find($id);
-        return $data;
-    }
 
     /**
      * Update the specified resource in storage.
@@ -109,13 +98,7 @@ class LaboratoryController extends Controller
         return response()->json($edit);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
+    public function destroy($id)
     {
         Laboratory::find($id)->delete();
         return response()->json(['done']);
@@ -123,5 +106,10 @@ class LaboratoryController extends Controller
     public function combo() {
         $laboratories = Laboratory::orderBy('name', 'asc')->get();
         return response()->json($laboratories);
+    }
+    public function getLaboratory($id)
+    {
+        $laboratory = Laboratory::find($id);
+        return response()->json($laboratory['name']);
     }
 }

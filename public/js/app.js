@@ -42105,13 +42105,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -42245,9 +42238,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "x_panel"
   }, [_c('div', {
     staticClass: "row x_title"
-  }, [_c('h5', {
-    staticClass: "col-md-6 "
-  }, [_vm._v(" Lista de distribuidores ")]), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "col-md-4 pull-right top_search"
   }, [_c('div', {
     staticClass: "input-group"
@@ -42275,7 +42266,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.queryString = $event.target.value
       }
     }
-  }), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   }), _vm._v(" "), _c('div', {
     staticClass: "x_content"
@@ -42284,8 +42275,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "role": "grid"
     }
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.ruc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _c('td', {
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.ruc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.phone))]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
@@ -42399,7 +42390,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(2), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('form', {
     staticClass: "form-horizontal form-label-left",
@@ -42416,12 +42407,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-4",
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "ruc"
     }
   }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
+    staticClass: "col-md-8 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42449,12 +42440,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['ruc']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-4",
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "name"
     }
   }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
+    staticClass: "col-md-8 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42482,12 +42473,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['name']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-4",
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "address"
     }
   }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
+    staticClass: "col-md-8 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42514,12 +42505,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.formErrorsUpdate['address']))]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
-    staticClass: "control-label col-md-4",
+    staticClass: "control-label col-md-3",
     attrs: {
       "for": "phone"
     }
   }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
+    staticClass: "col-md-8 col-xs-12"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -42543,7 +42534,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), (_vm.formErrorsUpdate['phone']) ? _c('span', {
     staticClass: "error text-danger"
-  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['phone']))]) : _vm._e()]), _vm._v(" "), _vm._m(3)])])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.formErrorsUpdate['phone']))]) : _vm._e()]), _vm._v(" "), _vm._m(4)])])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal",
     attrs: {
       "id": "show-item",
@@ -42558,141 +42549,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(4), _vm._v(" "), _c('div', {
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
-  }, [_c('form', {
-    staticClass: "form-horizontal form-label-left",
-    attrs: {
-      "enctype": "multipart/form-data"
-    }
   }, [_c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-md-4",
-    attrs: {
-      "for": "ruc"
-    }
-  }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.fillItem.ruc),
-      expression: "fillItem.ruc"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "disabled": "true",
-      "type": "text",
-      "name": "ruc"
-    },
-    domProps: {
-      "value": (_vm.fillItem.ruc)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.fillItem.ruc = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-md-4",
-    attrs: {
-      "for": "name"
-    }
-  }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.fillItem.name),
-      expression: "fillItem.name"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "disabled": "true",
-      "type": "text",
-      "name": "name"
-    },
-    domProps: {
-      "value": (_vm.fillItem.name)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.fillItem.name = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-md-4",
-    attrs: {
-      "for": "address"
-    }
-  }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.fillItem.address),
-      expression: "fillItem.address"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": "true",
-      "name": "address"
-    },
-    domProps: {
-      "value": (_vm.fillItem.address)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.fillItem.address = $event.target.value
-      }
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "control-label col-md-4",
-    attrs: {
-      "for": "phone"
-    }
-  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 col-xs-12"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.fillItem.phone),
-      expression: "fillItem.phone"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "disabled": "true",
-      "name": "phone"
-    },
-    domProps: {
-      "value": (_vm.fillItem.phone)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.fillItem.phone = $event.target.value
-      }
-    }
-  })])])])]), _vm._v(" "), _c('div', {
-    staticClass: "modal-footer"
-  })])])])])
+    staticClass: "x_panel"
+  }, [_c('div', {
+    staticClass: "row x_title"
+  }, [_c('p', [_c('i', {
+    staticClass: "fa fa-info"
+  }), _c('b', [_vm._v(" RUC:")]), _vm._v(" " + _vm._s(_vm.fillItem.ruc) + " ")])]), _vm._v(" "), _c('div', {
+    staticClass: "x_content"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_vm._m(6), _vm._v(" "), _c('p', {
+    staticClass: "col-md-9 col-sm-9 col-xs-9"
+  }, [_vm._v(_vm._s(_vm.fillItem.name) + " ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(7), _vm._v(" "), _c('p', {
+    staticClass: "col-md-9 col-sm-9 col-xs-9"
+  }, [_vm._v(" " + _vm._s(_vm.fillItem.address) + " ")])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_vm._m(8), _vm._v(" "), _c('p', {
+    staticClass: "col-md-9 col-sm-9 col-xs-9"
+  }, [_vm._v(" " + _vm._s(_vm.fillItem.phone) + " ")])])])])]), _vm._v(" "), _vm._m(9)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('h5', {
+    staticClass: "col-md-6"
+  }, [_c('i', {
+    staticClass: "fa fa-bars"
+  }), _vm._v(" Lista de distribuidores ")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "input-group-btn"
   }, [_c('button', {
@@ -42701,7 +42587,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-search"
   })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("RUC")]), _vm._v(" "), _c('th', [_vm._v("Razón Social")]), _vm._v(" "), _c('th', [_vm._v("Dirección")]), _vm._v(" "), _c('th', [_vm._v("Teléfono")]), _vm._v(" "), _c('th', {
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("RUC")]), _vm._v(" "), _c('th', [_vm._v("Nombre/Razón Social")]), _vm._v(" "), _c('th', [_vm._v("Teléfono")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "3"
     }
@@ -42753,12 +42639,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+  }, [_vm._v("×")])]), _vm._v(" "), _c('h5', {
     staticClass: "modal-title",
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_c('small', [_vm._v("Detalles de distribuidor")])])])
+  }, [_vm._v(" Detalles de distribuidor ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "col-md-3 col-sm-3 col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" "), _c('b', [_vm._v(" Razón Social:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "col-md-3 col-sm-3 col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-map-marker"
+  }), _c('b', [_vm._v(" Dirección:")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "col-md-3 col-sm-3 col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-phone"
+  }), _vm._v(" "), _c('b', [_vm._v(" Teléfono:  ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-link",
+    attrs: {
+      "data-dismiss": "modal"
+    }
+  }, [_vm._v("Volver")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -42918,7 +42831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-md-10 col-md-offset-1"
+    staticClass: "col-md-10 col-sm-12 col-xs-12 col-md-offset-1"
   }, [_c('div', {
     staticClass: "x_panel"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
@@ -43058,7 +42971,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_vm._v("Crear nuevo distribuidor")])]), _vm._v(" "), _c('div', {
+  }, [_c('h5', [_vm._v(" Crear nuevo distribuidor")]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -44219,7 +44132,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-md-10 col-md-offset-1"
+    staticClass: "col-md-10 col-sm-12 col-xs-12 col-md-offset-1"
   }, [_c('div', {
     staticClass: "x_panel"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
@@ -44388,7 +44301,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_vm._v("Crear nuevo cliente")])]), _vm._v(" "), _c('div', {
+  }, [_c('h5', [_vm._v("Crear nuevo cliente")]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -46651,7 +46564,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46672,7 +46584,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             formErrors: {},
             formErrorsUpdate: {},
 
-            fillItem: { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '', 'id': '' },
+            fillItem: { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'presentation_name': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '', 'id': '' },
             queryString: ''
 
         };
@@ -46731,10 +46643,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         getPresentation: function getPresentation() {
             var that = this;
-            axios.get('/presentations/c').then(function (response) {
+            axios.get('/presentations/combo').then(function (response) {
                 that.presentations = response.data;
             });
         },
+
+        getPresentationName: function getPresentationName() {
+            var that = this;
+            axios.get('/presentations/get/' + that.fillItem.presentation_id).then(function (response) {
+                that.fillItem.presentation_name = response.data;
+            });
+        },
+
         getVueItems: function getVueItems(page) {
             var that = this;
             axios.get('/medicines?page=' + page).then(function (response) {
@@ -46760,6 +46680,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.fillItem.name = item.name;
             this.fillItem.description = item.description;
             this.fillItem.presentation_id = item.presentation_id;
+            this.fillItem.presentation_name = item.presentation_name;
             this.fillItem.type = item.type;
             this.fillItem.component = item.component;
             this.fillItem.concentration = item.concentration;
@@ -46795,7 +46716,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var input = this.fillItem;
             axios.put('/medicines/' + id, input).then(function (response) {
                 _this.changePage(_this.pagination.current_page);
-                _this.fillItem = { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '', 'id': '' };
+                _this.fillItem = { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'presentation_name': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '', 'id': '' };
                 _this.date = '';
                 _this.date2 = '';
                 $("#edit-item").modal('hide');
@@ -46862,12 +46783,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "grid"
     }
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
-    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.presentation_id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.type))]), _vm._v(" "), _c('td', {
+    return _c('tr', [_c('th', [_vm._v(_vm._s(index + 1 + (_vm.pagination.current_page - 1) * 10))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.name))]), _vm._v(" "), _c('th', [_vm._v(_vm._s(item.presentation_name))]), _vm._v(" "), _c('td', {
       staticClass: "text-center"
     }, [_vm._v(_vm._s(item.sale_price))]), _vm._v(" "), _c('td', {
       staticClass: "text-center"
     }, [_vm._v(" " + _vm._s(item.stock))]), _vm._v(" "), _c('td', {
-      staticClass: "text-center"
+      staticClass: "textcenter"
     }, [_vm._v(_vm._s(item.expiration_date))]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
@@ -46990,27 +46911,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "x_title"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('h5', [_c('i', {
+  }, [_c('h5', {
+    staticClass: "col-md-8 col-sm-8 col-xs-8"
+  }, [_c('i', {
     staticClass: "fa fa-medkit"
-  }), _vm._v(" "), _c('b', [_vm._v(" Medicamento : ")]), _vm._v(" " + _vm._s(_vm.fillItem.name))])])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('b', [_vm._v(" Medicamento : ")]), _vm._v(" " + _vm._s(_vm.fillItem.name))]), _vm._v(" "), _c('h5', {
+    staticClass: "col-md-4 col-sm-4 col-xs-4 text-right"
+  }, [_c('i', {
+    staticClass: "fa fa-cube"
+  }), _c('b', [_vm._v(" Lote : ")]), _vm._v(" " + _vm._s(_vm.fillItem.batch))])])]), _vm._v(" "), _c('div', {
     staticClass: "x_content"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('p', {
-    staticClass: "text-right"
+    staticClass: "col-md-10 text-justify"
   }, [_c('i', {
-    staticClass: "fa fa-cube"
-  }), _c('b', [_vm._v(" Lote : ")]), _vm._v(" " + _vm._s(_vm.fillItem.batch))])]), _vm._v(" "), _c('div', {
+    staticClass: "fa fa-info-circle"
+  }), _c('b', [_vm._v(" Descripción: ")]), _vm._v(" " + _vm._s(_vm.fillItem.description) + " ")])]), _vm._v(" "), _c('div', {
     staticClass: "divider-dashed"
   }), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-6 col-sm-6 col-xs-12"
-  }, [_c('p', {
-    staticClass: "text-justify"
-  }, [_c('i', {
-    staticClass: "fa fa-info-circle"
-  }), _c('b', [_vm._v(" Descripción: ")]), _vm._v(" " + _vm._s(_vm.fillItem.description) + " ")]), _vm._v(" "), _c('p', [_c('i', {
+  }, [_c('p', [_c('i', {
+    staticClass: "fa fa-flask"
+  }), _c('b', [_vm._v(" Presentación: ")]), _vm._v(" " + _vm._s(_vm.fillItem.presentation_name) + " ")]), _vm._v(" "), _c('p', [_c('i', {
     staticClass: "fa fa-flask"
   }), _c('b', [_vm._v(" Tipo: ")]), _vm._v(" " + _vm._s(_vm.fillItem.type) + " ")])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6 col-sm-6 col-xs-12"
@@ -47171,7 +47096,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     on: {
-      "change": function($event) {
+      "change": [function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
         }).map(function(o) {
@@ -47179,7 +47104,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           return val
         });
         _vm.fillItem.presentation_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
+      }, _vm.getPresentationName]
     }
   }, _vm._l((_vm.presentations), function(presentation) {
     return _c('option', {
@@ -47434,7 +47359,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', {
     staticClass: "text-center"
-  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Medicicamento")]), _vm._v(" "), _c('th', [_vm._v("Presentación")]), _vm._v(" "), _c('th', [_vm._v("Tipo")]), _vm._v(" "), _c('th', [_vm._v("Precio Venta (S/.)")]), _vm._v(" "), _c('th', [_vm._v("Stock")]), _vm._v(" "), _c('th', [_vm._v("Vencimiento")]), _vm._v(" "), _c('th', {
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Medicicamento")]), _vm._v(" "), _c('th', [_vm._v("Presentación")]), _vm._v(" "), _c('th', [_vm._v("Precio Venta(S/.)")]), _vm._v(" "), _c('th', [_vm._v("Stock")]), _vm._v(" "), _c('th', [_vm._v("Vencimiento")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "3"
     }
@@ -47803,7 +47728,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -47815,7 +47739,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 												presentations: [],
 												newPresentation: { 'name': '' },
 												items: [],
-												newItem: { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '' },
+												newItem: { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'presentation_name': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '' },
 												formErrors: {},
 												formErrorsUpdate: {}
 								};
@@ -47848,6 +47772,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 								},
 
 
+								getPresentationName: function getPresentationName() {
+												var that = this;
+												axios.get('/presentations/get/' + that.newItem.presentation_id).then(function (response) {
+																that.newItem.presentation_name = response.data;
+												});
+												return that.newItem.presentation_name;
+								},
+
 								getVueItems: function getVueItems() {
 												var that = this;
 												axios.get('/medicines').then(function (response) {
@@ -47874,7 +47806,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 																toastr.warning('Complete todos los campos', { timeOut: 5000 });
 												} else {
 																axios.post('/medicines', input).then(function (response) {
-																				_this.newItem = { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '' }, toastr.success('Medicamento creado', { timeOut: 5000 });
+																				_this.newItem = { 'batch': '', 'name': '', 'description': '', 'presentation_id': '', 'presentation_name': '', 'type': '', 'component': '', 'concentration': '', 'stock': '', 'purchase_price': '', 'sale_price': '', 'igv': '', 'expiration_date': '', 'production_date': '' }, toastr.success('Medicamento creado', { timeOut: 5000 });
 																});
 												}
 								},
@@ -48023,7 +47955,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     on: {
-      "change": function($event) {
+      "change": [function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
         }).map(function(o) {
@@ -48031,7 +47963,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           return val
         });
         _vm.newItem.presentation_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
+      }, function($event) {
+        _vm.getPresentationName()
+      }]
     }
   }, _vm._l((_vm.presentations), function(presentation) {
     return _c('option', {
@@ -48659,13 +48593,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             items: [],
-            fillItem: { 'code': '', 'dealer_id': '', 'laboratory_id': '', 'date': '', 'total_price': '' },
+            fillItem: { 'code': '', 'dealer': '', 'laboratory': '', 'date': '', 'total_price': '' },
             details: [],
+            dealers: [],
+            laboratories: [],
+            medicines: [],
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -48714,8 +48652,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var that = this;
             axios.get('/purchases?page=' + page).then(function (response) {
                 that.items = response.data.data.data;
+                for (var i = 0; i < that.items.length; i++) {
+                    axios.get('/dealers/get/' + that.items[i].dealer_id).then(function (response) {
+                        that.dealers.push(response.data);
+                    });
+                    axios.get('/laboratories/get/' + that.items[i].laboratory_id).then(function (response) {
+                        that.laboratories.push(response.data);
+                    });
+                }
+                that.dealers = [];
+                that.laboratories = [];
                 that.pagination = response.data.pagination;
-
                 that.$nextTick(function () {
                     $('[data-toggle="popover"]').popover();
                 });
@@ -48723,6 +48670,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         changePage: function changePage(page) {
+            this.dealers = [];
+            this.laboratories = [];
             this.pagination.current_page = page;
             this.getVueItems(page);
         },
@@ -48730,17 +48679,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         showItem: function showItem(item) {
             var that = this;
             this.fillItem.code = item.code;
-            this.fillItem.dealer_id = item.dealer_id;
-            this.fillItem.laboratory_id = item.laboratory_id;
+            axios.get('/dealers/get/' + item.dealer_id).then(function (response) {
+                that.fillItem.dealer = response.data;
+            });
+            axios.get('/laboratories/get/' + item.laboratory_id).then(function (response) {
+                that.fillItem.laboratory = response.data;
+            });
             this.fillItem.date = item.date;
             this.fillItem.total_price = item.total_price;
             $("#show-item").modal('show');
-            axios.get('/purchases/' + item.code).then(function (response) {
+            axios.get('/purchases/show/' + item.code).then(function (response) {
                 that.details = response.data;
-                that.$nextTick(function () {
-                    $('[data-toggle="popover"]').popover();
-                });
+                for (var j = 0; j < that.details.length; j++) {
+                    axios.get('/medicines/get/' + that.details[j].medicine_id).then(function (response) {
+                        that.medicines.push(response.data);
+                    });
+                }
             });
+            this.medicines = [];
         }
     }
 });
@@ -48758,14 +48714,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "x_content"
   }, [_c('table', {
     staticClass: "table table-hover"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(item.code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.dealer_id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.laboratory_id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.date))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.total_price))]), _vm._v(" "), _c('td', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.items), function(item, index) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(item.code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.dealers[index]))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.laboratories[index]))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(item.date))]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
       }
     }, [_c('button', {
       staticClass: "btn btn-success",
       attrs: {
+        "type": "button",
         "title": "Edit"
       },
       on: {
@@ -48809,7 +48766,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.changePage(page)
         }
       }
-    }, [_vm._v("\n                                " + _vm._s(page) + "\n                            ")])])
+    }, [_vm._v("\n                            " + _vm._s(page) + "\n                        ")])])
   }), _vm._v(" "), (_vm.pagination.current_page < _vm.pagination.last_page) ? _c('li', [_c('a', {
     attrs: {
       "href": "#",
@@ -48833,7 +48790,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-labelledby": "myModalLabel"
     }
   }, [_c('div', {
-    staticClass: "modal-dialog",
+    staticClass: "modal-dialog modal-lg",
     attrs: {
       "role": "document"
     }
@@ -48844,31 +48801,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "x_panel"
   }, [_c('div', {
-    staticClass: "x_title"
-  }, [_c('h2', [_c('small', [_c('i', {
+    staticClass: "row x_title"
+  }, [_c('p', {
+    staticClass: "col-md-6 col-sm-6 col-xs-6"
+  }, [_c('i', {
     staticClass: "fa fa-shopping-cart"
-  }), _vm._v(" CODIGO DE COMPRA: " + _vm._s(_vm.fillItem.code))])]), _vm._v(" "), _c('ul', {
-    staticClass: "nav navbar-right panel_toolbox"
-  }, [_c('li', [_c('h2', [_c('small', [_c('i', {
+  }), _vm._v(" CODIGO: " + _vm._s(_vm.fillItem.code))]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 col-sm-6 col-xs-6 pull-right"
+  }, [_c('p', {
+    staticClass: "pull-right"
+  }, [_c('i', {
     staticClass: "fa fa-calendar"
-  }), _vm._v(" " + _vm._s(_vm.fillItem.date))])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" " + _vm._s(_vm.fillItem.date))])])]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('div', {
     staticClass: "x_content "
   }, [_c('div', {
     staticClass: "row"
   }, [_c('p', {
-    staticClass: "col-md-6 col-sm-6 col-xs-12"
+    staticClass: "col-md-6 col-sm-6 col-xs-12 text-justify"
   }, [_c('i', {
     staticClass: "fa fa-ambulance"
-  }), _c('b', [_vm._v(" Distribuidor: ")]), _vm._v(" " + _vm._s(_vm.fillItem.dealer_id) + "  ")]), _vm._v(" "), _c('p', {
-    staticClass: "col-md-6 col-sm-6 col-xs-12"
+  }), _c('b', [_vm._v(" Distribuidor: ")]), _vm._v(" " + _vm._s(_vm.fillItem.dealer) + "  ")]), _vm._v(" "), _c('p', {
+    staticClass: "col-md-6 col-sm-6 col-xs-12 text-left"
   }, [_c('i', {
     staticClass: "fa fa-flask"
-  }), _c('b', [_vm._v(" Laboratorio: ")]), _vm._v(" " + _vm._s(_vm.fillItem.laboratory_id))])]), _vm._v(" "), _c('div', {
+  }), _c('b', [_vm._v(" Laboratorio: ")]), _vm._v(" " + _vm._s(_vm.fillItem.laboratory))])]), _vm._v(" "), _c('div', {
     staticClass: "divider-dashed"
   }), _vm._v(" "), _c('div', {
-    staticClass: "col-md-12 col-sm-12 col-xs-12"
+    staticClass: "row col-md-12 col-sm-12 col-xs-12"
   }, [_c('table', {
     staticClass: "table table-striped table-bordered"
   }, [_vm._m(3), _vm._v(" "), _c('tbody', _vm._l((_vm.details), function(detail, index) {
@@ -48880,7 +48841,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "width": "300px"
       }
-    }, [_vm._v(_vm._s(detail.medicine_id))]), _vm._v(" "), _c('td', {
+    }, [_vm._v(_vm._s(_vm.medicines[index]))]), _vm._v(" "), _c('td', {
       staticClass: "text-right"
     }, [_vm._v(_vm._s(detail.quantity))]), _vm._v(" "), _c('td', {
       staticClass: "text-right"
@@ -48891,13 +48852,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-5 col-sm-5 col-xs-12 pull-right"
   }, [_c('p', {
     staticClass: "pull-right"
-  }, [_c('big', [_vm._v("TOTAL: S/." + _vm._s(_vm.fillItem.total_price))])], 1)])])])])])])])])])
+  }, [_c('big', [_vm._v("TOTAL: S/." + _vm._s(_vm.fillItem.total_price))])], 1)])])])])]), _vm._v(" "), _vm._m(4)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "x_title"
   }, [_c('h5', [_vm._v("Lista de compras")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Código")]), _vm._v(" "), _c('th', [_vm._v("Distribuidor")]), _vm._v(" "), _c('th', [_vm._v("Laboratorio")]), _vm._v(" "), _c('th', [_vm._v("Fecha")]), _vm._v(" "), _c('th', [_vm._v("Total(S/.)")]), _vm._v(" "), _c('th', {
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Código")]), _vm._v(" "), _c('th', [_vm._v("Distribuidor")]), _vm._v(" "), _c('th', [_vm._v("Laboratorio")]), _vm._v(" "), _c('th', [_vm._v("Fecha")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "1"
     }
@@ -48931,6 +48892,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "width": "300px"
     }
   }, [_vm._v("Descripción")]), _vm._v(" "), _c('th', [_vm._v("Cantidad")]), _vm._v(" "), _c('th', [_vm._v("P.U.(S/.)")]), _vm._v(" "), _c('th', [_vm._v("Subotal(S/.)")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-footer"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "button",
+      "onclick": "window.print();"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-print"
+  }), _vm._v(" Imprimir")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "button",
+      "data-dismiss": "modal"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-close"
+  }), _vm._v(" Cerrar")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -49195,7 +49176,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				} else {
 					this.details.push(this.newDetail);
 					toastr.success('Agregado a la compra', { timeOut: 5000 });
-					axios.get('/medicines/' + input['medicine_id']).then(function (response) {
+					axios.get('/medicines/get/' + input['medicine_id']).then(function (response) {
 						that.description.push(response.data);
 					});
 				}

@@ -70,9 +70,15 @@ class PresentationController extends Controller
         return response()->json($edit);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         Presentation::find($id)->delete();
         return response()->json(['done']);
+    }
+
+    public function getPresentation($id)
+    {
+        $pre = Presentation::find($id);
+        return response()->json($pre['name']);
     }
 }

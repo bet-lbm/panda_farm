@@ -49,26 +49,26 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-users"></i> Clientes <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Lista</a></li>
-                    <li><a href="#">Nuevo</a></li>
+                    <li><a href={{ route('clients.list') }}>Lista</a></li>
+                    <li><a href={{ route('clients.create') }}>Nuevo</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-ambulance"></i> Distribuidores <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Lista</a></li>
-                    <li><a href="#">Nuevo</a></li>
+                    <li><a href={{ route('dealers.list') }}>Lista</a></li>
+                    <li><a href={{ route('dealers.create') }}>Nuevo</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-flask"></i> Laboratorios<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Lista</a></li>
-                    <li><a href="#">Nuevo</a></li>
+                    <li><a href={{ route('laboratories.list') }}>Lista</a></li>
+                    <li><a href={{ route('laboratories.create') }}>Nuevo</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-medkit"></i> Medicamentos <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Lista</a></li>
-                    <li><a href="#">Nuevo</a></li>
+                    <li><a href={{ route('medicines.list') }}>Lista</a></li>
+                    <li><a href={{ route('medicines.create') }}>Nuevo</a></li>
                   </ul>
                 </li>
               </ul>
@@ -78,8 +78,8 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-shopping-cart"></i> Compras <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="#">Lista de Compras</a></li>
-                    <li><a href="#">Realizar Compra</a></li>
+                    <li><a href={{ route('purchases.list') }}>Lista de Compras</a></li>
+                    <li><a href={{ route('purchases.create') }}>Realizar Compra</a></li>
                     <li><a href="#">Reportes de Compras</a></li>
                   </ul>
                 </li>
