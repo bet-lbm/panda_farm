@@ -23,7 +23,23 @@ class PurchaseController extends Controller
             'data' => $purchases  ];
         return response()->json($response);
 	}
-
+    public function search(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $purchases=Purchase::where('code','like','%'.$queryString.'%')->latest()->paginate(5);
+        $response=[
+            'pagination'=>[
+                'total'=>$purchases->total(),
+                'per_page'=>$purchases->perPage(),
+                'current_page'=>$purchases->currentPage(),
+                'last_page'=>$purchases->lastPage(),
+                'from'=>$purchases->firstItem(),
+                'to'=>$purchases->lastItem(),
+            ],
+            'data'=>$purchases
+        ];
+        return response()->json($response);
+    }
     public function create()
     {
         return view('purchases.create');

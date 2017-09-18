@@ -1,14 +1,16 @@
 <template>
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
-		<div class="x_title">
-			<h5>Lista de Laboratorios</h5>
-			<a class="pull-right"><i class="fa fa-plus"></i></a> 
-			<div class="clearfix"></div>
-		</div>
-        <div class="input-group">
-                <input  class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="BUSCAR">
+		<div class="row x_title">
+            <h5 class="col-md-6 "> Lista de Laboratorios</h5>
+            <div class="col-md-4 pull-right top_search">
+                <div class="input-group">
+                    <input class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="Buscar">
+                    <span class="input-group-btn">  <button class="btn btn-default"><i class="fa fa-search"></i></button></span>
+                </div>
+            </div>
         </div>
+        <div class="clearfix"></div>
 		<div class="x_content">
 			<table class="table table-hover"> 
 				<thead>

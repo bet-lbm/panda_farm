@@ -35,7 +35,7 @@ class ClientController extends Controller
     public function search(Request $request)
     {
         $queryString=$request->input('queryString');
-        $clients=Client::where('name','like','%'.$queryString.'%')->latest()->paginate(5);
+        $clients=Client::where('name','like','%'.$queryString.'%')->latest()->paginate(10);
         $response=[
             'pagination'=>[
                 'total'=>$clients->total(),

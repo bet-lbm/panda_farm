@@ -43,7 +43,6 @@
 
                 <div class="form-group text-center">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <button class="btn btn-primary" >Listar</button>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                          <button class="btn btn-success" @click.prevent="createItem()">Guardar distribuidor</button>

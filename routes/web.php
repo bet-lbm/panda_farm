@@ -64,6 +64,7 @@ Route::resource('medicines','MedicineController',['except' => ['edit', 'show']])
 Route::name('purchases.list')->get('/purchases/list',function(){
 	return view('purchases.index');
 });
+Route::get('/purchases/search','PurchaseController@search');
 Route::name('purchases.create')->get('/purchases/create','PurchaseController@create');
 Route::get('/purchases/code','PurchaseController@code');
 Route::get('/purchases/show/{id}','PurchaseController@showDetails');
