@@ -10,20 +10,18 @@
 				<thead>
 					<tr>
 						<th>Código</th>
-                        <th>Distribuidor</th>
-                        <th>Laboratorio</th>
                         <th>Fecha</th>
+                        <th>Monto (S./)</th>
 						<th colspan="1">&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(item,index) in items">
 						<td>{{ item.code }}</td>
-                        <td>{{ dealers[index] }}</td>
-                        <td>{{ laboratories[index] }}</td>
                         <td>{{ item.date }}</td>
+                        <td>{{ item.total_price }}</td>
 						<td width="10px">
-							<button class="btn btn-success" type="button" title="Edit" @click.prevent="showItem(item)"><i class="fa fa-eye"></i></button>
+							<button class="btn btn-success" type="button" title="Mostrar" @click.prevent="showItem(item)"><i class="fa fa-eye"></i></button>
 						</td>
 					</tr>
 				</tbody>
@@ -88,7 +86,7 @@
                                     <tbody>
                                         <tr v-for="(detail,index) in details">
                                             <td width="10px">{{ index + 1 }}</td>
-                                            <td width="300px">{{ medicines[index] }}</td>
+                                            <td width="300px">{{ detail.medicine_name }}</td>
                                             <td class="text-right">{{ detail.quantity }}</td>
                                             <td class="text-right">{{ detail.price }}</td>
                                             <td class="text-right">{{ detail.subtotal }}</td>
@@ -119,9 +117,6 @@ export default {
 		    items: [],
             fillItem: {'code': '','dealer': '','laboratory': '','date': '','total_price': ''},
             details: [],
-            dealers: [],
-            laboratories: [],
-            medicines: [],
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -168,16 +163,6 @@ export default {
             var that = this;
             axios.get('/purchases?page='+page).then(function (response) {
                 that.items = response.data.data.data;
-                for (var i = 0; i < that.items.length; i++) { 
-                    axios.get('/dealers/get/'+ that.items[i].dealer_id).then(function (response) {
-                        that.dealers.push(response.data);
-                    });
-                    axios.get('/laboratories/get/'+ that.items[i].laboratory_id).then(function (response) {
-                        that.laboratories.push(response.data);
-                    });
-                }
-                that.dealers = [];
-                that.laboratories =[];
                 that.pagination = response.data.pagination;
                 that.$nextTick(function() {
                     $('[data-toggle="popover"]').popover();
@@ -206,13 +191,7 @@ export default {
             $("#show-item").modal('show');
             axios.get('/purchases/show/' + item.code).then(function (response) {
                 that.details = response.data;
-                for (var j = 0; j < that.details.length; j++) {
-                    axios.get('/medicines/get/'+ that.details[j].medicine_id).then(function (response) {
-                        that.medicines.push(response.data);
-                    });
-                }
             });
-            this.medicines = [];   
         }
 	}
 }

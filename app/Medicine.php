@@ -16,7 +16,10 @@ class Medicine extends Model
     {
         return $this->belongsTo(Presentation::class);
     }
-
+    public function purchasedetails()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
     
 
 }

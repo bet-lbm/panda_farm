@@ -147,7 +147,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Nombre <span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-6">
-                                            <input class="form-control" id="name" name="name" type="text" required="required" v-model="fillItem.name">
+                                            <input class="form-control" id="name" name="name" type="text" required="required" v-model="fillItem.name" autofocus>
                                         </div>
                                     </div>
                                     
@@ -403,6 +403,7 @@
                 this.fillItem.name = item.name;
                 this.fillItem.description=item.description;
                 this.fillItem.presentation_id=item.presentation_id;
+                this.fillItem.presentation_name = item.presentation_name;
                 this.fillItem.type=item.type;
                 this.fillItem.component=item.component;
                 this.fillItem.concentration=item.concentration;

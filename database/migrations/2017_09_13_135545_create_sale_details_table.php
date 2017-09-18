@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePurchaseDetailsTable extends Migration
+class CreateSaleDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreatePurchaseDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_details', function (Blueprint $table) {
+        Schema::create('sale_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('sales_id')->unsigned();
+             $table->foreign('sales_id')->references('id')->on('sales')->onUpdate('cascade');
+            $table->string('sale_series',5);
+            $table->string('sale_number',7);
+           // $table->foreign(array('sale_series','sale_number'))->references(array('series','number'))->on('sales')->onUpdate('cascade');
             $table->integer('medicine_id')->unsigned();
             $table->foreign('medicine_id')->references('id')->on('medicines')->onUpdate('cascade');
             $table->string('medicine_name')->references('name')->on('medicines')->onUpdate('cascade');
-            $table->string('purchase_id',7);
-            $table->foreign('purchase_id')->references('code')->on('purchases');
             $table->integer('quantity');
-            $table->float('price');
+            $table->float('sale_price');
+            $table->float('discount')->nullable();
             $table->float('subtotal');
             $table->timestamps();
         });
@@ -34,6 +38,6 @@ class CreatePurchaseDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_details');
+        Schema::dropIfExists('sale_details');
     }
 }

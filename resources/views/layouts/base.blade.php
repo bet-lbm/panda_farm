@@ -80,15 +80,19 @@
                   <ul class="nav child_menu">
                     <li><a href={{ route('purchases.list') }}>Lista de Compras</a></li>
                     <li><a href={{ route('purchases.create') }}>Realizar Compra</a></li>
-                    <li><a href="#">Reportes de Compras</a></li>
+                    <li><a href="#">Reporte de Compras</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-money"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a href="#">Lista de Ventas</a></li>
-                      <li><a href="#">Realizar Ventas</a></li>
-                      <li><a href="#">Consultar Ventas</a></li>
-                      <li><a href="#">Reporte de Ventas</a></li>
+                      <li><a> Realizar de Ventas  <span class="fa fa-chevron-down"></a> 
+                          <ul class="nav child_menu">
+                            <li><a href={{ route('sales.bill') }}>Boleta</a></li>
+                            <li><a href={{ route('sales.invoce') }}>Factura</a></li>
+                          </ul>
+                      </li>
+                      <li><a href="#">Reporte Venta</a></li>
                   </ul>
                 </li>
               </ul>

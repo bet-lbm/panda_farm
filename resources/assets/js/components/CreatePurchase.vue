@@ -38,7 +38,7 @@
 							    <div class="form-group col-md-4 col-sm-4 col-xs-12">
 				                    <label class="control-label col-md-5 col-sm-5 col-xs-6">Medicamento</label>
 				                    <div class="col-md-7 col-sm-7 col-xs-6">
-				                        <select class="form-control" v-model="newDetail.medicine_id">
+				                        <select class="form-control" v-model="newDetail.medicine_id" @change="getMedicineName">
 												<option v-for="medicine in medicines" :value="medicine.id">{{ medicine.name }}</option>
 										</select>
 				                    </div>
@@ -81,12 +81,12 @@
 				    				<tbody>
 				    					<tr v-for="(detail,index) in details">
 				    						<th width="20px">{{ index + 1 }}</th>
-				    						<td width="300px">{{ description[index] }}</td>
+				    						<td width="300px">{{ detail.medicine_name }}</td>
 				    						<td class="text-center">{{ detail.quantity }}</td>
 				    						<td class="text-center">{{ detail.price }}</td>
 				    						<td class="text-right">{{ detail.subtotal }}</td>
 				    						<td width="10px">
-				                                <button class="btn-link" @click.prevent="deleteDetail(index)" title="Quitar">
+				                                <button class="btn-link" title="Quitar">
 				                                <i class="fa fa-close"></i>
 				                                </button>
 				                            </td>
@@ -127,7 +127,7 @@
 	        	items:[],
 	        	description: [],
 	            newItem :  {'code':'','dealer_id':'','laboratory_id':'','date':'','total_price':''},
-	            newDetail: {'purchase_id':'','medicine_id':'','quantity':'','price':'','subtotal':''},
+	            newDetail: {'purchase_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''},
 	            formErrors: {},
 	            formErrorsUpdate: {},
 	        }
@@ -191,12 +191,17 @@
 	                that.medicines = response.data;
 	            });
 	        },
-
+	        getMedicineName: function(){
+	        	var that = this;
+	        	axios.get('/medicines/get/'+ that.newDetail.medicine_id).then(function (response) {
+	            	that.newDetail.medicine_name = response.data;
+	           	});
+	        },
 	        createDetail:function(){
 	        	var that = this;
 
 	        	var input = this.newDetail;
-	        	if((input['medicine_id'] == '')||(input['quantity'] == '')||(input['price'] == '')||(input['subtotal'] == '')){
+	        	if((input['medicine_id'] == '')||(input['medicine_name'] == '')||(input['quantity'] == '')||(input['price'] == '')||(input['subtotal'] == '')){
 	                toastr.warning('Complete todos los campos', {timeOut: 5000});
 	            }
 	            else{
@@ -206,12 +211,11 @@
 	            	else{
 	            		this.details.push(this.newDetail);
 			            toastr.success('Agregado a la compra',{timeOut: 5000});
-			            axios.get('/medicines/get/'+input['medicine_id']).then(function (response) {
-	            			that.description.push(response.data);
-	            		});
+			           
 	            	}
-	            	this.newDetail = {'purchase_id':'','medicine_id':'','quantity':'','price':'','subtotal':''};
+	            	this.newDetail = {'purchase_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''};
 	           	}
+	           	console.log(that.details);
 	        },
 
 	        deleteDetail:function(index){

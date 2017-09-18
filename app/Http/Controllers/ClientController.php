@@ -18,7 +18,6 @@ class ClientController extends Controller
      */
     public function index()
     {   
-       
         $clients=Client::latest()->paginate(10);
         $response=[
             'pagination'=>[
@@ -36,7 +35,24 @@ class ClientController extends Controller
     public function search(Request $request)
     {
         $queryString=$request->input('queryString');
-        $clients=Client::where('name','like','%'.$queryString.'%')->latest()->paginate(10);
+        $clients=Client::where('name','like','%'.$queryString.'%')->latest()->paginate(5);
+        $response=[
+            'pagination'=>[
+                'total'=>$clients->total(),
+                'per_page'=>$clients->perPage(),
+                'current_page'=>$clients->currentPage(),
+                'last_page'=>$clients->lastPage(),
+                'from'=>$clients->firstItem(),
+                'to'=>$clients->lastItem(),
+            ],
+            'data'=>$clients
+        ];
+        return response()->json($response);
+    }
+    public function searchDNI(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $clients=Client::where('dni','like','%'.$queryString.'%')->latest()->paginate(3);
         $response=[
             'pagination'=>[
                 'total'=>$clients->total(),
@@ -59,7 +75,7 @@ class ClientController extends Controller
     public function create()
     {
         $client= new Client;
-            return view('clients.create');
+        return view('clients.create');
     }
 
     /**

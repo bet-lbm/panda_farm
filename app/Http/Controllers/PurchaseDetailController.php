@@ -13,6 +13,7 @@ class PurchaseDetailController extends Controller
         $this->validate($request, [
             'purchase_id' => 'required' ,
             'medicine_id' => 'required' ,
+            'medicine_name' => 'required',
             'quantity' => 'required' ,
             'price' => 'required' ,
             'subtotal' => 'required' ,
