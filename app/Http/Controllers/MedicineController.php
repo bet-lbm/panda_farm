@@ -52,6 +52,7 @@ class MedicineController extends Controller
     		'name'  => 'required',
     		'description'  => 'required',
             'presentation_id' => 'required',
+            'presentation_name' => 'required',
             'type'  => 'required',
             'component'  => 'required',
             'concentration'  => 'required',
@@ -99,6 +100,6 @@ class MedicineController extends Controller
     public function getMedicine($id)
     {
         $medicine = Medicine::find($id);
-        return $medicine['name'];
+        return response()->json($medicine['name']);
     }
 }

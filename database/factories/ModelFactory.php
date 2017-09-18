@@ -60,9 +60,9 @@ $factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
         'description'=> $faker->text(100),
 
         'presentation_id' => \random_int(1, \Panda\Presentation::all()->count()),
-        /*'presentation_name' => function (array $medicines) {
+        'presentation_name' => function (array $medicines) {
             return Panda\Presentation::find($medicines['presentation_id'])->name;
-        },*/
+        },
         
         'type' => $faker->randomElement($array = array ('generico','comercial')),      
         'stock' => $faker->numberBetween($min=1, $max=1000),
@@ -79,7 +79,7 @@ $factory->define(Panda\Medicine::class, function (Faker\Generator $faker) {
 $factory->define(Panda\Purchase::class, function (Faker\Generator $faker) {
     return [
 
-        'code' => $faker->unique()->numerify('C-000##'),
+        'code' => $faker->unique()->numerify('C-00###'),
         'dealer_id' => \random_int(1, \Panda\Dealer::all()->count()),
         'laboratory_id' => \random_int(1, \Panda\Laboratory::all()->count()),
         'date' => $faker->date('Y-m-d','now'),
@@ -88,11 +88,41 @@ $factory->define(Panda\Purchase::class, function (Faker\Generator $faker) {
 });
 $factory->define(Panda\PurchaseDetail::class, function (Faker\Generator $faker) {
     return [
-
-        'purchase_id' => \random_int(1, \Panda\Purchase::all()->count()),
-        'medicine_id' => \random_int(1, \Panda\Medicine::all()->count()),
+        'purchase_id' => Panda\Purchase::all()->random()->code,
+        'medicine_id' => Panda\Medicine::all()->random()->id,
+        'medicine_name' => function (array $medicines) {
+            return Panda\Medicine::find($medicines['medicine_id'])->name;
+        },
         'quantity' => $faker->numberBetween($min=1, $max=1000),
         'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+        'subtotal' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+    ];
+});
+
+$factory->define(Panda\Sale::class, function (Faker\Generator $faker) {
+    return [
+        'series' => $faker-> randomElement($array = array ('F001','B001')),
+        'number' => $faker->unique()->numerify('#######'),
+        'type' => $faker-> randomElement($array = array ('factura','boleta')),
+        'client_id' => Panda\Client::all()->random()->id,
+        'user_id' => Panda\User::all()->random()->id,
+        'date' => $faker->date('Y-m-d'),
+        'subtotal' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 90),
+        'igv' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10),
+        'total_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+    ];
+});
+$factory->define(Panda\SaleDetail::class, function (Faker\Generator $faker) {
+    return [
+        'sale_series' => Panda\Purchase::all()->random()->series,
+        'sale_number' => Panda\Sale::all()->random()->number,
+        'medicine_id' => Panda\Medicine::all()->random()->id,
+        'medicine_name' => function (array $medicines) {
+            return Panda\Medicine::find($medicines['medicine_id'])->name;
+        },
+        'quantity' => $faker->numberBetween($min=1, $max=1000),
+        'sale_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+        'discount' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
         'subtotal' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
     ];
 });

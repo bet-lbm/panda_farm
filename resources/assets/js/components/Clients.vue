@@ -302,8 +302,8 @@ export default {
         },
 
         changePage: function(page) {
-                this.pagination.current_page = page;
-                this.getVueItems(page);
+            this.pagination.current_page = page;
+            this.getVueItems(page);
         }
 	}
 }

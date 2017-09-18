@@ -17,8 +17,7 @@
     						<th>#</th>
     						<th>Medicicamento</th>
                             <th>Presentación</th>
-                            <th>Tipo</th>
-    						<th>Precio Venta (S/.)</th>
+    						<th>Precio Venta(S/.)</th>
     						<th>Stock</th>
                             <th>Vencimiento</th>
     						<th colspan="3">&nbsp;</th>
@@ -28,11 +27,10 @@
     					<tr v-for="(item, index) in items"> 
     						<th>{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
     						<td>{{ item.name }}</td>
-                            <td>{{ item.presentation_id }}</td>
-    						<td>{{ item.type }}</td>
+                            <th>{{ item.presentation_name }}</th>
     						<td class="text-center">{{ item.sale_price}}</td>
     						<td class="text-center"> {{ item.stock }}</td>
-                            <td class="text-center">{{ item.expiration_date}}</td>
+                            <td class="textcenter">{{ item.expiration_date}}</td>
     						<td width="10px">
     							<button class="btn btn-success"  @click.prevent="showItem(item)" title="Show"> 
                                     <i class="fa fa-eye"></i>
@@ -86,18 +84,19 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <div class="row">
-                                    <h5><i class="fa fa-medkit"></i> <b> Medicamento : </b> {{ fillItem.name }}</h5>
+                                    <h5 class="col-md-8 col-sm-8 col-xs-8"><i class="fa fa-medkit"></i> <b> Medicamento : </b> {{ fillItem.name }}</h5>
+                                    <h5 class="col-md-4 col-sm-4 col-xs-4 text-right"><i class="fa fa-cube"></i><b> Lote : </b> {{ fillItem.batch }}</h5>
                                 </div>
                             </div>  
                             <div class="x_content">
                                 <div class="row">
-                                    <p class="text-right"><i class="fa fa-cube"></i><b> Lote : </b> {{ fillItem.batch }}</p>
+                                    <p class="col-md-10 text-justify"><i class="fa fa-info-circle"></i><b> Descripción: </b> {{ fillItem.description }} </p>
                                 </div>
                                 <div class="divider-dashed"></div>
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <p class="text-justify"><i class="fa fa-info-circle"></i><b> Descripción: </b> {{ fillItem.description }} </p>
+                                        <p><i class="fa fa-flask"></i><b> Presentación: </b> {{ fillItem.presentation_name }} </p>
                                         <p><i class="fa fa-flask"></i><b> Tipo: </b> {{ fillItem.type }} </p>
                                     </div>
                                     
@@ -148,7 +147,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-6" for="name">Nombre <span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-6">
-                                            <input class="form-control" id="name" name="name" type="text" required="required" v-model="fillItem.name">
+                                            <input class="form-control" id="name" name="name" type="text" required="required" v-model="fillItem.name" autofocus>
                                         </div>
                                     </div>
                                     
@@ -163,7 +162,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-6">Presentación <span class="required">*</span></label>
                                         <div class="col-md-8 col-sm-8 col-xs-6">
-                                            <select class="form-control" v-model="fillItem.presentation_id">
+                                            <select class="form-control" v-model="fillItem.presentation_id" @change="getPresentationName"> 
                                                 <option v-for="presentation in presentations" :value="presentation.id">{{ presentation.name }}</option>
                                             </select>
                                         </div>
@@ -288,7 +287,7 @@
 	            formErrors: {},
 	            formErrorsUpdate: {},
 
-                fillItem:  {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
+                fillItem:  {'batch':'','name':'','description':'','presentation_id':'','presentation_name':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''},
                 queryString:''
 
 			}
@@ -349,10 +348,18 @@
             
             getPresentation: function(){
                 var that = this;
-                axios.get('/presentations/c').then(function (response) {
+                axios.get('/presentations/combo').then(function (response) {
                     that.presentations = response.data;
                 });
             },
+
+            getPresentationName: function(){
+                var that = this 
+                axios.get('/presentations/get/'+that.fillItem.presentation_id).then(function(response){
+                    that.fillItem.presentation_name = response.data;
+                });    
+            },
+
 	        getVueItems: function(page){
 	        	var that = this;
 	            axios.get('/medicines?page='+page).then(function (response) {
@@ -377,6 +384,7 @@
                 this.fillItem.name = item.name;
                 this.fillItem.description=item.description;
                 this.fillItem.presentation_id=item.presentation_id;
+                this.fillItem.presentation_name = item.presentation_name;
                 this.fillItem.type=item.type;
                 this.fillItem.component=item.component;
                 this.fillItem.concentration=item.concentration;
@@ -395,6 +403,7 @@
                 this.fillItem.name = item.name;
                 this.fillItem.description=item.description;
                 this.fillItem.presentation_id=item.presentation_id;
+                this.fillItem.presentation_name = item.presentation_name;
                 this.fillItem.type=item.type;
                 this.fillItem.component=item.component;
                 this.fillItem.concentration=item.concentration;
@@ -411,7 +420,7 @@
                 var input = this.fillItem;
                 axios.put('/medicines/'+id,input).then((response) => {
                     this.changePage(this.pagination.current_page);
-                    this.fillItem = {'batch':'','name':'','description':'','presentation_id':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''};
+                    this.fillItem = {'batch':'','name':'','description':'','presentation_id':'','presentation_name':'','type':'' ,'component':'' ,'concentration':'','stock':'','purchase_price':'' ,'sale_price': '','igv': '','expiration_date':'','production_date':'', 'id':''};
                     this.date = '';
                     this.date2 = '';
                     $("#edit-item").modal('hide');

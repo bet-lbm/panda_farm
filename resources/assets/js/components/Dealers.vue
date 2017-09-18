@@ -2,7 +2,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
     	<div class="x_panel">
     		<div class="row x_title">
-    			<h5 class="col-md-6 "> Lista de distribuidores </h5>
+    			<h5 class="col-md-6"> <i class="fa fa-bars"></i> Lista de distribuidores </h5>
                 <div class="col-md-4 pull-right top_search">
                     <div class="input-group">
                         <input class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="Buscar">
@@ -17,8 +17,7 @@
     					<tr>
     						<th>#</th>
     						<th>RUC</th>
-    						<th>Razón Social</th>
-    						<th>Dirección</th>
+    						<th>Nombre/Razón Social</th>
     						<th>Teléfono</th>
     						<th colspan="3">&nbsp;</th>
     					</tr>
@@ -28,7 +27,6 @@
     						<th>{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
     						<td>{{ item.ruc }}</td>
     						<td>{{ item.name }}</td>
-    						<td>{{ item.address }}</td>
     						<td>{{ item.phone }}</td>
     						<td width="10px">
     							<button class="btn btn-success"  @click.prevent="showItem(item)" title="Show"> 
@@ -82,29 +80,29 @@
                     <div class="modal-body">
                         <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" v-on:submit.prevent="updateItem(fillItem.id)">
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="ruc">RUC : </label>
-                                <div class="col-md-6 col-xs-12">
+                                <label class="control-label col-md-3" for="ruc">RUC : </label>
+                                <div class="col-md-8 col-xs-12">
                                     <input class="form-control" disabled="true" type="text" name="ruc" v-model="fillItem.ruc" />
                                 </div>
                                 <span v-if="formErrorsUpdate['ruc']" class="error text-danger">{{ formErrorsUpdate['ruc'] }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="name">Razón Social : </label>
-                                <div class="col-md-6 col-xs-12">    
+                                <label class="control-label col-md-3" for="name">Razón Social : </label>
+                                <div class="col-md-8 col-xs-12">    
                                     <input class="form-control" type="text" name="name" v-model="fillItem.name" autofocus/>
                                 </div>
                                 <span v-if="formErrorsUpdate['name']" class="error text-danger">{{ formErrorsUpdate['name'] }}</span> 
                             </div>             
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="address">Dirección : </label>
-                                <div class="col-md-6 col-xs-12">    
+                                <label class="control-label col-md-3" for="address">Dirección : </label>
+                                <div class="col-md-8 col-xs-12">    
                                     <input type="text" name="address" class="form-control" v-model="fillItem.address" />
                                 </div>
                                 <span v-if="formErrorsUpdate['address']" class="error text-danger">{{ formErrorsUpdate['address'] }}</span>
                             </div> 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="phone">Teléfono : </label>
-                                <div class="col-md-6 col-xs-12">    
+                                <label class="control-label col-md-3" for="phone">Teléfono : </label>
+                                <div class="col-md-8 col-xs-12">    
                                     <input type="text" name="phone" class="form-control" v-model="fillItem.phone"/>
                                 </div>
                                 <span v-if="formErrorsUpdate['phone']" class="error text-danger">{{ formErrorsUpdate['phone'] }}</span>
@@ -125,37 +123,32 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel"> <small>Detalles de distribuidor</small> </h4> 
+                        <h5 class="modal-title" id="myModalLabel"> Detalles de distribuidor </h5> 
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal form-label-left" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="ruc">RUC : </label>
-                                <div class="col-md-6 col-xs-12">
-                                    <input class="form-control" disabled="true" type="text" name="ruc" v-model="fillItem.ruc" />
-                                </div>
+                        <div class="x_panel">
+                        <div class="row x_title">
+                            <p><i class="fa fa-info"></i><b> RUC:</b> {{ fillItem.ruc }} </p>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <p class="col-md-3 col-sm-3 col-xs-3"> <i class="fa fa-user"></i> <b> Razón Social:</b></p>
+                                <p class="col-md-9 col-sm-9 col-xs-9">{{ fillItem.name }} </p>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="name">Razón Social : </label>
-                                <div class="col-md-6 col-xs-12">    
-                                    <input class="form-control" disabled="true" type="text" name="name" v-model="fillItem.name"/>
-                                </div>
-                            </div>             
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="address">Dirección : </label>
-                                <div class="col-md-6 col-xs-12">    
-                                    <input type="text"  disabled="true" name="address" class="form-control" v-model="fillItem.address" />
-                                </div>
-                            </div> 
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="phone">Teléfono : </label>
-                                <div class="col-md-6 col-xs-12">    
-                                    <input type="text" disabled="true" name="phone" class="form-control" v-model="fillItem.phone"/>
-                                </div>
-                            </div>                
-                        </form> 
+                            <div class="row">
+                                <p class="col-md-3 col-sm-3 col-xs-3"><i class="fa fa-map-marker"></i><b> Dirección:</b></p>
+                                <p class="col-md-9 col-sm-9 col-xs-9"> {{ fillItem.address }} </p>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-3 col-sm-3 col-xs-3"> <i class="fa fa-phone"></i> <b> Teléfono:  </b></p>
+                                <p class="col-md-9 col-sm-9 col-xs-9"> {{ fillItem.phone }} </p>
+                            </div>
+                        </div>
+                        </div>
                     </div>
-                    <div class="modal-footer"></div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-link">Volver</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,10 +1,9 @@
 <?php
 
-
 use Illuminate\Database\Seeder;
-use Panda\Presentation;
+use Panda\PurchaseDetail;
 
-class PresentationsTableSeeder extends Seeder
+class PurchaseDetailsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +12,6 @@ class PresentationsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Presentation::class,10)->create();
+        factory(PurchaseDetail::class,50)->create();
     }
 }

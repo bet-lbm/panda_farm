@@ -1,8 +1,8 @@
 <template> 
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
     <div class="x_panel">
         <div class="x_title">
-            <h2><small>Crear nuevo cliente</small></h2>
+            <h5>Crear nuevo cliente</h5>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">

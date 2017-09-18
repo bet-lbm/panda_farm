@@ -84,5 +84,10 @@ class DealerController extends Controller
         $dealers = Dealer::orderBy('name', 'asc')->get();
         return response()->json($dealers);
     }
+    public function getDealer($id)
+    {
+        $dealer = Dealer::find($id);
+        return response()->json($dealer['name']);
+    }
 
 }

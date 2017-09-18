@@ -22,6 +22,10 @@ class CreateMedicinesTable extends Migration
             $table->foreign('presentation_id')
                   ->references('id')->on('presentations')
                   ->onUpdate('cascade');
+            $table->string('presentation_name')->nullable();
+            $table->foreign('presentation_name')
+                  ->references('name')->on('presentations')
+                  ->onUpdate('cascade');
             $table->string('type');
             $table->string('component');
             $table->string('concentration');

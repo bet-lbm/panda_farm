@@ -3,6 +3,7 @@
 namespace Panda\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Panda\Medicine;
 use Panda\Purchase;
 use Panda\PurchaseDetail;
 
@@ -63,6 +64,7 @@ class PurchaseController extends Controller
     public function showDetails($id)
     {
         $detail = PurchaseDetail::where('purchase_id', $id)->get();
-        return $detail;
+        return response()-> json($detail);
     }
+
 }
