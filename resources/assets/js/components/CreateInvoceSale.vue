@@ -42,27 +42,55 @@
                             </div>
                         </div>
                         <div class="ln_solid"></div>
-
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-6">Medicamento</label>
+                                    <div class="col-md-8 col-sm-8 col-xs-6">
+                                        <select class="form-control" v-model="newDetail.medicine_id" @change="getMedicineName">
+                                                <option v-for="medicine in medicines" :value="medicine.id">{{ medicine.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>                  
+                                <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-6">Cantidad</label>
+                                    <div class="col-md-8 col-sm-8 col-xs-6">
+                                        <input style="text-align:right;" class="form-control" type="number" min="5"aria-hidden v-model="newDetail.quantity">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                                    <label class="control-label col-md-5 col-sm-5 col-xs-6">Precio Compra</label>
+                                    <div class="input-group col-md-7 col-sm-7 col-xs-6">
+                                        <span class="input-group-addon">S/.</span>
+                                        <input style="text-align:right;" type="number"  min="0" class="form-control" step="any" v-model="newDetail.price" placeholder="00.00">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1 col-sm-1 col-xs-12">
+                                   <button type="button" class="btn btn-primary pull-right" @click.prevent="createDetail()"> <i class="fa fa-plus"></i> </button>
+                                </div>
+                            </div>
+                            <output style="visibility:hidden" >{{ calculateSubtotal }}</output>
+                        </div>
+                        <div class="ln_solid"></div>
                         <div class="row">
                             <div class="col-xs-12 table">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Qty</th>
-                                            <th>Product</th>
-                                            <th>Serial #</th>
-                                            <th style="width: 59%">Description</th>
+                                            <th>Cant.</th>
+                                            <th style="width: 59%">Medicamento</th>
+                                            <th>P.Unitario</th>
+                                            <th>Descuento</th>
                                             <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Call of Duty</td>
-                                            <td>455-981-221</td>
-                                            <td>El snort testosterone trophy driving gloves handsome gerry Richardson helvetica tousled street art master testosterone trophy driving gloves handsome gerry Richardson
-                                            </td>
-                                            <td>$64.50</td>
+                                        <tr v-for="detail in details"> 
+                                            <td>{{ detail.quantity }}</td>
+                                            <td>{{ detail.medicine_name }}</td>
+                                            <td>S/. {{ detail.price }}</td>
+                                            <td>  </td>
+                                            <td>S/. {{ detail.subtotal }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -114,46 +142,98 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                         </button>
-                        <h5 class="modal-title" id="myModalLabel"> BUSCAR CLIENTE </h5> 
+                        <h5 class="modal-title" id="myModalLabel"> CLIENTES </h5> 
                     </div>
                     <div class="modal-body">
-                        <div class="x_panel">
-                            <div class="row x_title">
-                                <h5 class="col-md-4"></i> CLIENTE </h5>
-                                <div class="col-md-6 pull-right top_search">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="Buscar">
-                                        <span class="input-group-btn">  <button class="btn btn-default"><i class="fa fa-search"></i></button></span>
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <p class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                        <i class="fa fa-search"></i> Buscar cliente </a>
+                                    </p>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        
+                                        <div class="row top_search">
+                                            <label class="control-label col-md-3 col-sm-5 col-xs-6">Buscar : </label>
+                                            <div class="input-group col-md-9 col-sm-7 col-xs-6">
+                                                <input class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="RUC...">
+                                                <span class="input-group-btn">  <button class="btn btn-default"><i class="fa fa-search"></i></button></span>
+                                            </div>
+                                        </div>
+                
+                                        <table class="table"> 
+                                            <thead>
+                                                <tr> 
+                                                    <th>RUC</th>
+                                                    <th>Razón Social</th>
+                                                    <th colspan="1">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr  v-for="client in clients">
+                                                    <th>{{ client.dni }}</th>
+                                                    <th>{{ client.name }} {{ client.last_name }}</th>
+                                                    <td width="10px">
+                                                        <button class="btn-link" @click.prevent="selectClient(client)" title="Seleccionar">
+                                                        <i class="fa fa-check"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
-                            <div class="x_content ">
-                                <table class="table"> 
-                                    <thead>
-                                        <tr> 
-                                            <th>RUC</th>
-                                            <th>Razón Social</th>
-                                            <th colspan="1">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr  v-for="client in clients">
-                                            <th>{{ client.dni }}</th>
-                                            <th>{{ client.name }} {{ client.last_name }}</th>
-                                            <td width="10px">
-                                                <button class="btn-link" @click.prevent="selectClient(client)" title="Seleccionar">
-                                                <i class="fa fa-check"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <p class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                        <i class="fa fa-user"></i> Agregar nuevo cliente</a>
+                                    </p>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                         <form class="form-horizontal form-label-left">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-4">RUC : </label>
+                                                <div class="col-md-8 col-sm-7 col-xs-12">
+                                                    <input class="form-control col-md-8 col-xs-6" required="required" type="text" v-model="newClient.dni">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-4">Razón Social : </label>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <input class="form-control col-md-7 col-xs-6" required="required" type="text" v-model="newClient.name">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-4" for="address">Dirección : </label>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <input class="form-control col-md-7 col-xs-12" required="required" type="text" v-model="newClient.address">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-4" for="phone">Teléfono : </label>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <input class="form-control col-md-7 col-xs-12" required="required" type="tel" v-model="newClient.phone"> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
+                                                    <button class="btn btn-success pull-right" @click.prevent="createClient()"><i class="fa fa-save"></i> Guardar Cliente</button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-hand-o-right"></i> Seleccionar</button>
                     </div>
                 </div>
             </div>
@@ -171,18 +251,12 @@
                 medicines: [],
                 details:[],
                 items:[],
-                newItem :  {'series':'','number':'','tipo':'','client_id':'','user_id':'','date':'','subtotal':'','igv':'','total_price':''},
+                newItem: {'series':'','number':'','tipo':'','client_id':'','user_id':'','date':'','subtotal':'','igv':'','total_price':''},
                 newDetail: {'sales_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''},
                 fillClient: {'dni':'','name':'','last_name':'','address':'' ,'phone': '', 'id':''},
+                newClient: {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
                 formErrors: {},
                 formErrorsUpdate: {},
-                pagination: {
-                    total: 0,
-                    per_page: 2,
-                    from: 1,
-                    to: 0,
-                    current_page: 1,
-                },
                 queryString:'',
             }
         },
@@ -201,32 +275,7 @@
                     result = result + array[i].subtotal; 
                 }
                 return this.newItem.total_price = Math.round(result*100)/100 ; ;
-            },
-
-            isActived: function() {
-                return this.pagination.current_page;
-            },
-
-            pagesNumber: function() {
-                if (!this.pagination.to) {
-                    return [];
-                }
-                var from = this.pagination.current_page - this.offset;
-                if (from < 1) {
-                    from = 1;
-                }
-                var to = from + (this.offset * 2);
-                if (to >= this.pagination.last_page) {
-                    to = this.pagination.last_page;
-                }
-                var pagesArray = [];
-                while (from <= to) {
-                    pagesArray.push(from);
-                    from++;
-                }
-                return pagesArray;
             }
-
         },
        created() {
             this.getCode();
@@ -253,7 +302,6 @@
                 var that=this;
                 axios.get('/clients/search/dni',{params:{queryString:this.queryString}}).then(response=>{
                     that.clients=response.data.data.data;
-                    that.pagination=response.data.pagination;
                 })
             },
             
@@ -276,7 +324,7 @@
                     }
                     else{
                         this.details.push(this.newDetail);
-                        toastr.success('Agregado a la compra',{timeOut: 5000});
+                        toastr.success('Agregado a la venta',{timeOut: 5000});
                        
                     }
                     this.newDetail = {'purchase_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''};
@@ -311,7 +359,7 @@
                     this.description = [];
                 }
             },
-            showClient: function(page) {
+            showClient: function() {
                 var that = this;
                 $("#show-client").modal('show');
             },
@@ -322,6 +370,23 @@
                 this.fillClient.address = client.address;
                 this.fillClient.phone = client.phone;
                 $("#show-client").modal('hide');
+                this.queryString = '';
+                this.clients = '';
+            },
+            createClient: function(){
+                var input = this.newClient;
+                this.fillClient.dni = this.newClient.dni;
+                this.fillClient.name = this.newClient.name;
+                this.fillClient.address = this.newClient.address;
+                var that = this;
+                axios.post('/clients',input)
+                .then(response => {
+                    that.newClient = {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
+                    $("#show-client").modal('hide');
+                    toastr.success('Cliente creado', {timeOut: 5000});
+
+                });
+
             }  
         }
     }

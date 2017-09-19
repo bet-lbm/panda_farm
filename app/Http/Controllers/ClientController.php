@@ -89,7 +89,6 @@ class ClientController extends Controller
         $this->validate($request, [
             'dni' => 'required',
             'name' => 'required',
-            'last_name' => 'required',
             'address' => 'required',
             'phone' => 'required',
         ]);

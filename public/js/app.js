@@ -49744,6 +49744,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49757,15 +49837,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newItem: { 'series': '', 'number': '', 'tipo': '', 'client_id': '', 'user_id': '', 'date': '', 'subtotal': '', 'igv': '', 'total_price': '' },
             newDetail: { 'sales_id': '', 'medicine_id': '', 'medicine_name': '', 'quantity': '', 'price': '', 'subtotal': '' },
             fillClient: { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '', 'id': '' },
+            newClient: { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '' },
             formErrors: {},
             formErrorsUpdate: {},
-            pagination: {
-                total: 0,
-                per_page: 2,
-                from: 1,
-                to: 0,
-                current_page: 1
-            },
             queryString: ''
         };
     },
@@ -49784,32 +49858,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 result = result + array[i].subtotal;
             }
             return this.newItem.total_price = Math.round(result * 100) / 100;;
-        },
-
-        isActived: function isActived() {
-            return this.pagination.current_page;
-        },
-
-        pagesNumber: function pagesNumber() {
-            if (!this.pagination.to) {
-                return [];
-            }
-            var from = this.pagination.current_page - this.offset;
-            if (from < 1) {
-                from = 1;
-            }
-            var to = from + this.offset * 2;
-            if (to >= this.pagination.last_page) {
-                to = this.pagination.last_page;
-            }
-            var pagesArray = [];
-            while (from <= to) {
-                pagesArray.push(from);
-                from++;
-            }
-            return pagesArray;
         }
-
     },
     created: function created() {
         this.getCode();
@@ -49837,7 +49886,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var that = this;
             axios.get('/clients/search/dni', { params: { queryString: this.queryString } }).then(function (response) {
                 that.clients = response.data.data.data;
-                that.pagination = response.data.pagination;
             });
         },
 
@@ -49861,7 +49909,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     toastr.error('Escoja otro medicamento para agregar a la compra', 'MEDICAMENTO YA AGREGADO', { timeOut: 5000 });
                 } else {
                     this.details.push(this.newDetail);
-                    toastr.success('Agregado a la compra', { timeOut: 5000 });
+                    toastr.success('Agregado a la venta', { timeOut: 5000 });
                 }
                 this.newDetail = { 'purchase_id': '', 'medicine_id': '', 'medicine_name': '', 'quantity': '', 'price': '', 'subtotal': '' };
             }
@@ -49894,7 +49942,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.description = [];
             }
         },
-        showClient: function showClient(page) {
+        showClient: function showClient() {
             var that = this;
             $("#show-client").modal('show');
         },
@@ -49905,6 +49953,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.fillClient.address = client.address;
             this.fillClient.phone = client.phone;
             $("#show-client").modal('hide');
+            this.queryString = '';
+            this.clients = '';
+        },
+        createClient: function createClient() {
+            var input = this.newClient;
+            this.fillClient.dni = this.newClient.dni;
+            this.fillClient.name = this.newClient.name;
+            this.fillClient.address = this.newClient.address;
+            var that = this;
+            axios.post('/clients', input).then(function (response) {
+                that.newClient = { 'dni': '', 'name': '', 'last_name': '', 'address': '', 'phone': '' }, $("#show-client").modal('hide');
+                toastr.success('Cliente creado', { timeOut: 5000 });
+            });
         }
     }
 });
@@ -49959,7 +50020,136 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-search"
   })])])])]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
-  }), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12 col-sm-12 col-xs-12"
+  }, [_c('div', {
+    staticClass: "form-group col-md-4 col-sm-4 col-xs-12"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4 col-sm-4 col-xs-6"
+  }, [_vm._v("Medicamento")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8 col-sm-8 col-xs-6"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newDetail.medicine_id),
+      expression: "newDetail.medicine_id"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": [function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.newDetail.medicine_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }, _vm.getMedicineName]
+    }
+  }, _vm._l((_vm.medicines), function(medicine) {
+    return _c('option', {
+      domProps: {
+        "value": medicine.id
+      }
+    }, [_vm._v(_vm._s(medicine.name))])
+  }))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-md-3 col-sm-3 col-xs-12"
+  }, [_c('label', {
+    staticClass: "control-label col-md-4 col-sm-4 col-xs-6"
+  }, [_vm._v("Cantidad")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8 col-sm-8 col-xs-6"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newDetail.quantity),
+      expression: "newDetail.quantity"
+    }],
+    staticClass: "form-control",
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "type": "number",
+      "min": "5",
+      "aria-hidden": ""
+    },
+    domProps: {
+      "value": (_vm.newDetail.quantity)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newDetail.quantity = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-md-4 col-sm-4 col-xs-12"
+  }, [_c('label', {
+    staticClass: "control-label col-md-5 col-sm-5 col-xs-6"
+  }, [_vm._v("Precio Compra")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group col-md-7 col-sm-7 col-xs-6"
+  }, [_c('span', {
+    staticClass: "input-group-addon"
+  }, [_vm._v("S/.")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newDetail.price),
+      expression: "newDetail.price"
+    }],
+    staticClass: "form-control",
+    staticStyle: {
+      "text-align": "right"
+    },
+    attrs: {
+      "type": "number",
+      "min": "0",
+      "step": "any",
+      "placeholder": "00.00"
+    },
+    domProps: {
+      "value": (_vm.newDetail.price)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newDetail.price = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-md-1 col-sm-1 col-xs-12"
+  }, [_c('button', {
+    staticClass: "btn btn-primary pull-right",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.createDetail()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  })])])]), _vm._v(" "), _c('output', {
+    staticStyle: {
+      "visibility": "hidden"
+    }
+  }, [_vm._v(_vm._s(_vm.calculateSubtotal))])]), _vm._v(" "), _c('div', {
+    staticClass: "ln_solid"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-12 table"
+  }, [_c('table', {
+    staticClass: "table table-striped"
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((_vm.details), function(detail) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(detail.quantity))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(detail.medicine_name))]), _vm._v(" "), _c('td', [_vm._v("S/. " + _vm._s(detail.price))]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("S/. " + _vm._s(detail.subtotal))])])
+  }))])])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "ln_solid"
   }), _vm._v(" "), _vm._m(4)])])])]), _vm._v(" "), _c('div', {
     staticClass: "modal",
@@ -49979,15 +50169,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [_c('div', {
-    staticClass: "x_panel"
+    staticClass: "panel-group",
+    attrs: {
+      "id": "accordion"
+    }
   }, [_c('div', {
-    staticClass: "row x_title"
-  }, [_c('h5', {
-    staticClass: "col-md-4"
-  }, [_vm._v(" CLIENTE ")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6 pull-right top_search"
+    staticClass: "panel panel-primary"
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "panel-collapse collapse in",
+    attrs: {
+      "id": "collapse1"
+    }
   }, [_c('div', {
-    staticClass: "input-group"
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "row top_search"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3 col-sm-5 col-xs-6"
+  }, [_vm._v("Buscar : ")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group col-md-9 col-sm-7 col-xs-6"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -49998,7 +50198,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "Buscar"
+      "placeholder": "RUC..."
     },
     domProps: {
       "value": (_vm.queryString)
@@ -50012,13 +50212,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.queryString = $event.target.value
       }
     }
-  }), _vm._v(" "), _vm._m(6)])])]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "x_content "
-  }, [_c('table', {
+  }), _vm._v(" "), _vm._m(7)])]), _vm._v(" "), _c('table', {
     staticClass: "table"
-  }, [_vm._m(7), _vm._v(" "), _c('tbody', _vm._l((_vm.clients), function(client) {
+  }, [_vm._m(8), _vm._v(" "), _c('tbody', _vm._l((_vm.clients), function(client) {
     return _c('tr', [_c('th', [_vm._v(_vm._s(client.dni))]), _vm._v(" "), _c('th', [_vm._v(_vm._s(client.name) + " " + _vm._s(client.last_name))]), _vm._v(" "), _c('td', {
       attrs: {
         "width": "10px"
@@ -50037,7 +50233,146 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-check"
     })])])])
-  }))])])])]), _vm._v(" "), _vm._m(8)])])])])
+  }))])])])]), _vm._v(" "), _c('div', {
+    staticClass: "panel panel-primary"
+  }, [_vm._m(9), _vm._v(" "), _c('div', {
+    staticClass: "panel-collapse collapse",
+    attrs: {
+      "id": "collapse2"
+    }
+  }, [_c('div', {
+    staticClass: "panel-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal form-label-left"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3 col-sm-3 col-xs-4"
+  }, [_vm._v("RUC : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8 col-sm-7 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newClient.dni),
+      expression: "newClient.dni"
+    }],
+    staticClass: "form-control col-md-8 col-xs-6",
+    attrs: {
+      "required": "required",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.newClient.dni)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newClient.dni = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3 col-sm-3 col-xs-4"
+  }, [_vm._v("Razón Social : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8 col-sm-8 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newClient.name),
+      expression: "newClient.name"
+    }],
+    staticClass: "form-control col-md-7 col-xs-6",
+    attrs: {
+      "required": "required",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.newClient.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newClient.name = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3 col-sm-3 col-xs-4",
+    attrs: {
+      "for": "address"
+    }
+  }, [_vm._v("Dirección : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8 col-sm-8 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newClient.address),
+      expression: "newClient.address"
+    }],
+    staticClass: "form-control col-md-7 col-xs-12",
+    attrs: {
+      "required": "required",
+      "type": "text"
+    },
+    domProps: {
+      "value": (_vm.newClient.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newClient.address = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "control-label col-md-3 col-sm-3 col-xs-4",
+    attrs: {
+      "for": "phone"
+    }
+  }, [_vm._v("Teléfono : ")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8 col-sm-8 col-xs-12"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newClient.phone),
+      expression: "newClient.phone"
+    }],
+    staticClass: "form-control col-md-7 col-xs-12",
+    attrs: {
+      "required": "required",
+      "type": "tel"
+    },
+    domProps: {
+      "value": (_vm.newClient.phone)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newClient.phone = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-md-6 col-sm-6 col-xs-6 pull-right"
+  }, [_c('button', {
+    staticClass: "btn btn-success pull-right",
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.createClient()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-save"
+  }), _vm._v(" Guardar Cliente")])])])])])])])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-sm-3 col-md-3  col-xs-12 invoice-header"
@@ -50055,17 +50390,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "text-center"
   }, [_c('br'), _vm._v("RUC: 20123456789\n                                    "), _c('br'), _vm._v("795 Freedom Ave, Suite 600, Tacna - Perú\n                                    "), _c('br'), _vm._v("Teléfono: +51 (080) 123-9876\n                                    "), _c('br'), _vm._v("Email: info@panda.com\n                                ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-12 table"
-  }, [_c('table', {
-    staticClass: "table table-striped"
-  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("Qty")]), _vm._v(" "), _c('th', [_vm._v("Product")]), _vm._v(" "), _c('th', [_vm._v("Serial #")]), _vm._v(" "), _c('th', {
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Cant.")]), _vm._v(" "), _c('th', {
     staticStyle: {
       "width": "59%"
     }
-  }, [_vm._v("Description")]), _vm._v(" "), _c('th', [_vm._v("Subtotal")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("1")]), _vm._v(" "), _c('td', [_vm._v("Call of Duty")]), _vm._v(" "), _c('td', [_vm._v("455-981-221")]), _vm._v(" "), _c('td', [_vm._v("El snort testosterone trophy driving gloves handsome gerry Richardson helvetica tousled street art master testosterone trophy driving gloves handsome gerry Richardson\n                                        ")]), _vm._v(" "), _c('td', [_vm._v("$64.50")])])])])])])
+  }, [_vm._v("Medicamento")]), _vm._v(" "), _c('th', [_vm._v("P.Unitario")]), _vm._v(" "), _c('th', [_vm._v("Descuento")]), _vm._v(" "), _c('th', [_vm._v("Subtotal")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
@@ -50122,7 +50451,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "myModalLabel"
     }
-  }, [_vm._v(" BUSCAR CLIENTE ")])])
+  }, [_vm._v(" CLIENTES ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-heading"
+  }, [_c('p', {
+    staticClass: "panel-title"
+  }, [_c('a', {
+    attrs: {
+      "data-toggle": "collapse",
+      "data-parent": "#accordion",
+      "href": "#collapse1"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-search"
+  }), _vm._v(" Buscar cliente ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "input-group-btn"
@@ -50139,15 +50482,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(" ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "modal-footer"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
+    staticClass: "panel-heading"
+  }, [_c('p', {
+    staticClass: "panel-title"
+  }, [_c('a', {
     attrs: {
-      "type": "button"
+      "data-toggle": "collapse",
+      "data-parent": "#accordion",
+      "href": "#collapse2"
     }
   }, [_c('i', {
-    staticClass: "fa fa-hand-o-right"
-  }), _vm._v(" Seleccionar")])])
+    staticClass: "fa fa-user"
+  }), _vm._v(" Agregar nuevo cliente")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
