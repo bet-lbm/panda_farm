@@ -129,8 +129,7 @@
 					        </div>
 						</div>
 					    <div class="ln_solid"></div>
-					    <div class="form-group pull-right">
-	                        <button class="btn btn-primary">Listar medicamentos</button>                  
+					    <div class="form-group pull-right">           
 	                        <button class="btn btn-success" type="submit">Guardar medicamento</button>
 		                </div>
 	                </form>
