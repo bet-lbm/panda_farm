@@ -40,6 +40,24 @@ class PurchaseController extends Controller
         ];
         return response()->json($response);
     }
+    public function report(Request $request){
+        $date1=$request->input('date1');
+        $date2=$request->input('date2');
+        $purchases=Purchase::whereBetween('date', array($date1,$date2))->latest()->paginate(5);
+        $response=[
+            'pagination'=>[
+                'total'=>$purchases->total(),
+                'per_page'=>$purchases->perPage(),
+                'current_page'=>$purchases->currentPage(),
+                'last_page'=>$purchases->lastPage(),
+                'from'=>$purchases->firstItem(),
+                'to'=>$purchases->lastItem(),
+            ],
+            'data'=>$purchases
+        ];
+        return response()->json($response);   
+    }
+
     public function create()
     {
         return view('purchases.create');
