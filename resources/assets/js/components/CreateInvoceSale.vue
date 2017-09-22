@@ -42,35 +42,47 @@
                             </div>
                         </div>
                         <div class="ln_solid"></div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-6">Medicamento</label>
-                                    <div class="col-md-8 col-sm-8 col-xs-6">
-                                        <select class="form-control" v-model="newDetail.medicine_id" @change="getMedicineName">
+                        <form class="form-horizontal form-label-left">
+                            <div class="row col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-md-5  col-sm-5  col-xs-12">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-6">Medicina</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-6">
+                                        <select class="form-control" v-model="newDetail.medicine_id" @change="getMedicineDetail" required="required">
                                                 <option v-for="medicine in medicines" :value="medicine.id">{{ medicine.name }}</option>
                                         </select>
                                     </div>
                                 </div>                  
                                 <div class="form-group col-md-3 col-sm-3 col-xs-12">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-6">Cantidad</label>
-                                    <div class="col-md-8 col-sm-8 col-xs-6">
-                                        <input style="text-align:right;" class="form-control" type="number" min="5"aria-hidden v-model="newDetail.quantity">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-6">cant.</label>
+                                    <div class="col-md-9 col-sm-9 col-xs-6">
+                                        <input style="text-align:right;" placeholder="0" class="form-control" id="stock" name="stock" type="number" min="5" v-model="newDetail.quantity" required="required">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4 col-sm-4 col-xs-12">
-                                    <label class="control-label col-md-5 col-sm-5 col-xs-6">Precio Compra</label>
-                                    <div class="input-group col-md-7 col-sm-7 col-xs-6">
+                                <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-6">PU.</label>
+                                    <div class="input-group col-md-9 col-sm-9 col-xs-6">
                                         <span class="input-group-addon">S/.</span>
-                                        <input style="text-align:right;" type="number"  min="0" class="form-control" step="any" v-model="newDetail.price" placeholder="00.00">
+                                        <output style="text-align:right;" class="form-control" disabled="disabled"> {{ saleP }}
+                                        </output>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-1 col-sm-1 col-xs-12">
-                                   <button type="button" class="btn btn-primary pull-right" @click.prevent="createDetail()"> <i class="fa fa-plus"></i> </button>
                                 </div>
                             </div>
-                            <output style="visibility:hidden" >{{ calculateSubtotal }}</output>
-                        </div>
+                            <div class="row col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-md-1 col-sm-1 col-xs-12 pull-right">
+                                   <button type="button" class="btn btn-primary pull-right" @click.prevent="createDetail()"> <i class="fa fa-plus"></i> </button>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-3 col-xs-12 pull-right">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-6">dto.</label>
+                                    <div class="input-group col-md-9 col-sm-9 col-xs-6">
+                                        <input style="text-align:right;" id="price" name="price" min="0" class="form-control" step="any" v-model="dto" placeholder="0" required="required">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <output style="visibility:hidden" class="pull-right">{{ calculateSubtotal }}</output>
+                                <output style="visibility:hidden" class="pull-right">{{ calculateDiscount }}</output>
+                                <output style="visibility:hidden" class="pull-right">{{ calculateSalePrice }}</output>                     
+                            </div>
+                        </form>
                         <div class="ln_solid"></div>
                         <div class="row">
                             <div class="col-xs-12 table">
@@ -79,18 +91,26 @@
                                         <tr>
                                             <th>Cant.</th>
                                             <th style="width: 59%">Medicamento</th>
-                                            <th>P.Unitario</th>
-                                            <th>Descuento</th>
-                                            <th>Subtotal</th>
+                                            <th>PU </th>
+                                            <th>Dto.</th>
+                                            <th>PV. </th>
+                                            <th>SubTotal</th>
+                                            <th colspan="1">&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="detail in details"> 
+                                        <tr v-for="(detail,index) in details"> 
                                             <td>{{ detail.quantity }}</td>
                                             <td>{{ detail.medicine_name }}</td>
-                                            <td>S/. {{ detail.price }}</td>
-                                            <td>  </td>
-                                            <td>S/. {{ detail.subtotal }}</td>
+                                            <td>{{ detail.discount + detail.price }}</td>
+                                            <td>{{ detail.discount }}</td>
+                                            <td>S/.{{ detail.price }}</td>
+                                            <td>S/.{{ detail.subtotal }}</td>
+                                            <td width="10px">
+                                                <button class="btn-link" title="Quitar" @click.prevent="deleteDetail(index)">
+                                                <i class="fa fa-close"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -108,16 +128,16 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <th style="width:50%">Subtotal:</th>
-                                                <td>$250.30</td>
+                                                <th style="width:50%">OP. GRAVADA:</th>
+                                                <td>S/.{{ calculateOP }}</td>
                                             </tr>
                                             <tr>
                                                 <th>IGV (18%)</th>
-                                                <td>$10.34</td>
+                                                <td>S/.{{ calculateIGV }}</td>
                                             </tr>
                                             <tr>
-                                              <th>Total:</th>
-                                              <td>$265.24</td>
+                                              <th>TOTAL:</th>
+                                              <td>S/.{{ calculateTotal }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -159,7 +179,7 @@
                                         <div class="row top_search">
                                             <label class="control-label col-md-3 col-sm-5 col-xs-6">Buscar : </label>
                                             <div class="input-group col-md-9 col-sm-7 col-xs-6">
-                                                <input class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="RUC...">
+                                                <input class="form-control" type="text" v-model="queryString" v-on:keyup="getResults()" placeholder="RUC..." autofocus="autofocus">
                                                 <span class="input-group-btn">  <button class="btn btn-default"><i class="fa fa-search"></i></button></span>
                                             </div>
                                         </div>
@@ -247,16 +267,17 @@
             return{
                 date: new Date(),
                 serie: 'F001',
+                dto: '',
+                saleP:'',
+                description: [],
                 clients: [],
                 medicines: [],
                 details:[],
                 items:[],
                 newItem: {'series':'','number':'','tipo':'','client_id':'','user_id':'','date':'','subtotal':'','igv':'','total_price':''},
-                newDetail: {'sales_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''},
+                newDetail: {'sales_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','discount':'','subtotal':''},
                 fillClient: {'dni':'','name':'','last_name':'','address':'' ,'phone': '', 'id':''},
                 newClient: {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
-                formErrors: {},
-                formErrorsUpdate: {},
                 queryString:'',
             }
         },
@@ -266,7 +287,13 @@
                 return this.date.toLocaleString("es-CL", {year: "numeric", month: "numeric",day: "numeric"});
             },
             calculateSubtotal: function(){
-                return this.newDetail.subtotal = Math.round(this.newDetail.quantity * this.newDetail.price*100)/100 ; 
+                return this.newDetail.subtotal = Math.round(this.newDetail.quantity * this.newDetail.price*100)/100; 
+            },
+            calculateDiscount: function(){
+                return this.newDetail.discount = Math.round((this.saleP * (this.dto / 100) )*100)/100; 
+            },
+            calculateSalePrice: function(){
+                return this.newDetail.price = ((this.saleP - this.newDetail.discount)*100)/100;
             },
             calculateTotal:function(){
                 var array = this.details;
@@ -275,6 +302,12 @@
                     result = result + array[i].subtotal; 
                 }
                 return this.newItem.total_price = Math.round(result*100)/100 ; ;
+            },
+            calculateIGV: function(){
+                return this.newItem.igv = Math.round( 0.18 * this.newItem.total_price * 100 ) / 100;
+            },
+            calculateOP: function(){
+                return this.newItem.subtotal = Math.round((this.newItem.total_price - this.newItem.igv)*100)/100;
             }
         },
        created() {
@@ -305,10 +338,13 @@
                 })
             },
             
-            getMedicineName: function(){
+            getMedicineDetail: function(){
                 var that = this;
                 axios.get('/medicines/get/'+ that.newDetail.medicine_id).then(function (response) {
-                    that.newDetail.medicine_name = response.data;
+                    that.newDetail.medicine_name = response.data; 
+                });
+                axios.get('/medicines/saleprice/'+ that.newDetail.medicine_id).then(function (response) {
+                    that.saleP = response.data;
                 });
             },
 
@@ -325,11 +361,12 @@
                     else{
                         this.details.push(this.newDetail);
                         toastr.success('Agregado a la venta',{timeOut: 5000});
-                       
                     }
-                    this.newDetail = {'purchase_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''};
                 }
-                console.log(that.details);
+                this.newDetail = {'sales_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','discount':'','subtotal':''};
+                this.dto = '';
+                this.saleP ='';
+
             },
 
             deleteDetail:function(index){

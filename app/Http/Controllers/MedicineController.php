@@ -102,4 +102,9 @@ class MedicineController extends Controller
         $medicine = Medicine::find($id);
         return response()->json($medicine['name']);
     }
+    public function getMedicinePrice($id)
+    {
+        $medicine = Medicine::find($id);
+        return response()->json($medicine['sale_price']);
+    }
 }

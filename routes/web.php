@@ -58,6 +58,7 @@ Route::name('medicines.list')->get('/medicines/list', function () {
 Route::get('/medicines/search','MedicineController@search');
 Route::get('/medicines/combo','MedicineController@combo');
 Route::get('/medicines/get/{id}','MedicineController@getMedicine');
+Route::get('/medicines/saleprice/{id}','MedicineController@getMedicinePrice');
 Route::resource('medicines','MedicineController',['except' => ['edit', 'show']]); 
 
 //-------------------------Purchase------------------------------------

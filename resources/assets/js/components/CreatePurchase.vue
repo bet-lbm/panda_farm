@@ -86,7 +86,7 @@
 				    						<td class="text-center">{{ detail.price }}</td>
 				    						<td class="text-right">{{ detail.subtotal }}</td>
 				    						<td width="10px">
-				                                <button class="btn-link" title="Quitar">
+				                                <button class="btn-link" title="Quitar" @click.prevent="deleteDetail(index)">
 				                                <i class="fa fa-close"></i>
 				                                </button>
 				                            </td>
@@ -199,7 +199,6 @@
 	        },
 	        createDetail:function(){
 	        	var that = this;
-
 	        	var input = this.newDetail;
 	        	if((input['medicine_id'] == '')||(input['medicine_name'] == '')||(input['quantity'] == '')||(input['price'] == '')||(input['subtotal'] == '')){
 	                toastr.warning('Complete todos los campos', {timeOut: 5000});
@@ -211,11 +210,9 @@
 	            	else{
 	            		this.details.push(this.newDetail);
 			            toastr.success('Agregado a la compra',{timeOut: 5000});
-			           
 	            	}
-	            	this.newDetail = {'purchase_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''};
 	           	}
-	           	console.log(that.details);
+	            this.newDetail = {'purchase_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','subtotal':''};
 	        },
 
 	        deleteDetail:function(index){
