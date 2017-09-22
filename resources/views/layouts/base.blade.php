@@ -80,7 +80,7 @@
                   <ul class="nav child_menu">
                     <li><a href={{ route('purchases.list') }}>Lista de Compras</a></li>
                     <li><a href={{ route('purchases.create') }}>Realizar Compra</a></li>
-                    <li><a href="#">Reporte de Compras</a></li>
+                    <li><a href={{ route('purchases.report')}}>Reporte de Compras</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-money"></i> Ventas <span class="fa fa-chevron-down"></span></a>

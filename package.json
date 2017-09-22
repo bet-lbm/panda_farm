@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "moment": "^2.18.1",
-    "vuejs-datepicker": "^0.9.9"
+    "vuejs-datepicker": "^0.9.13"
   }
 }

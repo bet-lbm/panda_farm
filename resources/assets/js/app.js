@@ -31,6 +31,7 @@ Vue.component('addmedicine',require('./components/CreateMedicine.vue'));
 //------------------------- Purchase --------------------------------------
 Vue.component('purchases',require('./components/Purchases.vue'));
 Vue.component('addpurchase',require('./components/CreatePurchase.vue'));
+Vue.component('reportpurchases',require('./components/ReportPurchases.vue'));
 //------------------------- Sale --------------------------------------
 Vue.component('addinvoce',require('./components/CreateInvoceSale.vue'));
 Vue.component('addbill',require('./components/CreateBillSale.vue'));
