@@ -3,20 +3,26 @@
 namespace Panda\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Panda\Sale;
+use Panda\SaleDetail;
 
 class SaleController extends Controller
 {
     public function bill()
     {
-        return view('sale.bill');
+        return view('sales.bill');
     }
     public function invoce()
     {
-        return view('sale.invoce');
+        return view('sales.invoce');
+    }
+    public function cancel()
+    {
+        return view('sales.cancel');
     }
     public function index() {
-		$sales = Sale::orderBy('code', 'des')->paginate(5);
+		$sales = Sale::orderBy('created_at', 'desc')->paginate(5);
         $response = [
             'pagination' => [
                 'total' => $sales->total(),
@@ -29,26 +35,43 @@ class SaleController extends Controller
             'data' => $sales  ];
         return response()->json($response);
 	}
+    public function search(Request $request)
+    {
+        $queryString=$request->input('queryString');
+        $sales=Sale::where('number','like','%'.$queryString.'%')->latest()->paginate(5);
+        $response=[
+            'pagination'=>[
+                'total'=>$sales->total(),
+                'per_page'=>$sales->perPage(),
+                'current_page'=>$sales->currentPage(),
+                'last_page'=>$sales->lastPage(),
+                'from'=>$sales->firstItem(),
+                'to'=>$sales->lastItem(),
+            ],
+            'data'=>$sales
+        ];
+        return response()->json($response);
+    }
 	public function store(Request $request) 
     {
     	$this->validate($request, [
     		'series' => 'required',
     		'number' => 'required',
-    		'tipo' => 'required',
-    		'cliente_id' => 'required',
+    		'type' => 'required',
+    		'client_id' => 'required',
     		'user_id' => 'required',
     		'date' => 'required',
     		'subtotal' => 'required',
     		'igv' => 'required',
-    		'total'  => 'required',
+    		'total_price'  => 'required',
         ]);
         $create = Sale::create($request->all());
         return response()->json($create);
     }
     public function numberInvoce(){
-        $max = Sale::where('type','like','factura')->count();
+        $max = Sale::where('type','like','F')->count();
         if ($max > 0) {
-            $row = Sale::get()->where('type','like','factura')->max('number');
+            $row = Sale::get()->where('type','like','F')->max('number');
             $cod = $row + 1;
             $Strsig = (string)$cod;
             $formato = str_pad($Strsig, "7", "0", STR_PAD_LEFT);
@@ -61,9 +84,9 @@ class SaleController extends Controller
         return response()->json($formato);
     }
     public function numberBill(){
-        $max = Sale::where('type','like','boleta')->count();
+        $max = Sale::where('type','like','B')->count();
         if ($max > 0) {
-            $row = Sale::get()->where('type','like','boleta')->max('number');
+            $row = Sale::get()->where('type','like','B')->max('number');
             $cod = $row + 1;
             $Strsig = (string)$cod;
             $formato = str_pad($Strsig, "7", "0", STR_PAD_LEFT);
@@ -74,5 +97,17 @@ class SaleController extends Controller
             $formato = str_pad($Strsig,"7","0",STR_PAD_LEFT);
         }
         return response()->json($formato);
+    }
+    public function showDetails($series,$number)
+    {
+        $detail = SaleDetail::where('sale_series','=',$series)
+            ->where('sale_number','=', $number)->get();
+        return response()-> json($detail);
+    }
+    public function show($series,$number)
+    {
+        $sale = Sale::where('series','=',$series)
+            ->where('number','=', $number)->get();
+        return response()-> json($sale);
     }
 }

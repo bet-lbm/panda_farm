@@ -10,6 +10,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                    {{ dateFormat }}
                     <section class="content invoice">
                         <div class="row">
                             <div class="col-sm-3 col-md-3  col-xs-12 invoice-header">
@@ -21,11 +22,11 @@
                             <div class="col-sm-5 col-md-5 col-xs-6 invoice-info">
                                 <div class="x_panel">
                                     <address>
-                                        <br><b> RUC: </b>{{ fillClient.dni }}
+                                        <br><b> RUC: </b>{{ fillClient.dni }} 
                                         <br><b> Razón Social: </b>{{ fillClient.name }}  {{ fillClient.last_name }}
                                         <br><b> Dirección: </b> {{ fillClient.address }}  
                                         <br>
-                                        <button type="button" class="btn btn-link pull-right" @click.prevent="showClient()"><i class="fa fa-search"></i></button>
+                                        <button type="button" class="btn btn-danger pull-right" @click.prevent="showClient()"><i class="fa fa-search"></i></button>
                                     </address>
                                 </div>
                             </div>
@@ -42,7 +43,7 @@
                             </div>
                         </div>
                         <div class="ln_solid"></div>
-                        <form class="form-horizontal form-label-left">
+                        <form class="form-horizontal form-label-left" v-on:submit.prevent="createDetail()">
                             <div class="row col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group col-md-5  col-sm-5  col-xs-12">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-6">Medicina</label>
@@ -55,7 +56,7 @@
                                 <div class="form-group col-md-3 col-sm-3 col-xs-12">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-6">cant.</label>
                                     <div class="col-md-9 col-sm-9 col-xs-6">
-                                        <input style="text-align:right;" placeholder="0" class="form-control" id="stock" name="stock" type="number" min="5" v-model="newDetail.quantity" required="required">
+                                        <input style="text-align:right;" placeholder="0" class="form-control" type="number" min="1" v-model="newDetail.quantity" required="required">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 col-sm-3 col-xs-12">
@@ -69,12 +70,12 @@
                             </div>
                             <div class="row col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group col-md-1 col-sm-1 col-xs-12 pull-right">
-                                   <button type="button" class="btn btn-primary pull-right" @click.prevent="createDetail()"> <i class="fa fa-plus"></i> </button>
+                                   <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></button>
                                 </div>
                                 <div class="form-group col-md-3 col-sm-3 col-xs-12 pull-right">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-6">dto.</label>
                                     <div class="input-group col-md-9 col-sm-9 col-xs-6">
-                                        <input style="text-align:right;" id="price" name="price" min="0" class="form-control" step="any" v-model="dto" placeholder="0" required="required">
+                                        <input style="text-align:right;" class="form-control" v-model="dto" placeholder="0">
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -102,9 +103,9 @@
                                         <tr v-for="(detail,index) in details"> 
                                             <td>{{ detail.quantity }}</td>
                                             <td>{{ detail.medicine_name }}</td>
-                                            <td>{{ detail.discount + detail.price }}</td>
+                                            <td>{{ detail.discount + detail.sale_price }}</td>
                                             <td>{{ detail.discount }}</td>
-                                            <td>S/.{{ detail.price }}</td>
+                                            <td>S/.{{ detail.sale_price }}</td>
                                             <td>S/.{{ detail.subtotal }}</td>
                                             <td width="10px">
                                                 <button class="btn-link" title="Quitar" @click.prevent="deleteDetail(index)">
@@ -118,12 +119,25 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-6">
+
+                            <div class="form-horizontal form-label-left col-xs-7">
+                                <div class="row">
+                                    <p class="col-md-3 control-label"> <b>PAGO EN EFECTIVO</b> </p>
+                                    <div class="col-md-5 col-xs-12">
+                                        <label class="col-md-4 control-label">SOLES:</label>
+                                        <div class="input-group col-md-8">
+                                            <span class="input-group-addon">S/.</span>
+                                            <input style="text-align:right;" class="form-control" v-model="cash"> 
+                                        </div> 
+                                    </div>
+                                    <output class="col-md-4 col-xs-12">VUELTO: <b>{{ Math.round((cash - newItem.total_price)*100)/100 }}</b></output>
+                                </div>
                                 <p class="text-muted well well-sm no-shadow" style="margin-top: 20px;">
                                 No se realiza cambio ni devolución de dinero por los productos adquiridos, por favor verifique el estado de cada uno de los items de su compra. 
                                 </p>
+
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
@@ -148,7 +162,7 @@
                         <div class="ln_solid"></div>
                         <div class="row no-print">
                             <div class="col-xs-12">
-                                <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Realizar Venta</button>
+                                <button class="btn btn-success pull-right" @click.prevent="createItem()"><i class="fa fa-credit-card"></i> Realizar Venta</button>
                                 <button class="btn btn-default pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i>Imprimir</button>
                             </div>
                         </div>
@@ -269,13 +283,14 @@
                 serie: 'F001',
                 dto: '',
                 saleP:'',
+                cash:'',
                 description: [],
                 clients: [],
                 medicines: [],
                 details:[],
                 items:[],
-                newItem: {'series':'','number':'','tipo':'','client_id':'','user_id':'','date':'','subtotal':'','igv':'','total_price':''},
-                newDetail: {'sales_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','discount':'','subtotal':''},
+                newItem: {'series':'','number':'','type':'','client_id':'','user_id':'','date':'','subtotal':'','igv':'','total_price':'','enabled':''},
+                newDetail: {'sale_series':'','sale_number':'','medicine_id':'','medicine_name':'','quantity':'','sale_price':'','discount':'','subtotal':''},
                 fillClient: {'dni':'','name':'','last_name':'','address':'' ,'phone': '', 'id':''},
                 newClient: {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
                 queryString:'',
@@ -286,14 +301,20 @@
             {
                 return this.date.toLocaleString("es-CL", {year: "numeric", month: "numeric",day: "numeric"});
             },
+            dateFormat: function() {
+                let date = new Date(this.date);
+                this.newItem.date = date.getFullYear() + '-'
+                                        + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+                                        + ('0' + date.getDate()).slice(-2);
+            },
             calculateSubtotal: function(){
-                return this.newDetail.subtotal = Math.round(this.newDetail.quantity * this.newDetail.price*100)/100; 
+                return this.newDetail.subtotal = Math.round(this.newDetail.quantity * this.newDetail.sale_price*100)/100; 
             },
             calculateDiscount: function(){
                 return this.newDetail.discount = Math.round((this.saleP * (this.dto / 100) )*100)/100; 
             },
             calculateSalePrice: function(){
-                return this.newDetail.price = ((this.saleP - this.newDetail.discount)*100)/100;
+                return this.newDetail.sale_price = ((this.saleP - this.newDetail.discount)*100)/100;
             },
             calculateTotal:function(){
                 var array = this.details;
@@ -309,6 +330,7 @@
             calculateOP: function(){
                 return this.newItem.subtotal = Math.round((this.newItem.total_price - this.newItem.igv)*100)/100;
             }
+
         },
        created() {
             this.getCode();
@@ -316,11 +338,22 @@
         },
         
         methods : {
+            getClient: function(){
+                var that = this;
+                axios.get('/clients/get/'+that.fillClient.dni).then (function(response){
+                    that.newItem.client_id=response.data;
+                });
+            },
             getCode: function(){
                 var that = this;
                 this.newItem.series = this.serie;
+                this.newItem.type = 'F';
+                this.newItem.enabled =true;
                 axios.get('/sales/code/invoce').then( function (response) {
                     that.newItem.number = response.data;
+                });
+                axios.get('/getuser').then( function(response) {
+                    that.newItem.user_id = response.data;
                 });
             },
 
@@ -359,11 +392,11 @@
                         toastr.error('Escoja otro medicamento para agregar a la compra','MEDICAMENTO YA AGREGADO', {timeOut: 5000});
                     }
                     else{
-                        this.details.push(this.newDetail);
+                        this.details.push(input);
                         toastr.success('Agregado a la venta',{timeOut: 5000});
                     }
                 }
-                this.newDetail = {'sales_id':'','medicine_id':'','medicine_name':'','quantity':'','price':'','discount':'','subtotal':''};
+                this.newDetail = {'sale_series':'','sale_number':'','medicine_id':'','medicine_name':'','quantity':'','sale_price':'','discount':'','subtotal':''};
                 this.dto = '';
                 this.saleP ='';
 
@@ -377,23 +410,26 @@
             createItem: function(){
                 var input = this.newItem;
                 var array = this.details;
-                if((input['dealer_id'] == '')||(input['laboratory_id'] == '')||(input['date'] == '')||(input['total_price'] == '')){
+                if((input['client_id'] == '')||(input['user_id'] == '')||(input['date'] == '')||(input['total_price'] == '')){
                     toastr.warning('Complete todos los campos', {timeOut: 5000});
                 }
                 else{
-                    axios.post('/purchases',input)
+                    axios.post('/sales',input)
                     .then(response => {
-                        for (var i = 0; i < array.length; i++) { 
-                            array[i].purchase_id = input['code'];
-                            axios.post('/purchasedetails', array[i]);
-                            axios.put('/purchasedetails/stock');                
+                       for (var i = 0; i < array.length; i++) { 
+                            array[i].sale_series = input['series'];
+                            array[i].sale_number = input['number'];                           
+                            axios.post('/saledetails', array[i]);
+                            axios.put('/saledetails/stock');                
                         };
-                        toastr.success('Actualice sus precios de venta','COMPRA REALIZADA',{timeOut: 5000});
-                        this.newItem = {'code':'','dealer_id':'','laboratory_id':'','date':'','total_price':''},
+                        toastr.success('VENTA REALIZADA',{timeOut: 5000});
+                        this.newItem = {'series':'','number':'','type':'','client_id':'','user_id':'','date':'','subtotal':'','igv':'','total_price':'','enabled':''},
                         this.getCode();
+                        this.fillClient = {'dni':'','name':'','last_name':'','address':'' ,'phone': '', 'id':''};
                     });
                     this.details = [];
                     this.description = [];
+                    this.cash='';
                 }
             },
             showClient: function() {
@@ -401,6 +437,7 @@
                 $("#show-client").modal('show');
             },
             selectClient: function(client){
+                this.newItem.client_id = client.id;
                 this.fillClient.dni = client.dni;
                 this.fillClient.name = client.name;
                 this.fillClient.last_name = client.last_name;
@@ -421,10 +458,10 @@
                     that.newClient = {'dni':'','name':'','last_name':'','address':'' ,'phone': ''},
                     $("#show-client").modal('hide');
                     toastr.success('Cliente creado', {timeOut: 5000});
-
+                    this.getClient();
                 });
 
-            }  
+            }
         }
     }
 </script>

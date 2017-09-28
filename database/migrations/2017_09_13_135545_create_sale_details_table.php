@@ -15,11 +15,11 @@ class CreateSaleDetailsTable extends Migration
     {
         Schema::create('sale_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sales_id')->unsigned();
-            $table->foreign('sales_id')->references('id')->on('sales')->onUpdate('cascade');
-            //$table->string('sale_series',5);
-            //$table->string('sale_number',7);
-           // $table->foreign(array('sale_series','sale_number'))->references(array('series','number'))->on('sales')->onUpdate('cascade');
+            //$table->integer('sales_id')->unsigned();
+            //$table->foreign('sales_id')->references('id')->on('sales')->onUpdate('cascade');
+            $table->string('sale_series',4);
+            $table->string('sale_number',7);
+            $table->foreign(array('sale_series','sale_number'))->references(array('series','number'))->on('sales')->onUpdate('cascade');
             $table->integer('medicine_id')->unsigned();
             $table->foreign('medicine_id')->references('id')->on('medicines')->onUpdate('cascade');
             $table->string('medicine_name')->references('name')->on('medicines')->onUpdate('cascade');

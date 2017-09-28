@@ -10,7 +10,7 @@ use Panda\PurchaseDetail;
 class PurchaseController extends Controller
 {
     public function index() {
-		$purchases = Purchase::orderBy('code', 'des')->paginate(5);
+		$purchases = Purchase::orderBy('created_at', 'desc')->paginate(5);
         $response = [
             'pagination' => [
                 'total' => $purchases->total(),

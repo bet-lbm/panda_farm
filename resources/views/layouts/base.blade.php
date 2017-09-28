@@ -85,7 +85,7 @@
                 </li>
                 <li><a><i class="fa fa-money"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="#">Lista de Ventas</a></li>
+                      <li><a href={{ route('sales.list') }}>Lista de Ventas</a></li>
                       <li><a> Realizar de Ventas  <span class="fa fa-chevron-down"></a> 
                           <ul class="nav child_menu">
                             <li><a href={{ route('sales.bill') }}>Boleta</a></li>
@@ -93,6 +93,8 @@
                           </ul>
                       </li>
                       <li><a href="#">Reporte Venta</a></li>
+                      <li><a href={{ route('sales.cancel') }}>Anular Venta</a></li>
+
                   </ul>
                 </li>
               </ul>
