@@ -176,6 +176,10 @@ return [
         // Panda\Providers\BroadcastServiceProvider::class,
         Panda\Providers\EventServiceProvider::class,
         Panda\Providers\RouteServiceProvider::class,
+        /**
+         * Third Party Service Providers...
+        */
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

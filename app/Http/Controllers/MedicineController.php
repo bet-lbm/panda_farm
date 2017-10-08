@@ -7,7 +7,15 @@ use Panda\Medicine;
 
 class MedicineController extends Controller
 {
-	public function index() {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function getIndex()
+    {
+        return view('medicines.index');
+    }
+    public function index() {
 		$medicines = Medicine::latest()->paginate(10);
         $response = [
             'pagination' => [

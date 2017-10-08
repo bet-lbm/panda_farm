@@ -2,39 +2,26 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
     	<div class="x_panel">
     		<div class="row x_title">
-    			<h2 class="col-md-6 text-danger"><i class="fa fa-warning"></i> ANULAR VENTA </h2>
-            </div>
-            <div class="clearfix"></div>
-            <div class="x_content">
-                <form class="row form-horizontal form-label-left" v-on:submit.prevent="showItem()">
-                    <div class="form-group col-md-5 col-sm-5 col-xs-12">
-                        <label class="control-label col-md-6 col-sm-6 col-xs-6">Comprobante : </label>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <select class="form-control" required="required" v-model="type">
-                                <option value="B">BOLETA</option>
-                                <option value="F">FACTURA</option>
-                            </select>
-                        </div>
-                    </div>                  
-                    <div class="form-group col-md-3 col-sm-3 col-xs-6">
-                        <label class="control-label col-md-4 col-sm-4 col-xs-6">Serie</label>
+                <form class="form-horizontal form-label-left" v-on:submit.prevent="showItem()">                
+                    <div class="form-group col-md-5 col-sm-5 col-xs-5">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-6">Serie :</label>
                         <div class="col-md-7 col-sm-7 col-xs-6">
                             <input class="form-control text-uppercase" placeholder="F001" required="required" v-model="series">
                         </div>
                     </div>
-                    <div class="form-group col-md-3 col-sm-3 col-xs-6">
-                        <label class="control-label col-md-2 col-sm-2 col-xs-6">N°</label>
-                        <div class="col-md-8 col-sm-8 col-xs-6">
+                    <div class="form-group col-md-5 col-sm-5 col-xs-5">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-6">N° :</label>
+                        <div class="col-md-7 col-sm-7 col-xs-6">
                             <input style="text-align:right;" class="form-control" placeholder="0000001" required="required" v-model="number">
                         </div>
                     </div>
-                    <div class="form-group col-md-1 col-sm-1 col-xs-12">
+                    <div class="form-group col-md-1 col-sm-1 col-xs-2">
                         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
-                <div class="ln_solid"></div>
-                <div class="clearfix"></div>
-                <div class="jumbotron">
+            </div>
+            <div class="x_content">
+                <div class="x_panel">
                     <div class="row">
                         <h4 class="col-md-6 col-sm-6 col-xs-6">{{ fillItem.type }}: {{ fillItem.series }}-{{ fillItem.number }}</h4>
                         <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
@@ -62,7 +49,7 @@
                                     <th width="10px">N°</th>
                                     <th width="55%">Descripción</th>
                                     <th class="text-center">Cantidad</th>
-                                    <th class="text-center">P. Unit.</th>
+                                    <th class="text-center">P. Unidad</th>
                                     <th class="text-center">SubTotal</th>
                                 </tr>
                             </thead>
@@ -81,16 +68,8 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
-                                            <th style="width:60%">OP. GRAVADA:</th>
-                                            <td class="text-right">S/.{{ fillItem.subtotal }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>IGV (18%)</th>
-                                            <td class="text-right">S/.{{ fillItem.igv }}</td>
-                                        </tr>
-                                        <tr>
-                                          <th>TOTAL:</th>
-                                          <td class="text-right">S/.{{ fillItem.total_price }}</td>
+                                            <th>TOTAL:</th>
+                                            <td class="text-right">S/.{{ fillItem.total_price }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -102,6 +81,12 @@
                         <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
                             <small class="pull-right"><i class="fa fa-child"></i> CAJERO: {{ fillItem.user }}</small>
                         </div>
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                <div class="row no-print">
+                    <div class="col-xs-12">
+                        <button class="btn btn-danger pull-right" @click.prevent="cancelItem(fillItem)"><i class="fa fa-close"></i> Anular Venta </button>
                     </div>
                 </div>
     		</div>   
@@ -127,44 +112,50 @@ export default {
     methods : {
         showItem: function(){
             var that = this;
-            axios.get('/sales/' + that.series+'/'+ that.number).then(function (response) {
+            axios.get('/sales/' + that.series + '/' + that.number).then(function (response) {
+                that.fillItem.series = response.data.series;
+                that.fillItem.number = response.data.number;
                 that.fillItem.date = response.data.date;
-            });
+                that.fillItem.type = response.data.type;
+                if (response.data.type == 'F') {
+                    that.fillItem.type = 'FACTURA';
+                } else {
+                    that.fillItem.type = 'BOLETA DE VENTA';               
+                };
+                axios.get('/clients/' + response.data.client_id).then(function(response){
+                    that.fillClient.dni = response.data.dni;
+                    that.fillClient.name = response.data.name;
+                    that.fillClient.last_name = response.data.last_name;
+                    that.fillClient.address = response.data.address;
+                });
+                axios.get('/getuser/' + response.data.user_id).then(function(response){
+                    that.fillItem.user = response.data;
+                });
+                that.fillItem.total_price = response.data.total_price;
 
-            /*axios.get('/sales/show/' + that.series+'/'+ that.number).then(function (response) {
-                that.details = response.data;
+                axios.get('/sales/show/' + response.data.series + '/' + response.data.number).then(function (response) {
+                    that.details = response.data;
+                });
             });
-            
-            this.fillItem.series = item.series;
-            this.fillItem.number = item.number;
-            this.fillItem.type = item.type;
-            this.fillItem.date = item.date;
-            axios.get('/clients/'+item.client_id).then(function(response){
-                that.fillClient.dni = response.data.dni;
-                that.fillClient.name = response.data.name;
-                that.fillClient.last_name = response.data.last_name;
-                that.fillClient.address = response.data.address;
-            });
-
-            axios.get('/getuser/'+item.user_id).then(function(response){
-                that.fillItem.user = response.data;
-            });
-            this.fillItem.subtotal = item.subtotal;
-            this.fillItem.igv = item.igv; 
-            this.fillItem.total_price = item.total_price;
-            */
-            if (this.type == 'F') {
-                this.fillItem.type = 'FACTURA';
-            } else {
-                this.fillItem.type = 'BOLETA DE VENTA';               
-            };
+            this.series = '';
+            this.number = '';
         },
 
-        cancelItem: function(item){
-            axios.delete('/dealers/'+item.id).then((response) => {
-                this.changePage(this.pagination.current_page);
-                toastr.error('Distribuidor eliminado.', {timeOut: 5000});
-            });
+        cancelItem: function(fillItem){
+            var that = this;
+            if((that.fillItem.series == '')||(that.fillItem.number == '')){
+                    toastr.warning('Complete todos los campos', {timeOut: 5000});
+            }
+            else{
+                axios.put('/sales/edit/' + that.fillItem.series + '/' + that.fillItem.number ).then((response) => {
+                    toastr.error('VENTA ANULADA', {timeOut: 5000});
+                    toastr.warning('ACTUALICE SU STOCK', {timeOut: 5000});
+                });
+                that.fillItem = '';
+                that.fillClient = '';
+                that.details = '';
+            }
+
         },
 	}
 }

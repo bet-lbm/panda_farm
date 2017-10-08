@@ -9,6 +9,14 @@ use Panda\SaleDetail;
 
 class SaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function getIndex()
+    {
+        return view('sales.index');
+    }
     public function bill()
     {
         return view('sales.bill');
@@ -17,12 +25,12 @@ class SaleController extends Controller
     {
         return view('sales.invoce');
     }
-    public function cancel()
+    public function getCancel()
     {
         return view('sales.cancel');
     }
     public function index() {
-		$sales = Sale::orderBy('created_at', 'desc')->paginate(5);
+		$sales = Sale::where('enabled',1)->orderBy('created_at', 'desc')->paginate(5);
         $response = [
             'pagination' => [
                 'total' => $sales->total(),
@@ -107,7 +115,20 @@ class SaleController extends Controller
     public function show($series,$number)
     {
         $sale = Sale::where('series','=',$series)
-            ->where('number','=', $number)->get();
+                -> where('number','=', $number)
+                -> where('enabled',1)
+                -> first();
+        return response()-> json($sale);
+    }
+    public function cancelSale($series,$number)
+    {
+        $sale = Sale::where('series',$series)
+                -> where('number', $number)
+                -> where('enabled',1)
+                -> first();
+        
+        $sale->enabled = 0;
+        $sale->update();
         return response()-> json($sale);
     }
 }

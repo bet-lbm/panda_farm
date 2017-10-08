@@ -3,7 +3,7 @@
 @section('content')
 	<div class="page-title">
 		<div class="title_left">
-			<h3><i class="fa fa-money"></i> VENTAS</h3>
+			<h2 class="col-md-6 text-danger"><i class="fa fa-warning"></i> ANULAR VENTA </h2>
 		</div>
 	</div>
 	<div class="clearfix"></div>
