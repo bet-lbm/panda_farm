@@ -7,5 +7,13 @@
 		</div>
 	</div>
 	<div class="clearfix"></div>
-	<salescancel></salescancel>
+	@can('cancel_sales')
+		<salescancel></salescancel>
+	@else
+		<div class="clearfix"></div>
+		<div class="alert alert-danger alert-dismissible fade in text-center">
+			<strong>Usuario NO autorizado,</strong>
+			para anular comprobantes de pago.
+		</div>
+	@endcan
 @endsection
