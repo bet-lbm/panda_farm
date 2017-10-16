@@ -7,11 +7,15 @@ use Illuminate\Http\Request;
 
 class LaboratoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function getIndex()
+    {
+        return view('laboratories.index');
+    }
+
     public function index()
     {
         $laboratories=Laboratory::latest()->paginate(10);

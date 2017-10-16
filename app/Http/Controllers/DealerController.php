@@ -11,6 +11,10 @@ class DealerController extends Controller
     {
         $this->middleware('auth');
     }
+    public function getIndex()
+    {
+        return view('dealers.index');
+    }    
     public function index() {
 		$dealers = Dealer::latest()->paginate(10);
         $response = [

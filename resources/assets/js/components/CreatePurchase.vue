@@ -235,6 +235,7 @@
 							axios.put('/purchasedetails/stock');				
 						};
 		                toastr.success('Actualice sus precios de venta','COMPRA REALIZADA',{timeOut: 5000});
+		                toastr.warning('STOCK ACTUALIZADO', {timeOut: 5000});
 		                this.newItem = {'code':'','dealer_id':'','laboratory_id':'','date':'','total_price':''},
 		                this.getCode();
 		            });

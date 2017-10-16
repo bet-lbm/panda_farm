@@ -17,10 +17,8 @@
 				<thead>
 					<tr>
 						<th>#</th>
-                        <th>DNI</th>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-						<th>Dirección</th>
+                        <th>DNI/RUC</th>
+						<th style="width: 40%">Denominación</th>
 						<th>Telefono</th>
 						<th colspan="3">&nbsp;</th>
 					</tr>
@@ -29,9 +27,7 @@
 					<tr v-for="(item, index) in items">
 						<th>{{ index + 1 + (pagination.current_page - 1) * 10 }}</th>
 						<td>{{ item.dni }}</td>
-                        <td>{{ item.name }}</td>
-						<td>{{ item.last_name }}</td>
-						<td>{{ item.address }}</td>
+                        <td>{{ item.name }} {{ item.last_name }}</td>
 						<td>{{ item.phone }}</td>
 						<td width="10px">
 							<button class="btn btn-success" @click.prevent="showItem(item)"title="Show"> 

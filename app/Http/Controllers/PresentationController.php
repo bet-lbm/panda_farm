@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class PresentationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    public function getIndex()
+    {
+        return view('presentations.index');
+    }
+
     public function index() {
         $presentations = Presentation::latest()->paginate(10);
         $response = [

@@ -15,9 +15,9 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('series',5 );
+            $table->string('series',4 );
             $table->string('number',7);
-            $table->string('type');
+            $table->char('type',1);
             $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->integer('user_id')->unsigned();
@@ -26,6 +26,8 @@ class CreateSalesTable extends Migration
             $table->float('subtotal');
             $table->float('igv');
             $table->float('total_price');
+            $table->boolean('enabled')->default(true);
+            //$table->primary(array('series','number'));
             $table->timestamps();
         });
     }

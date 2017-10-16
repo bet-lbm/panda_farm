@@ -16,6 +16,11 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getIndex()
+    {
+        return view('clients.index');
+    }
+
     public function index()
     {   
         $clients=Client::latest()->paginate(10);
@@ -104,7 +109,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        
+        $client = Client::find($id);
+        return response()->json($client);
     }
 
     /**
@@ -137,5 +143,10 @@ class ClientController extends Controller
     {
         Client::find($id)->delete();
         return response()->json(['done']);
+    }
+    public function getClient($dni)
+    {
+        $client = Client::where('dni','=',$dni)->first();
+        return response()->json($client['id']);
     }
 }

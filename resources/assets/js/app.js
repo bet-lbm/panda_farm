@@ -33,8 +33,10 @@ Vue.component('purchases',require('./components/Purchases.vue'));
 Vue.component('addpurchase',require('./components/CreatePurchase.vue'));
 Vue.component('reportpurchases',require('./components/ReportPurchases.vue'));
 //------------------------- Sale --------------------------------------
+Vue.component('sales',require('./components/Sales.vue'))
 Vue.component('addinvoce',require('./components/CreateInvoceSale.vue'));
 Vue.component('addbill',require('./components/CreateBillSale.vue'));
+Vue.component('salescancel',require('./components/SalesCancel.vue'));
 
 const app = new Vue({
     el: '#app'

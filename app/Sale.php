@@ -11,7 +11,7 @@ class Sale extends Model
 {
     protected $table = 'sales';
   	
-    protected $fillable = ['series','number','tipo','cliente_id','user_id','date','subtotal','igv','total_price'];
+    protected $fillable = ['series','number','type','client_id','user_id','date','subtotal','igv','total_price','enabled'];
 
     public function client()
     {
