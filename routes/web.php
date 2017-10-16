@@ -13,7 +13,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 //---------------------Client-------------------------
 Route::name('clients.list')->get('/clients/list','ClientController@getIndex');
