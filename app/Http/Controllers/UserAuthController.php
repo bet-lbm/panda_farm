@@ -25,4 +25,5 @@ class UserAuthController extends Controller
     	$user = User::find($id);
     	return response()->json ($user['name']);
     }
+    
 }
