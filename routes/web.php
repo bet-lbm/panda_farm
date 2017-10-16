@@ -69,6 +69,9 @@ Route::put('/purchasedetails/stock','PurchaseDetailController@updateStock');
 
 //-------------------------- Sale ------------------------------------
 Route::name('sales.list')->get('/sales/list','SaleController@getIndex');
+Route::name('sales.report')->get('/sales/report','SaleController@getReport');
+Route::get('/sales/search_report','SaleController@report');
+
 Route::name('sales.bill')->get('/sales/bill','SaleController@bill');
 Route::name('sales.invoce')->get('/sales/invoce','SaleController@invoce');
 Route::name('sales.cancel')->get('/sales/cancel','SaleController@getCancel');

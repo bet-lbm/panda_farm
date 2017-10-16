@@ -29,6 +29,9 @@ class SaleController extends Controller
     {
         return view('sales.cancel');
     }
+    public function  getReport(){
+        return view('sales.report');
+    }
     public function index() {
 		$sales = Sale::where('enabled',1)->orderBy('created_at', 'desc')->paginate(5);
         $response = [
@@ -59,6 +62,24 @@ class SaleController extends Controller
             'data'=>$sales
         ];
         return response()->json($response);
+    }
+
+    public function report(Request $request){
+        $date1=$request->input('date1');
+        $date2=$request->input('date2');
+        $sales=Sale::whereBetween('date', array($date1,$date2))->latest()->paginate(5);
+        $response=[
+            'pagination'=>[
+                 'total'=>$sales->total(),
+                'per_page'=>$sales->perPage(),
+                'current_page'=>$sales->currentPage(),
+                'last_page'=>$sales->lastPage(),
+                'from'=>$sales->firstItem(),
+                'to'=>$sales->lastItem(),
+            ],
+            'data'=>$sales
+        ];
+        return response()->json($response);   
     }
 	public function store(Request $request) 
     {

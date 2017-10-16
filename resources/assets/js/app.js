@@ -37,7 +37,7 @@ Vue.component('sales',require('./components/Sales.vue'))
 Vue.component('addinvoce',require('./components/CreateInvoceSale.vue'));
 Vue.component('addbill',require('./components/CreateBillSale.vue'));
 Vue.component('salescancel',require('./components/SalesCancel.vue'));
-
+Vue.component('reportsales', require('./components/ReportSales'));
 const app = new Vue({
     el: '#app'
 });

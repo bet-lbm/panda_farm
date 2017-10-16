@@ -92,7 +92,7 @@
                             <li><a href={{ route('sales.invoce') }}>Factura</a></li>
                           </ul>
                       </li>
-                      <li><a href="#">Reporte Venta</a></li>
+                      <li><a href={{ route('sales.report')}}>Reporte Venta</a></li>
                       <li><a href={{ route('sales.cancel') }}>Anular Venta</a></li>
 
                   </ul>
