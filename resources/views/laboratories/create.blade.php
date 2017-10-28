@@ -15,5 +15,13 @@
 	</div>
 </div>
 <div class="clearfix"></div>
-<addlaboratory></addlaboratory>
+	@can('add_laboratory')
+		<addlaboratory></addlaboratory>
+	@else
+		<div class="clearfix"></div>
+		<div class="alert alert-danger alert-dismissible fade in text-center">
+			<h5>NO TIENES PERMISOS PARA AGREGAR LABORATORIO</h5>
+		</div>
+	@endcan
+
 @endsection

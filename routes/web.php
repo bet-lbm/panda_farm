@@ -13,6 +13,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 //---------------------Client-------------------------
@@ -91,3 +92,4 @@ Route::put('/saledetails/stock','SaleDetailController@updateStock');
 //----------------------- USER  -------
 Route::get('/getuser','UserAuthController@getUserAuth');
 Route::get('/getuser/{id}','UserAuthController@getSaleUser');
+Route::get('/roles','RoleController@index');

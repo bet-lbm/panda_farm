@@ -38,6 +38,8 @@ Vue.component('addinvoce',require('./components/CreateInvoceSale.vue'));
 Vue.component('addbill',require('./components/CreateBillSale.vue'));
 Vue.component('salescancel',require('./components/SalesCancel.vue'));
 Vue.component('reportsales', require('./components/ReportSales'));
+//---------------------- utilitees--------------------------
+Vue.component('role',require('./components/Role.vue'))
 const app = new Vue({
     el: '#app'
 });

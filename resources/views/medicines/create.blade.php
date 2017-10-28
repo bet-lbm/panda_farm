@@ -15,5 +15,12 @@
 	</div>
 </div>
 <div class="clearfix"></div>
-<addmedicine></addmedicine>
+	@can('add_medicine')
+		<addmedicine></addmedicine>
+	@else
+		<div class="clearfix"></div>
+		<div class="alert alert-danger alert-dismissible fade in text-center">
+			<h5>NO TIENES PERMISOS PARA AGREGAR MEDICAMENTOS</h5>
+		</div>
+	@endcan
 @endsection
