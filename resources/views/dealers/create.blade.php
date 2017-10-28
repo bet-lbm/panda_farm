@@ -15,5 +15,13 @@
 	</div>
 </div>
 <div class="clearfix"></div>
-<adddealer></adddealer>
+	@can('add_dealer')
+		<adddealer></adddealer>
+	@else
+		<div class="clearfix"></div>
+		<div class="alert alert-danger alert-dismissible fade in text-center">
+			<h5>NO TIENES PERMISOS PARA AGREGAR DISTRIBUIDOR</h5>
+		</div>
+	@endcan
+
 @endsection
