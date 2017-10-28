@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item,index) in items">
-                        <td>{{ item.code }} - {{item.number}}</td>
+                        <td>{{ item.series }} - {{item.number}}</td>
                         <td>{{ item.date }}</td>
                         <td>{{ item.total_price }}</td>
                         <td width="10px">
